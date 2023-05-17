@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | <%= siteName %>
+    </title>
+    <%- include("../../partials/css.ejs") %>
+</head>
+
+<body>
+    <%- include('../../partials/secNavbar.ejs') %>
+        <div class="container">
+            <div class="text-center margin2-top">
+                <a href="/account/orders" class="acoptions">Orders</a>
+                <a href="/account/adresses" class="margin1-left acoptions">Addresses</a>
+                <a href="/logout" class="margin1-left acoptions logout">Log out</a>
+            </div>
+            <div class="margin2-top align-items-center">
+                <p class="me-auto m-0 ordersTitle">
+                    Address list
+                </p>
+            </div>
+            <div class="margin6-top text-center">
+                <a href="/" class="btn btn-primary">Add address</a>
+            </div>
+
+        </div>
+        <footer>
+            <div class="text-center margin6-top">
+                <hr style="background-color:#2d66e9; height: 2px; margin-bottom: 4rem;">
+                <span class="system-footer-letter"> © 2023 <%=siteName %></span>
+            </div>
+        </footer>
+        <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

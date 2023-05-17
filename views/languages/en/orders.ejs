@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | <%= siteName %>
+    </title>
+    <%- include("../../partials/css.ejs") %>
+</head>
+
+<body>
+    <%- include('../../partials/secNavbar.ejs') %>
+        <div class="container">
+            <div class="text-center margin2-top">
+                <a href="/account/orders" class="acoptions">Narudzbe</a>
+                <a href="/account/adresses" class="margin1-left acoptions">Adrese</a>
+                <a href="/logout" class="margin1-left acoptions logout">Odjava</a>
+            </div>
+            <div class="d-flex margin2-top align-items-center">
+                <p class="me-auto m-0 ordersTitle">
+                    Narudzbine
+                </p>
+                <select class="ms-auto form-select" aria-label="Default select example" style="width: auto;">
+                    <option selected>All oreders</option>
+                    <option value="preporuceno">Waiting for payment</option>
+                    <option value="cena-l-to-h">Waiting for shipping</option>
+                    <option value="cena-h-to-l">Sent</option>
+                    <option value="najnovije">Waiting for payment</option>
+                    <option value="ukupnoprodato">Delivered</option>
+                </select>
+            </div>
+            <div class="col">
+                <div class="row margin2-top text-center">
+                    <div class="col ordersTable">Oredered</div>
+                    <div class="col ordersTable">Status</div>
+                    <div class="col ordersTable">All</div>
+                </div>
+                <hr style="background-color:#614e4e; height: 2px;" class="margin1-top">
+                <div class="row text-center">
+                    <div class="col ordersTable">Ime haljine koje si stavila</div>
+                    <div class="col ordersTable">Cekanje Na Uplatu</div>
+                    <div class="col ordersTable">$40.00</div>
+                    
+                </div>
+                <hr style="background-color:#614e4e; height: 2px;" class="margin1-top">
+                <div class="row text-center">
+                    <div class="col ordersTable">Kratko ime haljine</div>
+                    <div class="col ordersTable">Poslato</div>
+                    <div class="col ordersTable">$85.00</div>
+                
+                </div>
+                <hr style="background-color:#614e4e; height: 2px;" class="margin1-top">
+                <div class="row text-center">
+                    <div class="col ordersTable">Ime haljine ili majice koje je malo duze</div>
+                    <div class="col ordersTable">Dostavljeno</div>
+                    <div class="col ordersTable">$60.00</div>
+                
+                </div>
+            </div>
+        </div>
+        <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

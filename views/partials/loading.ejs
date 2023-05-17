@@ -1,0 +1,16 @@
+<div class="loader">
+    <div class="row text-center justify-content-center">
+        <img src="/images/adores_logo.png" alt="Loading" style="height: 125px; width: 150px;">
+        <% if(req.session.language=="hr" ){ %>
+            <p class="margin2-top">Ucitavanje...</p>
+            <% }; %>
+
+                <% if(req.session.language=="en" ) { %>
+                    <p class="margin2-top">Ucitavanje...</p>
+                    <% }; %>
+
+                        <% if(req.session.language=="de" ){%>
+                            <p class="margin2-top">Ucitavanje...</p>
+                            <% }; %>
+    </div>
+</div>

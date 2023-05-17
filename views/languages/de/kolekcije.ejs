@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Sammlungen | <%= siteName %>
+    </title>
+    <%- include('../../partials/css.ejs') %>
+
+</head>
+
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <div class="categoryTitle">
+                <a href="/collections">Sammlungen</a>
+            </div>
+            <hr style="background-color:#2d66e9; height: 2px; margin-top: -2rem !important;">
+
+
+            <div class="d-flex margin2-top align-items-center">
+                <p class="me-auto m-0">
+                    297 Produkte
+                </p>
+                <select class="ms-auto form-select" aria-label="Default select example" style="width: auto;">
+                    <option selected>Empfohlen</option>
+                    <option value="preporuceno">Empfohlen</option>
+                    <option value="cena-l-to-h">Preis, am wenigsten für die meisten</option>
+                    <option value="cena-h-to-l">Preis, vom höchsten zum niedrigsten Preis</option>
+                    <option value="najnovije">Das Neueste</option>
+                    <option value="ukupnoprodato">Insgesamt verkauft, vom höchsten zum niedrigsten Wert</option>
+                    <option value="kupovine">Käufe, vom höchsten zum niedrigsten Wert</option>
+                    <option value="vidjeno">Gesehen, am meisten bis am wenigsten</option>
+                </select>
+            </div>
+            <div class="row margin2-top text-center">
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="btn btn-primary margin6-bottom">Schraubstock</div>
+            </div>
+        </div>
+
+        <%- include("../../partials/footer.ejs") %>
+
+            <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

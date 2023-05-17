@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj</title>
+    <%- include("../partials/css.ejs") %>
+        <link rel="stylesheet" href="/css/sidebars.css">
+        <style>
+            #fileslbl {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 4rem;
+                /* background-color: rgb(133, 160, 196); */
+                border-radius: 6px;
+                border-style: dashed dashed dashed dashed;
+                border-color: rgb(148, 138, 138);
+                color: black;
+                border-width: 3.5px;
+                padding: 16px;
+                text-align: center;
+                transition: .5s;
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: infinite;
+            }
+
+            #filesfld {
+                display: none;
+            }
+
+            #progress {
+                width: 0;
+                background-color: blue;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 25px;
+                padding: 0 5px;
+            }
+
+            .file-list {
+                margin: 20px auto;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .file-list p {
+                margin: 0;
+            }
+
+            .file-list ul {
+                margin: 10px 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .file-list li {
+                margin: 5px 0;
+                font-size: 14px;
+                line-height: 1.5;
+                word-break: break-all;
+            }
+
+            @keyframes dropbox {
+                0% {
+                    background-image: repeating-linear-gradient(30deg, green 1%, green 3%, darkgreen 5%, darkgreen 5%);
+                }
+
+                50% {
+                    background-image: repeating-linear-gradient(30deg, darkgreen 1%, darkgreen 3%, green 5%, green 5%);
+                }
+
+                100% {
+                    background-image: repeating-linear-gradient(30deg, green 1%, green 3%, darkgreen 5%, darkgreen 5%);
+                }
+            }
+        </style>
+
+</head>
+
+<body>
+    <%- include("../partials/dashboardNavbar.ejs") %>
+        <div class="container">
+            <div class="margin2-top ">
+                <div class="me-auto m-0 categoryTitle">
+                    Dodaj Proizvod
+                </div>
+            </div>
+            <hr>
+            <div class="margin2-top justify-content-center">
+                <form id="filesfrm" action="/upload" method="post" onsubmit="submitFilesForm(this)">
+                    <div class="row">
+                        <div class="col-md margin2-bottom">
+                            <div class="upload image">
+                                <div class="mb-3">
+
+                                    <input type="file" name="filesfld" id="filesfld" accept="image/*" multiple
+                                        accept="image/png" onchange="loadFile(event)" />
+
+                                    <!-- onchange="submitFilesForm(this.form);" -->
+                                    <label for="filesfld" id="fileslbl"
+                                        ondragover="stopDefault(event);dragOver(this, 'Spusti slike da ih ubacis na server.');"
+                                        ondragenter="stopDefault(event);dragOver(this, 'Spusti slike da ih ubacis na server.');"
+                                        ondragleave="stopDefault(event);dragLeave(this);"
+                                        ondrop="stopDefault(event);dragLeave(this);addFilesAndSubmit(event);">Klikni da
+                                        izaberes ili prevuci sliku</label>
+                                    <div style="text-align: left;">
+                                        <div id="progress"></div>
+                                    </div>
+                                    <div class="file-list text-center">
+                                        <p>Uploaded files:</p>
+                                        <ul></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="margin2-top">
+                                <div class="editTitle">
+                                    Naziv Proizvoda
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="title" id="title" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin2-top">
+                                <div class="editTitle">
+                                    Kratki opis (bice prikazan ispod naslova)
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="shortDescription" id="shortDescription" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin2-top">
+                                <div class="editTitle">
+                                    Opis
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="description" id="description"
+                                        rows="6"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md margin2-bottom">
+                            <div class="colors">
+                                <div class="editTitle text-center">
+                                    Dostupne Velicine
+                                </div>
+                                <div class="avaliableColors margin2-top">
+                                    <div class="list-group">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="size-xs" id="xs" type="checkbox">
+                                            XS
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="size-s" id="s" type="checkbox">
+                                            S
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="size-m" id="m" type="checkbox">
+                                            M
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="size-l" id="l" type="checkbox">
+                                            L
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sizes margin2-top">
+                                <div class="editTitle text-center">
+                                    Dostupne Boje
+                                </div>
+                                <div class="avaliableColors margin2-top">
+                                    <div class="list-group">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="pink" id="pink" type="checkbox">
+                                            Roza
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="black" id="black"
+                                                type="checkbox">
+                                            Crna
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="white" id="white"
+                                                type="checkbox">
+                                            Bela
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price margin2-top">
+                                <div class="editTitle">Cena (EUR)</div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="price" id="price" rows="1"
+                                        style="width: 7rem;"></textarea>
+                                </div>
+                            </div>
+                            <div class="category margin2-top">
+                                <div class="editTitle">Kategorija</div>
+                                <select class="form-select" aria-label="Default select example" id="category"
+                                    name="category" style="width: auto;">
+                                    <option value="haljine">Haljine</option>
+                                    <option value="novo">Novo</option>
+                                    <option value="majice">Majice</option>
+                                    <option value="topici">Topici</option>
+                                    <option value="kolekcije">Kolekcije</option>
+                                </select>
+                            </div>
+                            <div class="delete margin3-top">
+                                <input class="btn btn-success"
+                                    onclick="submitFilesForm(document.getElementById('filesfrm'))"
+                                    value="DODAJ PROIZVOD">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%- include("../partials/js.ejs") %>
+
+            <script type="text/javascript">
+                const fileInput = document.getElementById("filesfld");
+                const fileList = document.querySelector('.file-list ul');
+
+                fileInput.addEventListener('change', () => {
+                    const files = fileInput.files;
+                    handleFiles(files);
+                });
+
+                function handleFiles(files) {
+                    if (files.length === 0) return;
+
+                    // Loop through the selected files
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+
+                        // Display the file name in the list
+                        const li = document.createElement('li');
+                        li.textContent = file.name;
+                        fileList.appendChild(li);
+                    }
+                }
+
+                function stopDefault(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                function dragOver(label, text) {
+                    /* ADD ALMOST ANY STYLING YOU LIKE */
+                    label.style.animationName = "dropbox";
+                    label.innerText = text;
+                }
+                function dragLeave(label) {
+                    /* THIS SHOULD REMOVE ALL STYLING BY dragOver() */
+                    var len = label.style.length;
+                    for (var i = 0; i < len; i++) {
+                        label.style[label.style[i]] = "";
+                    }
+                    label.innerText = "Klikni da izaberes ili prevuci sliku";
+                }
+                function addFilesAndSubmit(event) {
+                    var files = event.target.files || event.dataTransfer.files;
+                    document.getElementById("filesfld").files = files;
+                    handleFiles(files);
+                    // submitFilesForm(document.getElementById("filesfrm"));
+                }
+                function submitFilesForm(form) {
+                    var label = document.getElementById("fileslbl");
+                    const title = document.getElementById("title")
+                    const description = document.getElementById("description")
+                    const shortDescription = document.getElementById("shortDescription")
+                    const category = document.getElementById("category")
+                    const pink = document.getElementById("pink").checked
+                    const black = document.getElementById("black").checked
+                    const white = document.getElementById("white").checked
+                    const price = document.getElementById("price");
+                    const xs = document.getElementById("xs").checked
+                    const s = document.getElementById("s").checked
+                    const m = document.getElementById("m").checked
+                    const l = document.getElementById("l").checked
+
+                    dragOver(label, "Ucitavanje na server..."); // set the drop zone text and styling
+                    var fd = new FormData();
+                    for (var i = 0; i < form.filesfld.files.length; i++) {
+                        var field = form.filesfld;
+                        fd.append(field.name, field.files[i], field.files[i].name);
+                    }
+                    var progress = document.getElementById("progress");
+                    var x = new XMLHttpRequest();
+                    if (x.upload) {
+                        x.upload.addEventListener("progress", function (event) {
+                            var percentage = parseInt(event.loaded / event.total * 100);
+                            progress.innerText = progress.style.width = percentage + "%";
+                        });
+                    }
+                    x.onreadystatechange = function () {
+                        if (x.readyState == 4) {
+                            progress.innerText = progress.style.width = "";
+                            form.filesfld.value = "";
+                            dragLeave(label); // this will reset the text and styling of the drop zone
+                            if (x.status == 200) {
+                                var images = JSON.parse(x.responseText);
+                                for (var i = 0; i < images.length; i++) {
+                                    var img = document.createElement("img");
+                                    img.src = images[i];
+                                    document.body.appendChild(img);
+                                }
+                            }
+                            else {
+                            }
+                        }
+                    };
+                    fd.append('title', title.value)
+                    fd.append('description', description.value)
+                    fd.append('description', shortDescription.value)
+                    fd.append('category', category.value)
+                    fd.append('price', price.value)
+                    fd.append('pink', pink)
+                    fd.append('black', black)
+                    fd.append('white', white)
+                    fd.append('s', s)
+                    fd.append('xs', xs)
+                    fd.append('m', m)
+                    fd.append('l', l)
+                    x.open("post", form.action, true);
+                    x.send(fd)
+                    window.location.replace("http://localhost/admin/uploaded")
+                    return false;
+                }
+            </script>
+</body>
+
+</html>

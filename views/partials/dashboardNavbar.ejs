@@ -1,0 +1,95 @@
+<div class="d-none d-lg-block">
+    <nav class="navbar navbar-expand-lg" style="background-color: #ADC2F2;">
+        <div class="container">
+            <a class="navbar-brand siteName2" href="/">
+                <%= siteName %>
+            </a>
+            <div class="mx-left">
+                <div class="secNav-items d-flex justify-content-center align-items-center nav-options">
+
+                    <select class="form-select margin2-left opti" style="width: auto;">
+                        <option class="text-break" selected>USD</option>
+                        <option value="euro">EUR</option>
+                    </select>
+                    <a class="opti margin2-left" href="/account/orders">Nalog</a>
+                    <a onclick="openNav()" class="opti margin2-left">
+                        <img src="/images/menu.png" width="25px" height="25px" style="margin-right: .5rem;">
+                        Menu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="d-block d-lg-none d-sm-block d-md-block" style="background-color: #ADC2F2;">
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container">
+            <a class="siteName2 navbar-brand" href="/">
+                <%= siteName %>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <hr style="background-color: #1453e7; height: 2px;">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 margin1-top secNav-items">
+                    <div class="row">
+                        <div class="col">
+                            <li class="nav-item margin1-left">
+                                <a class="opti">USD</a>
+                            </li>
+                        </div>
+                        <div class="col">
+                            <li class="nav-item margin1-left">
+                                <% if(req.session.user){ %>
+                                    <a class="opti" href="/account/orders">Nalog</a>
+                                    <% } else {%>
+                                        <a class="opti" href="/login">Prijava</a>
+                                        <% } %>
+                            </li>
+                        </div>
+                        <div class="col">
+                            <li class="nav-item margin1-left">
+                                <a onclick="openNav()">
+                                    <img src="/images/menu.png" width="25px" height="25px" style="margin-right: 1rem;"
+                                        class="opti"> <b>Menu</b>
+                                </a>
+                            </li>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+<div id="mySidenav" class="white bg-dark-purple sidenav" style="width: 250px; color: white !important;">
+    <a href="javascript:void(0)" class="white closebtn" onclick="closeNav()">&times;</a>
+    <div class="margin1-top text-center">
+        <a href="/admin/dashboard">Statistika</a>
+        <a href="/admin/activity">Aktivnosti</a>
+        <a href="/admin/orders">Porudzbine</a>
+        <a href="/admin/new">Novo</a>
+        <a href="/">USKORO</a>
+        <a href="/admin/clothing">Majice</a>
+        <a href="/admin/tops">Topici</a>
+        <a href="/admin/collections">Kolekcije</a>
+        <div class="container">
+            <hr style="background-color: white; height: 2px;">
+        </div>
+        <a href="/admin/add">Dodaj Proizvod</a>
+    </div>
+</div>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>

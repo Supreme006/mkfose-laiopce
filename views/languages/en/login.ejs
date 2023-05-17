@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | <%= siteName %>
+    </title>
+    <%- include('../../partials/css.ejs') %>
+</head>
+
+<body>
+    <%- include('../../partials/secNavbar.ejs') %>
+
+        <div class="container login-container text-center">
+            <div class="register-title">
+                Login
+            </div>
+            <div class="register-description">
+                Enter mail and password
+            </div>
+            <form action="/login" method="post">
+                <div class="register-information">
+                    <input class="system-input" type="email" name="email" placeholder="Email">
+                </div>
+                <div class="register-information">
+                    <input class="system-input" type="password" name="password" placeholder="Password">
+                </div>
+                <div class="register-information">
+                    <input class="btn btn-primary button16" type="submit" value="Uloguj se">
+                </div>
+            </form>
+            <div class="register-information">
+                <div class="already text-center">Nemate nalog?</div> <a class="loginHref" href="/register">Registrujte
+                    se</a>
+            </div>
+        </div>
+        <footer>
+            <div class="text-center">
+                <hr style="background-color:#614e4e; height: 2px; margin-bottom: 4rem;">
+                <span class="system-footer-letter"> © 2023 <%=siteName %></span>
+            </div>
+        </footer>
+        <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

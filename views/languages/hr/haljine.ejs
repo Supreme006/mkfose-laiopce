@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Haljine | <%= siteName %>
+    </title>
+    <%- include('../../partials/css.ejs') %>
+
+</head>
+
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <div class="categoryTitle">
+                <a href="/dresses">Haljine</a>
+            </div>
+            <hr style="background-color:#2d66e9; height: 2px; margin-top: -2rem !important;">
+
+
+            <div class="d-flex margin2-top align-items-center">
+                <p class="me-auto m-0">
+                    297 Proizvoda
+                </p>
+                 <select class="ms-auto form-select" aria-label="Default select example" style="width: auto;">
+                    <option selected>Preporuceno</option>
+                    <option value="preporuceno">Preporuceno</option>
+                    <option value="cena-l-to-h">Cena, najmanje do najvise</option>
+                    <option value="cena-h-to-l">Cena, najvisa do najmanje</option>
+                    <option value="najnovije">Najnovije</option>
+                    <option value="ukupnoprodato">Ukupno prodato, najvise do najmanje</option>
+                    <option value="kupovine">Kupovine, najvise do najmanje</option>
+                    <option value="vidjeno">Vidjeno, najvise do najmanje</option>
+                </select>
+            </div>
+            <div class="row margin2-top text-center">
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+                <div class="col product-gap">
+                    <img src="images/360x540.svg" style="max-height: 378px; max-width: 252px; border-radius: 15px;">
+                    <div class="productInfo">
+                        <div class="productName text-break">
+                            Ime haljine
+                        </div>
+                        <div class="productPrice">
+                            $41.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="btn btn-primary margin6-bottom">Vise</div>
+            </div>
+        </div>
+
+        <%- include("../../partials/footer.ejs") %>
+
+            <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

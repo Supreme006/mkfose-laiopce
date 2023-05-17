@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haljine</title>
+    <%- include('../partials/css.ejs') %>
+        <link rel="stylesheet" href="/css/sidebars.css">
+</head>
+
+<body>
+    <%- include('../partials/dashboardNavbar.ejs') %>
+
+        <div class="container">
+            <div class="margin2-top align-items-center">
+                <div class="me-auto m-0 categoryTitle">
+                    Topici
+                </div>
+            </div>
+            <hr>
+            <div class="row text-center">
+                <% products.forEach(item=> {%>
+                    <div class="col product-gap">
+                        <% if(item.images[0]) {%>
+                            <a href="/admin/edit/id"><img src="/uploads/<%= item.images[0] %>"
+                                    style="max-height: 516px; max-width: 344px; border-radius: 15px;"></a>
+                            <% } else { %>
+                                <a href="/admin/edit/id"><img src="/images/mia12.png"
+                                        style="max-height: 516px; max-width: 344px; border-radius: 15px;"></a>
+                                <% } %>
+                                    <div class="productInfo">
+                                        <div class="productName text-break">
+                                            <%= item.title %>
+                                        </div>
+                                        <div class="col">
+                                            <span class="productPrice">
+                                                €<%= item.price %>
+                                            </span>
+
+                                        </div>
+                                        <div class="col">
+                                            <span class="stats">
+                                                <%= item.views || 0 %> pregleda
+                                            </span>
+                                            <span class="stats">
+                                                <%= item.sold || 0 %> Prodato
+                                            </span>
+                                        </div>
+                                    </div>
+                    </div>
+                    <%})%>
+            </div>
+        </div>
+
+        <%- include('../partials/js.ejs') %>
+</body>
+
+</html>

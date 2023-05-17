@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagen | <%= siteName %>
+    </title>
+
+    <%- include('../../partials/css.ejs') %>
+</head>
+
+<body>
+    <%- include('../../partials/secNavbar.ejs') %>
+        <div class="container margin3-top">
+            <div class="d-flex justify-content-center">
+                <div class="me-auto m-0">
+                    <h3>Cart</h3>
+                </div>
+                <h3 class="ms-auto d-flex">
+                    <div class="margin1-right">Gesamt: $120</div>
+                    <div class="btn btn-success">Kasse</div>
+                </h3>
+            </div>
+            <hr>
+            <% products.forEach(item=> { %>
+                <div class="cartHolder">
+                    <div class="dik">
+                        <div class="d-flex">
+                            <div class="ms-auto">
+                                <div class="x">&#10005;</div>
+                            </div>
+                        </div>
+                        <div class="cartContainer">
+                            <div class="d-flex">
+                                <div class="cartImage">
+                                    <div class="me-auto m-0">
+                                        <% if(item.images[0]) {%>
+                                            <img src="/uploads/<%= item.images[0] %>" height="250px"
+                                                style="border-radius: 15px;">
+                                            <% } else { %>
+                                                <img src="/images/mia11.png" height="250px"
+                                                    style="border-radius: 15px;">
+                                                <% } %>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="cartTitle">
+                                        <%= item.title %>
+                                    </div>
+                                    <div class="cartDescription text-center">
+                                        <%= item.description %>
+                                    </div>
+                                </div>
+                                <h3 class="ms-auto">
+                                    <div class="cartPrice">
+                                        €<%= item.price %>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+
+        <%- include('../../partials/js.ejs') %>
+</body>
+
+</html>

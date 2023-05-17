@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desavanja</title>
+    <%- include('../partials/css.ejs') %>
+        <link rel="stylesheet" href="/css/sidebars.css">
+</head>
+
+<body>
+    <%- include('../partials/dashboardNavbar.ejs') %>
+
+        <div class="container">
+            <div class="margin3-top dashboardListTitle">
+                Lista Aktivnosti
+            </div>
+            <div class="row margin2-top text-center">
+                <div class="col ordersTable">Datum</div>
+                <div class="col ordersTable">Posetioci</div>
+                <div class="col ordersTable">Kupci</div>
+            </div>
+            <div class="margin5-bottom">
+                <% products.forEach(item=> { %>
+                    <hr style="background-color:#2d66e9; height: 2px;" class="margin1-top">
+                    <div class="row text-center">
+                        <div class="col ordersTable">
+                            <%= item.date %>
+                        </div>
+                        <div class="col ordersTable">
+                            <%= item.views %>
+                        </div>
+                        <div class="col ordersTable">
+                            <%= item.sold %>
+                        </div>
+
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+        <%- include('../partials/js.ejs') %>
+</body>
+
+</html>

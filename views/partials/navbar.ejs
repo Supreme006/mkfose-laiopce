@@ -1,0 +1,227 @@
+<% let pocetna; if(req.session.language=="hr" ) pocetna="POCETNA" ; if(req.session.language=="en" ) pocetna="HOME" ;
+    if(req.session.language=="de" ) pocetna="INITIAL" ; let novo; if(req.session.language=="hr" ) novo="NOVO" ;
+    if(req.session.language=="en" ) novo="NEW" ; if(req.session.language=="de" ) novo="NEU" ; let uskoro;
+    if(req.session.language=="hr" ) uskoro="USKORO" ; if(req.session.language=="en" ) uskoro="SOON" ;
+    if(req.session.language=="de" ) uskoro="BALD" ; let majice; if(req.session.language=="hr" ) majice="MAJICE" ;
+    if(req.session.language=="en" ) majice="T-SHIRTS" ; if(req.session.language=="de" ) majice="T-SHIRTS" ; let topici;
+    if(req.session.language=="hr" ) topici="TOPICI" ; if(req.session.language=="en" ) topici="TOPICI" ;
+    if(req.session.language=="de" ) topici="TOPICI" ; let kolekcije; if(req.session.language=="hr" )
+    kolekcije="KOLEKCIJA" ; if(req.session.language=="en" ) kolekcije="COLLECTION" ; if(req.session.language=="de" )
+    kolekcije="SAMMLUNGEN" ; let pretraga; if(req.session.language=="hr" ) pretraga="Pretraga" ;
+    if(req.session.language=="en" ) pretraga="Search" ; if(req.session.language=="de" ) pretraga="Suchen" ; let nalog;
+    if(req.session.language=="hr" ) nalog="Nalog" ; if(req.session.language=="en" ) nalog="Account" ;
+    if(req.session.language=="de" ) nalog="Befehl" ; let prijava; if(req.session.language=="hr" ) prijava="Prijavi se" ;
+    if(req.session.language=="en" ) prijava="Login" ; if(req.session.language=="de" ) prijava="Anwenden" ; let kolica;
+    if(req.session.language=="hr" ) kolica="Košarica" ; if(req.session.language=="en" ) kolica="Cart" ;
+    if(req.session.language=="de" ) kolica="Korb" ; 
+    
+    if(!req.session.language)req.session.language = "hr";
+    if(!req.session.value)req.session.language = "eur";
+
+    %>
+
+
+    <div class="d-none d-lg-block">
+        <nav class="navbar navbar-expand-lg" style="background-color: #bb9797;">
+            <div class="container">
+                <div class="d-flex align-items-center nav-options align-baseline">
+                    <select class="form-select" aria-label="Hrvatski" onchange="changeLanguage()" id="language"
+                        style="width: auto;">
+                        <option selected>
+                            <%= req.session.language.toUpperCase(); %>
+                        </option>
+                        <option value="en">EN</option>
+                        <option value="de">DE</option>
+                        <option value="hr">HR</option>
+                    </select>
+                    <select class="form-select" style="width: auto;" onchange="changeValue()" id="value">
+                        <option selected>
+                            <%= req.session.value.toUpperCase(); %>
+                        </option>
+                        <option value="eur">EUR</option>
+                        <option value="usd">USD</option>
+                    </select>
+                </div>
+                <div class="align-middle siteName">
+                    <img src="/images/Black_Transparent.svg" alt="" srcset="" style="width: 100px; height: auto;">
+                </div>
+                <div class="align-end">
+                    <!-- <a href="/search"><img src="/images/search.png" class="margin05-left" width="25" height="25"></a> -->
+                    <% if(!req.session.user){ %>
+                        <a href="/login" class="opti"><img src="/images/user.png" width="25" height="25"></a>
+                        <% } else { %>
+                            <a href="/account/orders" class="opti"><img src="/images/user.png" width="25"></a>
+                            <% } %>
+                                <a href="/cart"><img src="/images/cart.png" width="25" height="25"></a>
+                </div>
+            </div>
+        </nav>
+        <!-- <nav class="navbar navbar-expand-lg justify-content-center text-center"
+            style="background-color: #FAE0DF; margin-top: -1rem; margin-left: 4rem;">
+            <div class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link opti" href="/">
+                        <%= pocetna %>
+                    </a>
+                </li>
+                <li class="nav-item margin1-left">
+                    <a class="nav-link opti" href="/new">
+                        <%= novo %>
+                    </a>
+                </li>
+                <li class="nav-item margin1-left">
+                    <a class="nav-link opti" href="/">
+                        <%= uskoro %>
+                    </a>
+                </li>
+                <li class="nav-item margin1-left">
+                    <a class="nav-link opti" href="/clothing">
+                        <%= majice %>
+                    </a>
+                </li>
+                <li class="nav-item margin1-left">
+                    <a class="nav-link opti" href="/tops">
+                        <%= topici %>
+                    </a>
+                </li>
+                <li class="nav-item margin1-left">
+                    <a class="nav-link opti" href="/collections">
+                        <%= kolekcije %>
+                    </a>
+                </li>
+            </div>
+        </nav> -->
+    </div>
+
+    <div class="d-block d-lg-none d-sm-block d-md-block" style="background-color: #ADC2F2;">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container">
+                <a class="siteName2 navbar-brand" href="/">
+                    <%= siteName %>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <hr style="background-color: #1453e7; height: 2px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 margin1-top">
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/">
+                                <%= pocetna %>
+                            </a>
+                        </li>
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/new">
+                                <%= novo %>
+                            </a>
+                        </li>
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/">
+                                <%= uskoro %>
+                            </a>
+                        </li>
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/clothing">
+                                <%= majice %>
+                            </a>
+                        </li>
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/tops">
+                                <%= topici %>
+                            </a>
+                        </li>
+                        <li class="nav-item margin1-left">
+                            <a class="nav-link opti" href="/collections">
+                                <%= kolekcije %>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <hr style="background-color: #1453e7; height: 2px;">
+                        <div class="row">
+                            <div class="col">
+                                <a href="/search" class="opti"><img src="/images/search.png" class="margin05-right"
+                                        width="25" height="25">
+                                    <%= pretraga %>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <% if(!req.session.user){ %>
+                                    <a href="/login" class="opti"><img src="/images/user.png" class="margin05-right"
+                                            width="25" height="25">
+                                        <%= prijava %>
+                                    </a>
+                                    <% } else { %>
+                                        <a href="/account/orders" class="opti"><img src="/images/user.png"
+                                                class="margin05-right" width="25" height="25">
+                                            <%= nalog %>
+                                        </a>
+                                        <% } %>
+                            </div>
+                            <div class="col">
+                                <a href="/cart" class="opti"><img src="/images/cart.png" class="margin05-right"
+                                        width="25" height="25">
+                                    <%= kolica %>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="margin1-top row">
+                            <div class="col nav-options">
+                                <select class="form-select" aria-label="Hrvatski" style="width: auto;">
+                                    <option selected>
+                                        <%= req.session.language.toUpperCase(); %>
+                                    </option>
+                                    <option value="en">EN</option>
+                                    <option value="de">DE</option>
+                                    <option value="hr">HR</option>
+                                </select>
+                            </div>
+                            <div class="col nav-options">
+                                <select class="form-select" style="width: auto;">
+                                    <option selected>
+                                        <%= req.session.value.toUpperCase(); %>
+                                    </option>
+                                    <option value="eur">EUR</option>
+                                    <option value="usd">USD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        function changeValue() {
+            const selectedValue = document.getElementById("value").value
+
+            $.ajax({
+                url: "/changeValue",
+                type: "POST",
+                data: {
+                    "value": selectedValue,
+                },
+                success: function () {
+                    window.location.replace("/")
+                }
+            });
+        };
+
+        function changeLanguage() {
+            const selectedLanguage = document.getElementById("language").value
+
+            $.ajax({
+                url: "/changeLanguage",
+                type: "POST",
+                data: {
+                    "language": selectedLanguage,
+                },
+                success: function () {
+                    window.location.replace("/")
+                }
+            });
+        };
+    </script>

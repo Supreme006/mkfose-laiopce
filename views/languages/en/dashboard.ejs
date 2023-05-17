@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../../partials/css.ejs') %>
+        <link rel="stylesheet" href="/css/sidebars.css">
+</head>
+
+<body>
+    <%- include('../../partials/dashboardNavbar.ejs') %>
+
+        <div class="container ">
+            <div class="d-none d-lg-block margin3-top d-flex align-items-center justify-content-center">
+                <canvas id="chartPc" style="width:100%; "></canvas>
+            </div>
+            <div class="margin3-top dashboardListTitle">
+                Lista Aktivnosti
+            </div>
+            <div class="row margin2-top text-center">
+                <div class="col ordersTable">Datum</div>
+                <div class="col ordersTable">Posetioci</div>
+                <div class="col ordersTable">Kupci</div>
+            </div>
+            <div class="margin5-bottom">
+                <% stats.forEach(item=> { %>
+                    <hr style="background-color:#2d66e9; height: 2px;" class="margin1-top">
+                    <div class="row text-center">
+                        <div class="col ordersTable"><%= item.date %></div>
+                        <div class="col ordersTable"><%= item.views %></div>
+                        <div class="col ordersTable"><%= item.sold %></div>
+                    </div>
+                    <% }) %>
+
+            </div>
+        </div>
+
+        <%- include('../../partials/js.ejs') %>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+            </script>
+            <script>
+                var chartPc = document.getElementById("chartPc");
+
+                Chart.defaults.global.defaultFontFamily = "Lato";
+                Chart.defaults.global.defaultFontSize = 18;
+
+                $.ajax({
+                    url: "/activity/last30",
+                    type: "GET",
+                    success: function (res) {
+
+                        var posetioci = {
+                            label: 'Posetioci',
+                            data: res.views,
+                            backgroundColor: 'rgba(0, 99, 132, 0.6)',
+                            borderColor: 'rgba(0, 99, 132, 1)',
+                            yAxisID: "y-axis-density"
+                        };
+
+                        var prodato = {
+                            label: 'Prodato',
+                            data: res.sold,
+                            backgroundColor: 'rgba(99, 132, 0, 0.6)',
+                            borderColor: 'rgba(99, 132, 0, 1)',
+                            yAxisID: "y-axis-gravity"
+                        };
+
+                        var days = {
+                            labels: res.date,
+                            datasets: [posetioci, prodato]
+                        };
+
+                        var chartOptions = {
+                            scales: {
+                                xAxes: [{
+                                    barPercentage: 1,
+                                    categoryPercentage: 0.6
+                                }],
+                                yAxes: [{
+                                    id: "y-axis-density"
+                                }, {
+                                    id: "y-axis-gravity"
+                                }]
+                            }
+                        };
+
+                        var barChart = new Chart(chartPc, {
+                            type: 'bar',
+                            data: days,
+                            options: chartOptions
+                        });
+                    },
+                    error: {
+
+                    }
+                })
+
+
+            </script>
+</body>
+
+</html>

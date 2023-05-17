@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | <%= siteName %>
+    </title>
+    <%- include('../../partials/css.ejs') %>
+</head>
+
+<body>
+    <%- include('../../partials/secNavbar.ejs') %>
+        <div class="jumbotron text-center bg-transparent margin3-top margin6-bottom">
+            <h1 class="commandstitle">Products</h1>
+            <p class="lead commandssub">All available products.</p>
+            <hr>
+            <input id="myInput" type="text" class="searchbox mb-5" placeholder="Search">
+            <div class="border mb-2"></div>
+            <div id="myCmd">
+                <% products.forEach(item=> { %>
+                    <button type="button" class="collapsible mt-4">
+                        <%= item.title %><span> €<%= item.price %></span>
+                    </button>
+                    <div class="content">
+                        <h4 style="color: black;">Opis:</h4>
+                        <p>
+                            <%= item.description %>
+                        </p>
+                        <h4 style="color: black;">Kategorija:</h4>
+                        <p>
+                            <%= item.category %>
+                        </p>
+                        <h4 style="color: black;">Link:</h4>
+                        <p>
+                            <a href="https://localhost/<%=item.category%>/<%= item.id %>">https://localhost/
+                                <%=item.category%>/<%= item.id %>
+                            </a>
+                        </p>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+        <%- include('../../partials/js.ejs') %>
+            <script>
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function () {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
+                }
+
+                $(document).ready(function () {
+                    $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#myCmd button").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+            </script>
+
+</body>
+
+</html>

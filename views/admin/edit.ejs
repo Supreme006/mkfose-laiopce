@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Izmene</title>
+    <%- include("../partials/css.ejs") %>
+        <link rel="stylesheet" href="/css/sidebars.css">
+</head>
+
+<body>
+    <%- include("../partials/dashboardNavbar.ejs") %>
+        <div class="container">
+            <div class="margin2-top ">
+                <div class="me-auto m-0 categoryTitle">
+                    Izmeni Proizvod
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex margin2-top justify-content-center">
+                <div class="row">
+                    <div class="col margin2-bottom">
+                        <div class="row">
+                            <div class="previewImage">
+                                <img src="/images/mia18.svg"
+                                    style="max-height: 516px; max-width: 344px; border-radius: 15px;">
+                            </div>
+                            <div class="margin2-top">
+                                <div class="editTitle">
+                                    Naziv Proizvoda
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="name" id="name" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="margin2-top">
+                                <div class="editTitle">
+                                    Opis
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="description" id="description"
+                                        rows="6"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col margin2-bottom">
+                        <div class="editTitle text-center">
+                            Dostupne Boje
+                        </div>
+                        <div class="avaliableColors margin2-top">
+                            <div class="list-group">
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox">
+                                    Roza
+                                </label>
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox">
+                                    Crna
+                                </label>
+                                <label class="list-group-item">
+                                    <input class="form-check-input me-1" type="checkbox">
+                                    Bela
+                                </label>
+                            </div>
+                        </div>
+                        <div class="price margin2-top">
+                            <div class="editTitle">Cena (EUR)</div>
+                            <div class="mb-3">
+                                <textarea class="form-control noresize" name="description" id="description" rows="1"
+                                    style="width: 7rem;"></textarea>
+                            </div>
+                        </div>
+                        <div class="category margin2-top">
+                            <div class="editTitle">Kategorija</div>
+                            <select class="form-select" aria-label="Default select example" style="width: auto;">
+                                <option selected>Haljine</option>
+                                <option value="novo">Novo</option>
+                                <option value="haljine">Haljine</option>
+                                <option value="majice">Majice</option>
+                                <option value="topici">Topici</option>
+                                <option value="kolekcije">Kolekcije</option>
+                            </select>
+                        </div>
+                        <div class="delete margin3-top">
+                            <div class="btn btn-danger">OBRISI PROIZVOD</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include("../partials/js.ejs") %>
+</body>
+
+</html>
