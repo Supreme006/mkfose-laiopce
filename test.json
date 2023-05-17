@@ -1,0 +1,17 @@
+{
+    "mail": "a99676669@gmail.com",
+    "product": "Hose Monte",
+    "price": 120,
+    "adresa": "Bulevar Jebaca Zorana br. 3",
+    "country": "Nemacka",
+    "amount": 1,
+    "size": "s",
+    "message": "Nemojte da omasite porudzbinu",
+    "paymentDetails": {
+        "type": "Visa",
+        "cardNumber": "1023 5934 5934 6044 6045",
+        "cvv": "523",
+        "cardHolder": "ToxicTheDog",
+        "expireDate": "11/23"
+    }
+}
