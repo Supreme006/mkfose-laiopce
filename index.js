@@ -64,6 +64,12 @@ app.use(session({
     expires: 604800000,
 }));
 
+app.get('/checkout', async (req, res) => {
+    if (req.session.language == "hr") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
+    if (req.session.language == "de") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
+    if (req.session.language == "en") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
+})
+
 app.get('/product', async (req, res) => {
     if (req.session.language == "hr") return res.render("languages/hr/product", { siteName: siteName, req: req });
     if (req.session.language == "de") return res.render("languages/hr/product", { siteName: siteName, req: req });
