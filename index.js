@@ -350,6 +350,7 @@ app.post("/addToCart", async (req, res) => {
         if(!cart) cart= [];
         cart.push(result);
         req.session.user.cart = cart;
+        console.log(req.session.user.cart)
         res.send("added")
     }
 })
