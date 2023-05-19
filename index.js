@@ -17,6 +17,14 @@ async function connect() {
     await mongo.connect();
 }
 
+function removeFromArray(arr, value) {
+    var index = arr.indexOf(value);
+    if (index > -1) {
+      arr.splice(index, 1);
+    }
+    return arr;
+  }
+
 connect()
 
 const db = mongo.db("Adores")
@@ -318,6 +326,32 @@ app.get("/admin/uploaded", async (req, res) => {
     if (!req.session.user.isAdmin) return res.redirect("/404");
 
     res.render('admin/uploaded')
+})
+
+app.post("/removeFromCart", async (req, res) => {
+    const id = req.body.title;
+    if(!req.session.user){
+        res.send("unauthorized")
+    } else{
+        let cart = req.session.user.cart;
+        const result = db.collection("products").find({"title": id}).toArray()
+        req.session.user.cart = removeFromArray(cart, result);
+        res.send("removed")
+    }
+})
+
+app.post("/addToCart", async (req, res) => {
+    const id = req.body.title;
+    if(!req.session.user){
+        res.send("unauthorized")
+    } else{
+        const result = db.collection("products").find({"title": id}).toArray()
+        let cart = req.session.user.cart;
+        if(!cart) cart= [];
+        cart.push(result);
+        req.session.user.cart = cart;
+        res.send("added")
+    }
 })
 
 app.post("/register", async (req, res) => {
