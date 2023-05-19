@@ -11,7 +11,7 @@ async function addToCart() {
             "title": title
         },
         success: (r) => {
-            console.log(r)
+            alert(r)
             
             // if (r == "added") {
             //     alert("ADDED TO CART")
