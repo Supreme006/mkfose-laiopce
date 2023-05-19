@@ -343,7 +343,7 @@ app.post("/removeFromCart", async (req, res) => {
 app.post("/addToCart", async (req, res) => {
     const id = req.body.title;
     if(!req.session.user){
-        res.send("unauthorized")
+        res.statusCode(400).send("unauthorized")
     } else{
         const result = db.collection("products").find({"title": id}).toArray()
         let cart = req.session.user.cart;
@@ -351,7 +351,7 @@ app.post("/addToCart", async (req, res) => {
         cart.push(result);
         req.session.user.cart = cart;
         console.log(req.session.user.cart)
-        res.send("added")
+        res.statusCode(200).send("added")
     }
 })
 
