@@ -1,27 +1,23 @@
 async function addToCart() {
   const title = document.getElementById("title");
 
-    $.ajax({
-        url: 'http://41.216.188.63:2357/addToCart',
-        type: "POST",
-        dataType: 'json',
-        cache : false,
+  $.ajax({
+    url: "/addToCart",
+    type: "POST",
+    Headers: "accept/json",
+    cache: false,
     processData: false,
-        data: {
-            "title": title
-        },
-        success: (r) => {
-            alert(r)
-            
-            // if (r == "added") {
-            //     alert("ADDED TO CART")
-            // }
-            // if (r == "unauthorized") {
-            //     alert("UNAUTHORIZED")
-            // }
-        },
-        error: (r) => {
-            console.log(r)
-        }
- })
+    data: {
+      title: title,
+    },
+    success: (r) => {
+
+      if (r.response == "added") {
+          alert("ADDED TO CART")
+      }
+      if (r.response == "unauthorized") {
+          alert("UNAUTHORIZED")
+      }
+    }
+  });
 }

@@ -480,15 +480,15 @@ app.post("/removeFromCart", async (req, res) => {
 app.post("/addToCart", async (req, res) => {
   const id = req.body.title;
   if (!req.session.user) {
-    res.statusCode(400).send(JSON.parse("{'response': 'unauthorized'}"));
+    return res.json({ response: "unauthorized" });
   } else {
-    const result = db.collection("products").find({ title: id }).toArray();
+    const result = await db.collection("products").find({ title: id }).toArray();
     let cart = req.session.user.cart;
     if (!cart) cart = [];
     cart.push(result);
     req.session.user.cart = cart;
-    console.log(req.session.user.cart);
-    res.statusCode(200).send(JSON.parse("{'response': 'added'}"));
+    console.log(await req.session.user.cart); //dodaje prazno
+    return res.json({ response: "added" });
   }
 });
 
