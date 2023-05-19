@@ -11,12 +11,14 @@ async function addToCart() {
             "title": title
         },
         success: (r) => {
-            if (r == "added") {
-                alert("ADDED TO CART")
-            }
-            if (r == "unauthorized") {
-                alert("UNAUTHORIZED")
-            }
+            console.log(r)
+            
+            // if (r == "added") {
+            //     alert("ADDED TO CART")
+            // }
+            // if (r == "unauthorized") {
+            //     alert("UNAUTHORIZED")
+            // }
         }
  })
 }
