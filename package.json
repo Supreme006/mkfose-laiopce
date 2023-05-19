@@ -16,6 +16,7 @@
     "express-session": "^1.17.3",
     "mongodb": "^5.3.0",
     "multer": "^1.4.5-lts.1",
-    "quick.db": "^9.1.4"
+    "quick.db": "^9.1.4",
+    "node-cron": "^3.0.2"
   }
 }
