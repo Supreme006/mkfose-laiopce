@@ -6,68 +6,262 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <%- include('../../partials/css.ejs') %>
+    <%- include('partials/css.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
-    <%- include('../../partials/navbar.ejs') %>
+    <%- include('partials/navbar.ejs') %>
 
 
+        <div class="super_container">
+            <div class="single_product">
+                <div class="container-fluid" style=" background-color: #fff; padding: 11px;">
+                    <div class="row">
+                        <div class="col-lg-2 order-lg-1 order-2 ">
+                            <div class="max13">
+                                <ul class="image_list">
+                                    <li data-image="/images/mia1.png">
+                                        <img onclick="changeImage(this)" src="/images/mia11.png" alt=""
+                                            style="max-height: 165px !important;">
+                                    </li>
+                                    <li data-image="/image/mia2.png">
+                                        <img onclick="changeImage(this)" src="/images/mia2.png" alt=""
+                                            style="max-height: 165px !important;">
+                                    </li>
+                                    <li data-image="/images/mia3.png">
+                                        <img onclick="changeImage(this)" src="/images/mia3.png" alt=""
+                                            style="max-height: 165px !important;">
+                                    </li>
+                                    <li data-image="/image/mia4.png">
+                                        <img onclick="changeImage(this)" src="/images/mia4.png" alt=""
+                                            style="max-height: 165px !important;">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 order-lg-2 order-1">
+                            <div class="image_selected"><img id="main_selected_image" src="/images/mia11.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-3">
+                            <div class="product_description">
+                                <div class="product_name">ATHLETICS</div>
+                                <div class="product_shortDescription">
+                                    Wide Leg Embroidered Back Joggers in Heather Grey
+                                </div>
+                                <div>
+                                    <span class="product_price">$24.00</span>
+                                </div>
+                                <hr>
+                                <div class="product_info">
+                                    Colors:
+                                </div>
+                                <div class="colorList d-flex">
+                                    <div class="black">
+                                        <a href="/test">
+                                            <div class="colorblack1">
+                                                <div class="colorCentarWite">
+                                                    <div class="colorblack2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="color-gap pink">
+                                        <a href="/test">
+                                            <div class="colorpink1">
+                                                <div class="colorCentarWite">
+                                                    <div class="colorpink2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="color-gap red">
+                                        <a href="/test">
+                                            <div class="colorred1">
+                                                <div class="colorCentarWite">
+                                                    <div class="colorred2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="color-gap gray">
+                                        <a href="/test">
+                                            <div class="colorgrey1">
+                                                <div class="colorCentarWite">
+                                                    <div class="colorgrey2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product_info">
+                                    Sizes:
+                                </div>
+                                <div class="sizeList d-flex">
+                                    <div class="xs">
+                                        <a href="/test">
+                                            <div class="sizeXS1">
+                                                <div class="colorCentarWite">
+                                                    <div class="sizeXS2">
+                                                        XS
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="s">
+                                        <div class="color-gap s">
+                                            <a href="/test">
+                                                <div class="sizeS1">
+                                                    <div class="colorCentarWite">
+                                                        S
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="m">
+                                        <div class="color-gap s">
+                                            <a href="/test">
+                                                <div class="sizeM1">
+                                                    <div class="colorCentarWite">
+                                                        M
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="l">
+                                        <div class="color-gap s">
+                                            <a href="/test">
+                                                <div class="sizeL1">
+                                                    <div class="colorCentarWite">
+                                                        L
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product_info modelInfo">
+                                    Mia je <b>5'1"</b> i nosi velicinu <b>XS</b>
+                                </div>
+                                <div class="checkout text-center">
+                                    <div class="wud btn btn-classic" style="width: auto; padding: 8px 15px 8px 15px;">
+                                        <img src="/images/bag.png" width="25" height="25" style="margin-right: 8px;">ADD
+                                        TO CART
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="partDescription">
+                                    Super mekane i dizajnirane da traju, Athletics široke trenirke
+                                    dizajnirane za vrhunsku udobnost. Izrađene od naše vrhunske,
+                                    330 g/m2 teške, brušene pamučne tkanine s... <b onclick="showDetails()"
+                                        class="more">Vise</b>
+                                </div>
+                                <hr>
+                                <div class="details d-flex justify-content-center align-items-center"
+                                    onclick="showDetails()">
+                                    <div class="detailsTitle">Product Details</div>
+                                    <div class="ms-auto d-flex align-items-center">
+                                        <i class="fa-solid fa-arrow-down fa-xl" id="arrow"></i>
+                                    </div>
 
-        
-
-
-
-
-
-
-
-
-        ATHLETICS
-        Wide Leg Embroidered Back Joggers in Heather Grey
-        $24.00
-        Color: Black
-        Size: L
-        XS
-        S
-        M
-        L
-        Mia je 5’1” i nosi velicinu XS
-        <div class="btn">ADD TO CART</div>
-        <hr>
-        Super mekane i dizajnirane da traju, Athletics široke trenirke
-        dizajnirane za vrhunsku udobnost. Izrađene od naše vrhunske,
-        330 g/m2 teške, brušene pamučne tkanine s... Vise
-        <hr>
-        PRODUCT DETAILS
-        <div style="visibility: hidden;">
-            Super mekane i dizajnirane da traju, Athletics široke trenirke
-            dizajnirane za vrhunsku udobnost. Izrađene od naše vrhunske,
-            330 g/m2 teške, brušene pamučne tkanine s podstavom od flisa
-            iznutra za nevjerojatnu udobnost, Athletics trenirke širokog su kroja
-            ravnih nogavica. S izvezenim Sport logotipom na stražnjoj strani,
-            Athletics trenirke su upotpunjene podesivom, skrivenom uzicom koja
-            steže struk. Zarazno mekane i nevjerojatno udobne, sportske hlače
-            Athletics dizajnirane su da podignu vašu odjeću za slobodno vrijeme
-            na višu razinu.
-            330gsm super soft, fleece back fabric (80% Cotton, 20% Polyester)
-            High, elasticated waistband with drawcord
-            Relaxed, oversized fit with wide legEmbroidered, Bo+Tee Sport logo on rear
-            Pull on design
-            Full length
-            Product code: BT0825
-            Wash inside out, on a gentle setting and low temperature.
-            We do our best to ensure that our photos are as true to colour as possible.
-            However, due to inconsistencies in monitors, digital photography and production
-            variations, we cannot guarantee that the colour you see on your screen accurately
-            portrays the true colour of the product.
+                                </div>
+                                <div class="description hidden" id="description">
+                                    Super mekane i dizajnirane da traju, Athletics široke trenirke
+                                    dizajnirane za vrhunsku udobnost. Izrađene od naše vrhunske,
+                                    330 g/m2 teške, brušene pamučne tkanine s podstavom od flisa
+                                    iznutra za nevjerojatnu udobnost, Athletics trenirke širokog su kroja
+                                    ravnih nogavica. S izvezenim Sport logotipom na stražnjoj strani,
+                                    Athletics trenirke su upotpunjene podesivom, skrivenom uzicom koja
+                                    steže struk. Zarazno mekane i nevjerojatno udobne, sportske hlače
+                                    Athletics dizajnirane su da podignu vašu odjeću za slobodno vrijeme
+                                    na višu razinu.
+                                    330gsm super soft, fleece back fabric (80% Cotton, 20% Polyester)
+                                    High, elasticated waistband with drawcord
+                                    Relaxed, oversized fit with wide legEmbroidered, Bo+Tee Sport logo on rear
+                                    Pull on design
+                                    Full length
+                                    Product code: BT0825
+                                    Wash inside out, on a gentle setting and low temperature.
+                                    We do our best to ensure that our photos are as true to colour as possible.
+                                    However, due to inconsistencies in monitors, digital photography and production
+                                    variations, we cannot guarantee that the colour you see on your screen accurately
+                                    portrays the true colour of the product.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="recommended text-center">
+                        <div class="recommendedItemsTitle">
+                            Complete Collection
+                        </div>
+                        <div class="recommendedItemsDescription">
+                            Ostali proizvodi iz ove kolekcije.
+                        </div>
+                        <div class="recommendedItemsList row">
+                            <div class="col product-gap tile">
+                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
+                                <div class="productInfo">
+                                    <div class="productName text-break">
+                                        Majica
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col product-gap tile">
+                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
+                                <div class="productInfo">
+                                    <div class="productName text-break">
+                                        Korset
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col product-gap tile">
+                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
+                                <div class="productInfo">
+                                    <div class="productName text-break">
+                                        Crop Top
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr>
 
-        <hr>
-        CHECK OUT THEESE TOO
-        <%- include('../../partials/footer.ejs') %>
-            <%- include('../../partials/js.ejs') %>
+        <script>
+            function changeImage(element) {
+
+                var main_prodcut_image = document.getElementById('main_selected_image');
+                main_prodcut_image.src = element.src;
+
+            }
+
+            function showDetails() {
+                var details = document.getElementById('description')
+                var arrow = document.getElementById("arrow")
+                console.log(details.classList.value)
+                if (details.classList.value.includes("hidden")) {
+                    details.classList.value = 'description';
+                    arrow.classList.value = "fa-solid fa-arrow-up fa-xl"
+                } else {
+                    arrow.classList.value = "fa-solid fa-arrow-down fa-xl"
+                    details.classList.value = 'description hidden'
+                }
+            }
+
+        </script>
+
+        <%- include('partials/js.ejs') %>
+            <%- include('partials/footer.ejs') %>
 </body>
 
 </html>
