@@ -21,7 +21,7 @@ async function addToCart() {
             // }
         },
         error: (r) => {
-            alert(r.response)
+            console.log(r)
         }
  })
 }
