@@ -19,6 +19,9 @@ async function addToCart() {
             // if (r == "unauthorized") {
             //     alert("UNAUTHORIZED")
             // }
+        },
+        error: (r) => {
+            alert(r)
         }
  })
 }
