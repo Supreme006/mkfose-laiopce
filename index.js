@@ -1,441 +1,578 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const partials = require('express-partials');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const { port, siteName } = require("./config.json")
-const { MongoClient } = require('mongodb');
-const multer = require("multer")
-console.clear()
+const partials = require("express-partials");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const { port, siteName } = require("./config.json");
+const { MongoClient } = require("mongodb");
+const multer = require("multer");
+console.clear();
 
-let images = []
+let images = [];
 
-const uri = 'mongodb+srv://darkstar:miabeba1@cluster0.myl0e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const uri =
+  "mongodb+srv://darkstar:miabeba1@cluster0.myl0e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const mongo = new MongoClient(uri, { useUnifiedTopology: true });
 
 async function connect() {
-    await mongo.connect();
+  await mongo.connect();
 }
 
 function removeFromArray(arr, value) {
-    var index = arr.indexOf(value);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
   }
+  return arr;
+}
 
-connect()
+connect();
 
-const db = mongo.db("Adores")
+const db = mongo.db("Adores");
 
 function imageName(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        counter += 1;
-    }
-    return result;
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads') // specify the directory where uploaded files should be stored
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        const name = `${imageName(15)}-${uniqueSuffix}.png`
-        cb(null, name) // use the original file name as the new file name
-        images.push(`\"${name}\"`);
-    }
-})
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads"); // specify the directory where uploaded files should be stored
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const name = `${imageName(15)}-${uniqueSuffix}.png`;
+    cb(null, name); // use the original file name as the new file name
+    images.push(`\"${name}\"`);
+  },
+});
 
 const upload = multer({ storage: storage });
 
 app.listen(port, () => {
-    console.info(`Starting web on port ${port}!`)
+  console.info(`Starting web on port ${port}!`);
 });
 
-app.set('port', port);
+app.set("port", port);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(partials());
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
-app.use(session({
-    secret: '48738924783748273742398747238',
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(
+  session({
+    secret: "48738924783748273742398747238",
     resave: false,
     saveUninitialized: false,
     expires: 604800000,
-}));
-
-app.get('/checkout', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/hr/checkout", { siteName: siteName, req: req });
-})
-
-app.get('/product', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/product", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/hr/product", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/hr/product", { siteName: siteName, req: req });
-})
-
-app.get('/', async (req, res) => {
-    if (!req.session.value) {
-        req.session.value = "eur";
-    }
-
-    if (!req.session.language) {
-        req.session.language = "hr";
-    }
-
-    if (req.session.language == "hr") return res.render("languages/hr/home", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/home", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/home", { siteName: siteName, req: req });
-})
-
-app.get('/register', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/register", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/register", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/register", { siteName: siteName, req: req });
-})
-
-app.get('/login', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/login", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/login", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/login", { siteName: siteName, req: req });
-
-})
-
-app.get('/new', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/novo", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/novo", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/novo", { siteName: siteName, req: req });
-
-})
-
-app.get('/dresses', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/haljine", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/haljine", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/haljine", { siteName: siteName, req: req });
-
-})
-
-app.get('/clothing', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/majice", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/majice", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/majice", { siteName: siteName, req: req });
-
-})
-
-app.get('/cart', async (req, res) => {
-
-    const products = await db.collection("products").find().toArray();
-
-    if (req.session.language == "hr") return res.render("languages/hr/cart", { siteName: siteName, req: req, products: products });
-    if (req.session.language == "de") return res.render("languages/de/cart", { siteName: siteName, req: req, products: products });
-    if (req.session.language == "en") return res.render("languages/en/cart", { siteName: siteName, req: req, products: products });
-})
-
-app.get('/search', async (req, res) => {
-
-    const products = await db.collection("products").find().toArray();
-
-    if (req.session.language == "hr") return res.render("languages/hr/search", { siteName: siteName, req, req, products: products });
-    if (req.session.language == "de") return res.render("languages/de/search", { siteName: siteName, req, req, products: products });
-    if (req.session.language == "en") return res.render("languages/en/search", { siteName: siteName, req, req, products: products });
-})
-
-app.get('/tops', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/topici", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/topici", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/topici", { siteName: siteName, req: req });
-})
-
-app.get('/collections', async (req, res) => {
-    if (req.session.language == "hr") return res.render("languages/hr/kolekcije", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/kolekcije", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/kolekcije", { siteName: siteName, req: req });
-})
-
-app.get('/account/orders', async (req, res) => {
-    if (!req.session.user) return res.redirect("/login");
-    if (req.session.language == "hr") return res.render("languages/hr/orders", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/orders", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/orders", { siteName: siteName, req: req });
-})
-
-app.get('/account/adresses', async (req, res) => {
-    if (!req.session.user) return res.redirect("/login");
-    if (req.session.language == "hr") return res.render("languages/hr/adresses", { siteName: siteName, req: req });
-    if (req.session.language == "de") return res.render("languages/de/adresses", { siteName: siteName, req: req });
-    if (req.session.language == "en") return res.render("languages/en/adresses", { siteName: siteName, req: req });
-})
-
-app.get('/admin/dashboard', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const stats = await db.collection("statistic").find().toArray();
-
-    stats.reverse()
-
-    res.render('languages/hr/dashboard', { siteName: siteName, req: req, stats: stats })
-})
-
-app.get('/activity/last30', async (req, res) => {
-
-    const stats = await db.collection("statistic").find().toArray();
-
-    stats.reverse()
-
-    let last30d = [];
-    let last30v = [];
-    let last30s = [];
-
-    for (let i = 0; i < stats.length; i++) {
-        if (i == 30) break;
-
-        const splited = stats[i].date.split(".");
-
-
-        last30d.push(`${splited[0]}.${splited[1]}`)
-    }
-    for (let i = 0; i < stats.length; i++) {
-        if (i == 30) break;
-        last30v.push(stats[i].views.toString())
-    }
-    for (let i = 0; i < stats.length; i++) {
-        if (i == 30) break;
-        last30s.push(stats[i].sold.toString())
-    }
-
-    last30d.reverse()
-    last30s.reverse()
-    last30v.reverse()
-
-    let mi = "";
-
-    mi = JSON.parse(`{"date": ${JSON.stringify(last30d)}, "views": ${JSON.stringify(last30v)}, "sold": ${JSON.stringify(last30s)}}`);
-
-    res.send(mi)
-})
-
-app.get('/admin/orders', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    res.render('admin/porudzbine', { siteName: siteName, req: req })
-})
-
-
-app.get('/admin/orders', async (req, res) => {
-    // if (!req.session.user) return res.redirect("/404");
-    // if (!req.session.user.isAdmin) return res.redirect("/404");
-
-
-
-    res.render('admin/porudzbine', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/activity', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const products = await db.collection("statistic").find().toArray()
-
-    products.reverse()
-
-    res.render('admin/desavanja', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/new', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    res.render('admin/novo', { siteName: siteName, req: req })
-})
-
-app.get('/admin/dresses', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const products = await db.collection("products").find({ "category": "haljine" })
-        .toArray()
-
-    res.render('admin/haljine', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/clothing', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const products = await db.collection("products").find({ "category": "majice" })
-        .toArray()
-
-    res.render('admin/majice', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/tops', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const products = await db.collection("products").find({ "category": "topici" })
-        .toArray()
-
-    res.render('admin/topici', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/collections', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const products = await db.collection("products").find({ "category": "kolekcije" })
-        .toArray()
-
-    res.render('admin/kolekcije', { siteName: siteName, req: req, products: products })
-})
-
-app.get('/admin/edit/:id', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    const id = req.params.id;
-
-    res.render('admin/edit', { siteName: siteName, req: req })
-})
-
-app.get('/test', async (req, res) => {
-    res.render('test', { siteName: siteName, req: req })
-})
-
-
-app.get('/admin/add', async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
-
-    res.render('admin/add', { siteName: siteName, req: req })
-})
+  })
+);
+
+app.get("/checkout", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/checkout", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/hr/checkout", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/hr/checkout", {
+      siteName: siteName,
+      req: req,
+    });
+});
+
+app.get("/product", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/product", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/hr/product", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/hr/product", { siteName: siteName, req: req });
+});
+
+app.get("/", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
+
+  if (req.session.language == "hr")
+    return res.render("languages/hr/home", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/home", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/home", { siteName: siteName, req: req });
+});
+
+app.get("/register", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/register", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/de/register", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/en/register", {
+      siteName: siteName,
+      req: req,
+    });
+});
+
+app.get("/login", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/login", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/login", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/login", { siteName: siteName, req: req });
+});
+
+app.get("/new", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/novo", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/novo", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/novo", { siteName: siteName, req: req });
+});
+
+app.get("/dresses", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/haljine", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/haljine", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/haljine", { siteName: siteName, req: req });
+});
+
+app.get("/clothing", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/majice", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/majice", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/majice", { siteName: siteName, req: req });
+});
+
+app.get("/cart", async (req, res) => {
+  const products = await db.collection("products").find().toArray();
+
+  if (req.session.language == "hr")
+    return res.render("languages/hr/cart", {
+      siteName: siteName,
+      req: req,
+      products: products,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/de/cart", {
+      siteName: siteName,
+      req: req,
+      products: products,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/en/cart", {
+      siteName: siteName,
+      req: req,
+      products: products,
+    });
+});
+
+app.get("/search", async (req, res) => {
+  const products = await db.collection("products").find().toArray();
+
+  if (req.session.language == "hr")
+    return res.render("languages/hr/search", {
+      siteName: siteName,
+      req,
+      req,
+      products: products,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/de/search", {
+      siteName: siteName,
+      req,
+      req,
+      products: products,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/en/search", {
+      siteName: siteName,
+      req,
+      req,
+      products: products,
+    });
+});
+
+app.get("/tops", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/topici", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/topici", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/topici", { siteName: siteName, req: req });
+});
+
+app.get("/collections", async (req, res) => {
+  if (req.session.language == "hr")
+    return res.render("languages/hr/kolekcije", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/de/kolekcije", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/en/kolekcije", {
+      siteName: siteName,
+      req: req,
+    });
+});
+
+app.get("/account/orders", async (req, res) => {
+  if (!req.session.user) return res.redirect("/login");
+  if (req.session.language == "hr")
+    return res.render("languages/hr/orders", { siteName: siteName, req: req });
+  if (req.session.language == "de")
+    return res.render("languages/de/orders", { siteName: siteName, req: req });
+  if (req.session.language == "en")
+    return res.render("languages/en/orders", { siteName: siteName, req: req });
+});
+
+app.get("/account/adresses", async (req, res) => {
+  if (!req.session.user) return res.redirect("/login");
+  if (req.session.language == "hr")
+    return res.render("languages/hr/adresses", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "de")
+    return res.render("languages/de/adresses", {
+      siteName: siteName,
+      req: req,
+    });
+  if (req.session.language == "en")
+    return res.render("languages/en/adresses", {
+      siteName: siteName,
+      req: req,
+    });
+});
+
+app.get("/admin/dashboard", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const stats = await db.collection("statistic").find().toArray();
+
+  stats.reverse();
+
+  res.render("languages/hr/dashboard", {
+    siteName: siteName,
+    req: req,
+    stats: stats,
+  });
+});
+
+app.get("/activity/last30", async (req, res) => {
+  const stats = await db.collection("statistic").find().toArray();
+
+  stats.reverse();
+
+  let last30d = [];
+  let last30v = [];
+  let last30s = [];
+
+  for (let i = 0; i < stats.length; i++) {
+    if (i == 30) break;
+
+    const splited = stats[i].date.split(".");
+
+    last30d.push(`${splited[0]}.${splited[1]}`);
+  }
+  for (let i = 0; i < stats.length; i++) {
+    if (i == 30) break;
+    last30v.push(stats[i].views.toString());
+  }
+  for (let i = 0; i < stats.length; i++) {
+    if (i == 30) break;
+    last30s.push(stats[i].sold.toString());
+  }
+
+  last30d.reverse();
+  last30s.reverse();
+  last30v.reverse();
+
+  let mi = "";
+
+  mi = JSON.parse(
+    `{"date": ${JSON.stringify(last30d)}, "views": ${JSON.stringify(
+      last30v
+    )}, "sold": ${JSON.stringify(last30s)}}`
+  );
+
+  res.send(mi);
+});
+
+app.get("/admin/orders", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  res.render("admin/porudzbine", { siteName: siteName, req: req });
+});
+
+app.get("/admin/orders", async (req, res) => {
+  // if (!req.session.user) return res.redirect("/404");
+  // if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  res.render("admin/porudzbine", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/activity", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const products = await db.collection("statistic").find().toArray();
+
+  products.reverse();
+
+  res.render("admin/desavanja", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/new", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  res.render("admin/novo", { siteName: siteName, req: req });
+});
+
+app.get("/admin/dresses", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const products = await db
+    .collection("products")
+    .find({ category: "haljine" })
+    .toArray();
+
+  res.render("admin/haljine", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/clothing", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const products = await db
+    .collection("products")
+    .find({ category: "majice" })
+    .toArray();
+
+  res.render("admin/majice", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/tops", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const products = await db
+    .collection("products")
+    .find({ category: "topici" })
+    .toArray();
+
+  res.render("admin/topici", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/collections", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const products = await db
+    .collection("products")
+    .find({ category: "kolekcije" })
+    .toArray();
+
+  res.render("admin/kolekcije", {
+    siteName: siteName,
+    req: req,
+    products: products,
+  });
+});
+
+app.get("/admin/edit/:id", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  const id = req.params.id;
+
+  res.render("admin/edit", { siteName: siteName, req: req });
+});
+
+app.get("/test", async (req, res) => {
+  res.render("test", { siteName: siteName, req: req });
+});
+
+app.get("/admin/add", async (req, res) => {
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
+
+  res.render("admin/add", { siteName: siteName, req: req });
+});
 
 app.get("/admin/uploaded", async (req, res) => {
-    if (!req.session.user) return res.redirect("/404");
-    if (!req.session.user.isAdmin) return res.redirect("/404");
+  if (!req.session.user) return res.redirect("/404");
+  if (!req.session.user.isAdmin) return res.redirect("/404");
 
-    res.render('admin/uploaded')
-})
+  res.render("admin/uploaded");
+});
 
 app.post("/removeFromCart", async (req, res) => {
-    const id = req.body.title;
-    if(!req.session.user){
-        res.send("unauthorized")
-    } else{
-        let cart = req.session.user.cart;
-        const result = db.collection("products").find({"title": id}).toArray()
-        req.session.user.cart = removeFromArray(cart, result);
-        res.send("removed")
-    }
-})
+  const id = req.body.title;
+  if (!req.session.user) {
+    res.send("unauthorized");
+  } else {
+    let cart = req.session.user.cart;
+    const result = db.collection("products").find({ title: id }).toArray();
+    req.session.user.cart = removeFromArray(cart, result);
+    res.send("removed");
+  }
+});
 
 app.post("/addToCart", async (req, res) => {
-    const id = req.body.title;
-    if(!req.session.user){
-        res.statusCode(400).send("unauthorized")
-    } else{
-        const result = db.collection("products").find({"title": id}).toArray()
-        let cart = req.session.user.cart;
-        if(!cart) cart= [];
-        cart.push(result);
-        req.session.user.cart = cart;
-        console.log(req.session.user.cart)
-        res.statusCode(200).send("added")
-    }
-})
+  const id = req.body.title;
+  if (!req.session.user) {
+    res.statusCode(400).send(JSON.parse("{'response': 'unauthorized'}"));
+  } else {
+    const result = db.collection("products").find({ title: id }).toArray();
+    let cart = req.session.user.cart;
+    if (!cart) cart = [];
+    cart.push(result);
+    req.session.user.cart = cart;
+    console.log(req.session.user.cart);
+    res.statusCode(200).send(JSON.parse("{'response': 'added'}"));
+  }
+});
 
 app.post("/register", async (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const email = req.body.email;
-    const password = req.body.password;
-    let offers = req.body.offers;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const password = req.body.password;
+  let offers = req.body.offers;
 
-    if (offers == "on") offers = true;
-    if (offers == "off") offers = false
+  if (offers == "on") offers = true;
+  if (offers == "off") offers = false;
 
-    const user = await usersCollection.findOne({ email });
-    if (user) return res.send("Already registred email");
+  const user = await usersCollection.findOne({ email });
+  if (user) return res.send("Already registred email");
 
-    if (firstName && lastName && email && password && offers) {
-
-        db.collection("users").insertOne(JSON.parse(`{
+  if (firstName && lastName && email && password && offers) {
+    db.collection("users").insertOne(
+      JSON.parse(`{
             "firstName": "${firstName}",
             "lastName": "${lastName}",
             "email": "${email}",
             "password": "${password}",
             "offers": ${offers},
             "isAdmin": false
-        }`))
+        }`)
+    );
 
-        return res.redirect("/");
-    }
-})
-
+    return res.redirect("/");
+  }
+});
 
 app.post("/login", async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
-    const usersCollection = db.collection('users');
-    const user = await usersCollection.findOne({ email });
+  const usersCollection = db.collection("users");
+  const user = await usersCollection.findOne({ email });
 
-    if (!user) return res.send("Wrong username");
+  if (!user) return res.send("Wrong username");
 
-    if (password == user.password) {
-        req.session.user = user;
-        res.redirect("/")
-    } else {
-        return res.send("Wrong password.");
-    }
-})
+  if (password == user.password) {
+    req.session.user = user;
+    res.redirect("/");
+  } else {
+    return res.send("Wrong password.");
+  }
+});
 
 app.post("/changeValue", async (req, res) => {
-    const value = req.body.value;
+  const value = req.body.value;
 
-    req.session.value = value;
+  req.session.value = value;
 
-    res.redirect("/")
-})
+  res.redirect("/");
+});
 
 app.post("/changeLanguage", async (req, res) => {
-    const language = req.body.language;
+  const language = req.body.language;
 
-    req.session.language = language;
+  req.session.language = language;
 
-    res.redirect("/")
-})
+  res.redirect("/");
+});
 
-app.post("/upload", upload.array('filesfld', 10), async (req, res) => {
+app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
+  let mi = "";
+  mi = images.toLocaleString();
 
-    let mi = "";
-    mi = images.toLocaleString()
+  const category = req.body.category;
+  const title = req.body.title;
+  const description = req.body.description;
+  const shortDescription = req.body.shortDescription;
+  const pink = req.body.pink;
+  const black = req.body.black;
+  const white = req.body.white;
+  const price = req.body.price;
+  const xs = req.body.xs;
+  const s = req.body.s;
+  const m = req.body.m;
+  const l = req.body.l;
 
-    const category = req.body.category;
-    const title = req.body.title;
-    const description = req.body.description;
-    const shortDescription = req.body.shortDescription;
-    const pink = req.body.pink;
-    const black = req.body.black;
-    const white = req.body.white;
-    const price = req.body.price;
-    const xs = req.body.xs
-    const s = req.body.s
-    const m = req.body.m
-    const l = req.body.l
-
-    db.collection("products").insertOne(JSON.parse(`{
+  db.collection("products").insertOne(
+    JSON.parse(`{
             "title": "${title}",
             "description": "${description}",
             "shortDescription": "${shortDescription}",
@@ -453,13 +590,14 @@ app.post("/upload", upload.array('filesfld', 10), async (req, res) => {
                 "m": ${m},
                 "l": ${l}
             }
-        }`))
+        }`)
+  );
 
-    images = [];
+  images = [];
 
-    return res.send("test");
+  return res.send("test");
 });
 
-app.get('*', async (req, res) => {
-    res.render('languages/hr/404')
-})
+app.get("*", async (req, res) => {
+  res.render("languages/hr/404");
+});
