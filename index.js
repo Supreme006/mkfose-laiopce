@@ -77,30 +77,59 @@ app.use(
 );
 
 app.get("/checkout", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
+  let arr = [{ "title": "Hose Monte", "price": 31, "s_description": "This is short description" }, { "title": "Hosin", "price": 20, "s_description": "This is short description" }, { "title": "Minte", "price": 95, "s_description": "This is short description" }]
+  const promo = {
+    "code": "DISCOUNT20",
+    "price": 13
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
+      cart: arr,
+      promo: promo
     });
   if (req.session.language == "de")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
+      cart: arr,
+      promo: promo
     });
   if (req.session.language == "en")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
+      cart: arr,
+      promo: promo
     });
 });
 
-app.get("/product", async (req, res) => {
+app.get("/products/:name", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
+  const name = req.params.name;
+  const title = name.replace(/_/g, " ");
+  const result = await db.collection("products").find({ "title": title }).toArray();
+
   if (req.session.language == "hr")
-    return res.render("languages/hr/product", { siteName: siteName, req: req });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
   if (req.session.language == "de")
-    return res.render("languages/hr/product", { siteName: siteName, req: req });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
   if (req.session.language == "en")
-    return res.render("languages/hr/product", { siteName: siteName, req: req });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
 });
 
 app.get("/", async (req, res) => {
@@ -139,6 +168,13 @@ app.get("/register", async (req, res) => {
 });
 
 app.get("/login", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/login", { siteName: siteName, req: req });
   if (req.session.language == "de")
@@ -148,6 +184,13 @@ app.get("/login", async (req, res) => {
 });
 
 app.get("/new", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/novo", { siteName: siteName, req: req });
   if (req.session.language == "de")
@@ -157,6 +200,13 @@ app.get("/new", async (req, res) => {
 });
 
 app.get("/dresses", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/haljine", { siteName: siteName, req: req });
   if (req.session.language == "de")
@@ -166,6 +216,13 @@ app.get("/dresses", async (req, res) => {
 });
 
 app.get("/clothing", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/majice", { siteName: siteName, req: req });
   if (req.session.language == "de")
@@ -175,29 +232,43 @@ app.get("/clothing", async (req, res) => {
 });
 
 app.get("/cart", async (req, res) => {
-  const products = await db.collection("products").find().toArray();
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
 
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
+  const cart = req.session.user.cart;
+  console.log(cart)
   if (req.session.language == "hr")
     return res.render("languages/hr/cart", {
       siteName: siteName,
       req: req,
-      products: products,
+      products: cart,
     });
   if (req.session.language == "de")
     return res.render("languages/de/cart", {
       siteName: siteName,
       req: req,
-      products: products,
+      products: cart,
     });
   if (req.session.language == "en")
     return res.render("languages/en/cart", {
       siteName: siteName,
       req: req,
-      products: products,
+      products: cart,
     });
 });
 
 app.get("/search", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   const products = await db.collection("products").find().toArray();
 
   if (req.session.language == "hr")
@@ -224,6 +295,13 @@ app.get("/search", async (req, res) => {
 });
 
 app.get("/tops", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/topici", { siteName: siteName, req: req });
   if (req.session.language == "de")
@@ -233,6 +311,13 @@ app.get("/tops", async (req, res) => {
 });
 
 app.get("/collections", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (req.session.language == "hr")
     return res.render("languages/hr/kolekcije", {
       siteName: siteName,
@@ -251,6 +336,13 @@ app.get("/collections", async (req, res) => {
 });
 
 app.get("/account/orders", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (!req.session.user) return res.redirect("/login");
   if (req.session.language == "hr")
     return res.render("languages/hr/orders", { siteName: siteName, req: req });
@@ -261,6 +353,13 @@ app.get("/account/orders", async (req, res) => {
 });
 
 app.get("/account/adresses", async (req, res) => {
+  if (!req.session.value) {
+    req.session.value = "eur";
+  }
+
+  if (!req.session.language) {
+    req.session.language = "hr";
+  }
   if (!req.session.user) return res.redirect("/login");
   if (req.session.language == "hr")
     return res.render("languages/hr/adresses", {
@@ -483,11 +582,11 @@ app.post("/addToCart", async (req, res) => {
     return res.json({ response: "unauthorized" });
   } else {
     const result = await db.collection("products").find({ title: id }).toArray();
-    let cart = req.session.user.cart;
+    let cart = await req.session.user.cart;
     if (!cart) cart = [];
     cart.push(result);
-    req.session.user.cart = cart;
-    console.log(await req.session.user.cart); //dodaje prazno
+    req.session.user.cart = await cart;
+    console.log(await req.session.user.cart);
     return res.json({ response: "added" });
   }
 });

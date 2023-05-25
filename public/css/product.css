@@ -1,4 +1,4 @@
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
   content: ">";
 }
 
@@ -652,7 +652,7 @@ ul {
 }
 
 .sizeXS2 {
-  background-color: #ffffff;
+  background-color: #c8ebff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -735,7 +735,39 @@ ul {
   width: 30rem;
 }
 
-.sizeList a {
+.red:hover {
+  cursor: pointer;
+}
+
+.pink:hover {
+  cursor: pointer;
+}
+
+.black:hover {
+  cursor: pointer;
+}
+
+.grey:hover {
+  cursor: pointer;
+}
+
+.xs:hover {
+  cursor: pointer;
+}
+
+.s:hover {
+  cursor: pointer;
+}
+
+.m:hover {
+  cursor: pointer;
+}
+
+.l:hover {
+  cursor: pointer;
+}
+
+.sizeList div {
   text-decoration: none;
   text-align: center;
   font-weight: 800;
