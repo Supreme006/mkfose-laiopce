@@ -239,7 +239,8 @@ app.get("/cart", async (req, res) => {
   if (!req.session.language) {
     req.session.language = "hr";
   }
-  const cart = req.session.user.cart;
+  let cart = req.session.cart;
+  if (!cart) cart = "empty";
   console.log(cart)
   if (req.session.language == "hr")
     return res.render("languages/hr/cart", {
@@ -576,19 +577,17 @@ app.post("/removeFromCart", async (req, res) => {
   }
 });
 
-app.post("/addToCart", async (req, res) => {
+app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
-  if (!req.session.user) {
-    return res.json({ response: "unauthorized" });
-  } else {
-    const result = await db.collection("products").find({ title: id }).toArray();
-    let cart = await req.session.user.cart;
-    if (!cart) cart = [];
-    cart.push(result);
-    req.session.user.cart = await cart;
-    console.log(await req.session.user.cart);
-    return res.json({ response: "added" });
-  }
+  console.log(id)
+  const result = await db.collection("products").findOne({ title: id });
+  let cart = [];
+  if (req.session.cart) cart = req.session.cart;
+  console.log(cart)
+  cart.push(result);
+  req.session.cart = await cart;
+  console.log(await req.session.cart);
+  return res.json({ response: "added" });
 });
 
 app.post("/register", async (req, res) => {

@@ -9,8 +9,9 @@ cron.schedule('*/10 * * * * *', () => {
             return;
         }
         if (stderr) {
-            console.log(`${stderr}`);
-            return;
+            if (!stderr.includes("Already up to date.")) {
+                console.log(`${stderr}`);
+            } else return;
         }
         console.log(`${stdout}`);
     });

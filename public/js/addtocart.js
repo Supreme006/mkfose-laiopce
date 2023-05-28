@@ -126,22 +126,15 @@ async function selectL() {
 }
 
 async function addToCart() {
-  const title = document.getElementById("title").innerText;
+  const title = document.getElementById("title").textContent;
   // const price = document.getElementById("price").innerText;
   // const value = document.getElementById("value").innerText;
   // const s_description = document.getElementById("s_description")
-
   $.ajax({
     url: "/addToCart",
     type: "POST",
-    Headers: "accept/json",
-    cache: false,
-    processData: false,
     data: {
-      title: title,
-      // price: price,
-      // value: value,
-      // s_description: s_description
+      title: title
     },
     success: (r) => {
 
