@@ -6,6 +6,7 @@ const session = require("express-session");
 const { port, siteName } = require("./config.json");
 const { MongoClient } = require("mongodb");
 const multer = require("multer");
+const ms = require("ms")
 console.clear();
 
 let images = [];
@@ -548,7 +549,8 @@ app.get("/admin/edit/:id", async (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
-  res.render("test", { siteName: siteName, req: req });
+  const date = ms("3d") + Date.now()
+  res.render("test", { siteName: siteName, req: req, date: date });
 });
 
 app.get("/admin/add", async (req, res) => {
