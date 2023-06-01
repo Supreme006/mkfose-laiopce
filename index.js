@@ -86,6 +86,10 @@ app.get("/policy/payments", async (req, res) => {
   res.render("languages/hr/policy/nacinplacanja", { req: req, siteName: siteName })
 })
 
+app.get("/policy/payments", async (req, res) => {
+  res.render("languages/hr/policy/nacinplacanja", { req: req, siteName: siteName })
+})
+
 app.get("/checkout", async (req, res) => {
   if (!req.session.value) {
     req.session.value = "eur";
@@ -150,7 +154,8 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  const info = await ig.posts()
+  // const info = await ig.posts()
+  const info = "test"
   const axios = require('axios');
   const fs = require('fs');
   async function downloadImage(url, filename) {
@@ -159,9 +164,9 @@ app.get("/", async (req, res) => {
       if (err) throw err;
     });
   }
-  info.forEach(pohoto => {
-    downloadImage(pohoto.imageUrl, pohoto.id + ".png");
-  })
+  // info.forEach(pohoto => {
+  //   downloadImage(pohoto.imageUrl, pohoto.id + ".png");
+  // })
 
   const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")  // zavrsiti. stao si kod mnozenja
 
