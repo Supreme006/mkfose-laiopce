@@ -6,7 +6,8 @@ const session = require("express-session");
 const { port, siteName } = require("./config.json");
 const { MongoClient } = require("mongodb");
 const multer = require("multer");
-const ms = require("ms")
+const ms = require("ms");
+const ig = require("./getPosts");
 console.clear();
 
 let images = [];
@@ -77,6 +78,14 @@ app.use(
   })
 );
 
+app.get("/policy/returns", async (req, res) => {
+  res.render("languages/hr/policy/nacinpovrata", { req: req, siteName: siteName })
+})
+
+app.get("/policy/payments", async (req, res) => {
+  res.render("languages/hr/policy/nacinplacanja", { req: req, siteName: siteName })
+})
+
 app.get("/checkout", async (req, res) => {
   if (!req.session.value) {
     req.session.value = "eur";
@@ -137,17 +146,42 @@ app.get("/", async (req, res) => {
   if (!req.session.value) {
     req.session.value = "eur";
   }
-
   if (!req.session.language) {
     req.session.language = "hr";
   }
 
+  const info = await ig.posts()
+  const axios = require('axios');
+  const fs = require('fs');
+  async function downloadImage(url, filename) {
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    fs.writeFile("public/tempImage/" + filename, response.data, (err) => {
+      if (err) throw err;
+    });
+  }
+  info.forEach(pohoto => {
+    downloadImage(pohoto.imageUrl, pohoto.id + ".png");
+  })
+
+  const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")  // zavrsiti. stao si kod mnozenja
+
+  fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
+
+  const collection = await db.collection("products").find({ "collection": "adores_it" }).toArray()
+  collection.reverse()
+  const coll = []
+
+  for (let i = 0; i < collection.length; i++) {
+    if (i > 5) break;
+    coll.push(collection[i])
+  }
+
   if (req.session.language == "hr")
-    return res.render("languages/hr/home", { siteName: siteName, req: req });
+    return res.render("languages/hr/home", { siteName: siteName, req: req, posts: info, collection: coll });
   if (req.session.language == "de")
-    return res.render("languages/de/home", { siteName: siteName, req: req });
+    return res.render("languages/de/home", { siteName: siteName, req: req, posts: info, collection: coll });
   if (req.session.language == "en")
-    return res.render("languages/en/home", { siteName: siteName, req: req });
+    return res.render("languages/en/home", { siteName: siteName, req: req, posts: info, collection: coll });
 });
 
 app.get("/register", async (req, res) => {
@@ -666,6 +700,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const black = req.body.black;
   const white = req.body.white;
   const price = req.body.price;
+  const collection = req.body.collection;
   const xs = req.body.xs;
   const s = req.body.s;
   const m = req.body.m;
@@ -679,6 +714,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
             "category": "${category}",
             "images": [${mi}],
             "price": ${price},
+            "collection": "${collection}",
             "colors": {
                 "pink": ${pink},
                 "black": ${black},

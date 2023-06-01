@@ -199,6 +199,12 @@
                                         style="width: 7rem;"></textarea>
                                 </div>
                             </div>
+                            <div class="price margin2-top">
+                                <div class="editTitle">Kolekcija</div>
+                                <div class="mb-3">
+                                    <textarea class="form-control noresize" name="collection" id="collection" rows="1" style="width: 7rem;"></textarea>
+                                </div>
+                            </div>
                             <div class="category margin2-top">
                                 <div class="editTitle">Kategorija</div>
                                 <select class="form-select" aria-label="Default select example" id="category"
@@ -271,6 +277,7 @@
                 function submitFilesForm(form) {
                     var label = document.getElementById("fileslbl");
                     const title = document.getElementById("title")
+                    const collection = document.getElementById("collection")
                     const description = document.getElementById("description")
                     const shortDescription = document.getElementById("shortDescription")
                     const category = document.getElementById("category")
@@ -319,6 +326,7 @@
                     fd.append('s_description', shortDescription.value)
                     fd.append('category', category.value)
                     fd.append('price', price.value)
+                    fd.append('collection', collection.value)
                     fd.append('pink', pink)
                     fd.append('black', black)
                     fd.append('white', white)
@@ -328,7 +336,7 @@
                     fd.append('l', l)
                     x.open("post", form.action, true);
                     x.send(fd)
-                    window.location.replace("http://localhost/admin/uploaded")
+                    window.location.replace("http://localhost:2357/admin/uploaded")
                     return false;
                 }
             </script>

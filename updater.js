@@ -1,6 +1,7 @@
 require("./index.js");
 const cron = require("node-cron")
 const { exec } = require("child_process");
+const fs = require("fs")
 
 cron.schedule('*/10 * * * * *', () => {
     exec('git pull', (error, stdout, stderr) => {
@@ -16,3 +17,9 @@ cron.schedule('*/10 * * * * *', () => {
         console.log(`${stdout}`);
     });
 });
+
+// cron.schedule('* */4 * * * *', async () => {
+//     const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.USD?fmt=json&&api_token=6478bd499255a6.76524263")
+
+//     fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
+// })

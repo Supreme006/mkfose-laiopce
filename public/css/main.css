@@ -6,89 +6,104 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
-.recommendedItemsDescription{
+.brk {
+    white-space: pre-line
+}
+
+.modal-dialog {
+    max-width: 900px !important;
+}
+
+.nothing {
+    margin: 0;
+    padding: 0 0 0 0;
+    border: 0px;
+    background-color: transparent;
+}
+
+.recommendedItemsDescription {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 2rem;
 }
 
-.recommendedItemsTitle{
+.recommendedItemsTitle {
     font-size: 32px;
     font-weight: 600;
     margin-top: .5rem;
 }
 
-.btn-classic{
+.btn-classic {
     background-color: #87c5f7 !important;
 }
 
-.description{
+.description {
     margin-top: .5rem;
     margin-bottom: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.more{
+.more {
     cursor: pointer;
 }
 
-.wud{
+.wud {
     font-weight: 800 !important;
 }
 
-.product_name{
+.product_name {
     padding-left: 2rem;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.product_shortDescription{
+.product_shortDescription {
     padding-left: 2rem;
 }
 
-.product_price{
+.product_price {
     padding-left: 2rem;
 }
 
-.product_saved{
+.product_saved {
     padding-left: 2rem;
 }
 
-.product_info{
+.product_info {
     padding-left: 2rem;
 }
 
-.modelInfo{
+.modelInfo {
     margin-bottom: 1rem;
 }
 
-.colorList{
+.colorList {
     margin-top: .5rem;
     padding-left: 2rem;
     margin-bottom: 1rem;
 }
 
-.sizeList{
+.sizeList {
     padding-left: 2rem;
     margin-top: .5rem;
     margin-bottom: 1rem;
 }
 
-.partDescription{
+.partDescription {
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.details{
+.details {
     cursor: pointer;
     padding-left: 2rem;
     padding-right: 2rem;
 }
 
-.detailsTitle{
+.detailsTitle {
     font-size: 32px;
     font-weight: 600;
 }

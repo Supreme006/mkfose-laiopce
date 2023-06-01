@@ -25,168 +25,170 @@
 <body>
     <%- include('../../partials/loading.ejs') %>
         <%- include('../../partials/navbar.ejs') %>
-            <div class="hwrap2">
-                <div class="hmove">
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                </div>
-            </div>
-            <div class="d-none d-lg-block">
-                <div class="view"
-                    style="background-image: url('/images/test.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 60rem;">
-                </div>
-            </div>
-            <div class="d-block d-lg-none d-sm-block d-md-block">
-                <div class="view"
-                    style="background-image: url('/images/test.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 30rem;">
-                </div>
-            </div>
-            <div class="togeder" style="background-color: #FAE0DF;">
-                <div class="row text-center" style="margin:auto">
-                    <div class="col text-center"
-                        style="background-color: #b67673; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px;">
-                        KOLEKCIJA</div>
-                    <div class="col text-center justify-content-center"
-                        style="background-color: #F7D7D0; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px;">
-                        USKORO</div>
-                    <div class="col text-center justify-content-center"
-                        style="background-color: #b48888; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px !important;">
-                        O NAMA</div>
-                </div>
-                <div class="popular text-center container">
-                    <div class="categoryTitle">
-                        <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
-                    </div>
-                    <div class="row">
-                        <div class="col product-gap tile">
-                            <img src="/images/mia17.png"
-                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                            <div class="productInfo">
-                                <div class="productName text-break">
-                                    CROP TOP
-                                </div>
-                                <div class="col">
-                                    <span class="productPrice">
-                                        $41.00
-                                    </span>
-                                    <span class="discountPrice">
-                                        $80.00
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col product-gap tile">
-                            <img src="/images/mia18.png"
-                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                            <div class="productInfo">
-                                <div class="productName text-break">
-                                    Neka haljina koja god hoces
-                                </div>
-                                <div class="col">
-                                    <span class="productPrice">
-                                        $41.00
-                                    </span>
+            <% posts.forEach(post=> {%>
+                <div class="container">
+                    <div class="modal" id="a<%= post.id %>">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Instagram Post</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col product-gap tile">
-                            <img src="/images/mia19.png"
-                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                            <div class="productInfo">
-                                <div class="productName text-break">
-                                    Uuuuu ova je malo skupa za moj ukus
-                                </div>
-                                <div class="col">
-                                    <span class="productPrice">
-                                        $41.00
-                                    </span>
 
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="d-flex text-center justify-content-center align-items-center"
+                                                style="height: 100%;">
+                                                <img src="tempImage/<%= post.id %>.png" alt="" srcset=""
+                                                    style="width: 100%;">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="text-center brk">
+                                                <%= post.text %>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col product-gap tile">
-                            <img src="/images/mia19.png"
-                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                            <div class="productInfo">
-                                <div class="productName text-break">
-                                    Uuuuu ova je malo skupa za moj ukus
-                                </div>
-                                <div class="col">
-                                    <span class="productPrice">
-                                        $41.00
-                                    </span>
 
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <a href="<%= post.link %>" style="text-decoration: none; color: black;">ADORES //
+                                        INSTAGRAM</a>
+                                    <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col product-gap tile">
-                            <img src="/images/mia19.png"
-                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                            <div class="productInfo">
-                                <div class="productName text-break">
-                                    Uuuuu ova je malo skupa za moj ukus
-                                </div>
-                                <div class="col">
-                                    <span class="productPrice">
-                                        $41.00
-                                    </span>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hwrap">
-                <div class="hmove">
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                    <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
-                </div>
-            </div>
-
-            <div class="d-none d-lg-block">
-                <div class="margin3-top d-flex justify-content-center margin2-bottom">
-                    <div class="roww">
-                        <div class="columnn">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
-                        </div>
-                        <div class="columnn">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
-                        </div>
-                        <div class="columnn">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
-                            <img src="/images/testBlock.svg" style="width: 100%;">
+                <% }) %>
+                    <div class="hwrap2">
+                        <div class="hmove">
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
                         </div>
                     </div>
-                    <div class="text justify-content-center"
-                        style="width: auto; padding-top: 5rem; padding-right: 15px;">
-                        <div style=" font-weight: 500; font-size: 52px;">INSTAGRAM</div>
-                        <div class="instagramCategory" style="font-family: 16px; font-family: 'Work Sans', sans-serif !important; font-weight: 300;">
-                            Slike sa nasega instagram profila @adores.fsh gde uvek kacimo nove proizvode pre nego
-                            sto
-                            izadju.
+                    <div class="d-none d-lg-block">
+                        <div class="view"
+                            style="background-image: url('/images/test.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 60rem;">
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="d-block d-lg-none d-sm-block d-md-block">
+                        <div class="view"
+                            style="background-image: url('/images/test.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 30rem;">
+                        </div>
+                    </div>
+                    <div class="togeder" style="background-color: #FAE0DF;">
+                        <div class="row text-center" style="margin:auto">
+                            <div class="col text-center"
+                                style="background-color: #b67673; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px;">
+                                KOLEKCIJA</div>
+                            <div class="col text-center justify-content-center"
+                                style="background-color: #F7D7D0; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px;">
+                                USKORO</div>
+                            <div class="col text-center justify-content-center"
+                                style="background-color: #b48888; height: 3rem; padding-top: 0.5rem; font-size: 20px; font-weight: 700; width: 250px !important;">
+                                O NAMA</div>
+                        </div>
+                        <div class="popular text-center container">
+                            <div class="categoryTitle">
+                                <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
+                            </div>
+                            <div class="row">
+                                <% collection.forEach(product=> { %>
+                                    <div class="col product-gap tile">
+                                        <img src="/uploads/<%= product.images[0] %>"
+                                            style="max-height: 516px; max-width: 344px; border-radius: 15px;">
+                                        <div class="productInfo">
+                                            <div class="productName text-break">
+                                                <%= product.title %>
+                                            </div>
+                                            <div class="col">
+                                                <span class="productPrice">
+                                                            <%= product.price %>€
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hwrap">
+                        <div class="hmove">
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                            <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
+                        </div>
+                    </div>
 
-            <!-- <div class="novo text-center">
+                    <div class="d-none d-lg-block">
+                        <div class="margin3-top d-flex justify-content-center margin2-bottom">
+                            <div class="roww">
+                                <div class="columnn">
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[0].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[0].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[1].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[1].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                </div>
+                                <div class="columnn">
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[2].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[2].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[3].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[3].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                </div>
+                                <div class="columnn">
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[4].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[4].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                    <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[5].id %>"
+                                        style="width: 100%;">
+                                        <img src="/tempImage/<%= posts[5].id %>.png" style="max-width: 289px;">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text justify-content-center"
+                                style="width: auto; padding-top: 5rem; padding-right: 15px;">
+                                <div style=" font-weight: 500; font-size: 52px;">INSTAGRAM</div>
+                                <div class="instagramCategory"
+                                    style="font-family: 16px; font-family: 'Work Sans', sans-serif !important; font-weight: 300;">
+                                    Slike sa nasega instagram profila @adores.fsh gde uvek kacimo nove proizvode pre
+                                    nego
+                                    sto
+                                    izadju.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="novo text-center">
                     <div class="categoryTitle">
                         <a href="/new">Novo</a>
                     </div>
@@ -478,22 +480,22 @@
                     </div>
                     <div class="btn btn-primary margin6-bottom">Vise</div>
                 </div> -->
-            <div class="d-none d-lg-block">
-                <div class="view"
-                    style="background-image: url('/images/horizontal.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 60rem;">
-                </div>
-            </div>
-            <div class="d-block d-lg-none d-sm-block d-md-block">
-                <div class="view"
-                    style="background-image: url('/images/horizontal.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 30rem;">
-                </div>
-            </div>
+                    <div class="d-none d-lg-block">
+                        <div class="view"
+                            style="background-image: url('/images/horizontal.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 60rem;">
+                        </div>
+                    </div>
+                    <div class="d-block d-lg-none d-sm-block d-md-block">
+                        <div class="view"
+                            style="background-image: url('/images/horizontal.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 30rem;">
+                        </div>
+                    </div>
 
-            <%- include('../../partials/footer.ejs') %>
+                    <%- include('../../partials/footer.ejs') %>
 
 
 
-                <%- include('../../partials/js.ejs') %>
+                        <%- include('../../partials/js.ejs') %>
 </body>
 
 </html>
