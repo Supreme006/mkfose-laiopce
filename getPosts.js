@@ -48,27 +48,6 @@ async function posts() {
     return results;
 }
 
-async function image(id) {
-    const responseIwa = await iwaIdUrl({
-
-        headers: {
-            'cookie': _cookie,
-            'user-agent': _userAgent,
-            'x-ig-app-id': _xIgAppId
-        },
-
-        base64images: true,                    // <!-- optional, but without it, you will be not able to store/show images
-        file: "instagram-cache-byidurl.json",   // <!-- optional, instagram-cache.json is by default
-        pretty: true,                           // <!-- optional, prettyfy json true/false
-        time: 3600,                                  // <!-- optional, reload contents after 3600 seconds by default
-
-        id: "CsrUAWANBGM"                     // <!-- id is required
-
-    })
-
-    console.log(responseIwa)
-}
-
 // image()
 
 posts()
