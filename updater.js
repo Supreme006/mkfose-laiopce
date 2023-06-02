@@ -18,6 +18,12 @@ cron.schedule('*/10 * * * * *', () => {
     });
 });
 
+cron.schedule('0 0 * * * *', async () => {
+    const info = require("./getPosts.js")
+    info.posts()
+    console.log("Got posts")
+})
+
 // cron.schedule('* */4 * * * *', async () => {
 //     const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.USD?fmt=json&&api_token=6478bd499255a6.76524263")
 

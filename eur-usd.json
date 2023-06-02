@@ -1,13 +1,1 @@
-{
-    "code": "EUR.FOREX",
-    "timestamp": 1685648400,
-    "gmtoffset": 0,
-    "open": 0.9352,
-    "high": 0.9377,
-    "low": 0.9282,
-    "close": 0.9293,
-    "volume": 0,
-    "previousClose": 0.9355,
-    "change": -0.0062,
-    "change_p": -0.6627
-}
+{"code":"EUR.FOREX","timestamp":1685721600,"gmtoffset":0,"open":0.9289,"high":0.9328,"low":0.9275,"close":0.9323,"volume":0,"previousClose":0.9292,"change":0.0031,"change_p":0.3336}

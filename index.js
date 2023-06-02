@@ -8,6 +8,10 @@ const { MongoClient } = require("mongodb");
 const multer = require("multer");
 const ms = require("ms");
 const ig = require("./getPosts");
+
+const axios = require('axios');
+const fs = require('fs');
+
 console.clear();
 
 let images = [];
@@ -86,8 +90,8 @@ app.get("/policy/payments", async (req, res) => {
   res.render("languages/hr/policy/nacinplacanja", { req: req, siteName: siteName })
 })
 
-app.get("/policy/payments", async (req, res) => {
-  res.render("languages/hr/policy/nacinplacanja", { req: req, siteName: siteName })
+app.get("/policy/data", async (req, res) => {
+  res.render("languages/hr/policy/zastitapodataka", { req: req, siteName: siteName })
 })
 
 app.get("/checkout", async (req, res) => {
@@ -154,23 +158,18 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  // const info = await ig.posts()
-  const info = "test"
-  const axios = require('axios');
-  const fs = require('fs');
+  const info = require("./instagram-cache.json");
+  
   async function downloadImage(url, filename) {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     fs.writeFile("public/tempImage/" + filename, response.data, (err) => {
       if (err) throw err;
     });
   }
-  // info.forEach(pohoto => {
-  //   downloadImage(pohoto.imageUrl, pohoto.id + ".png");
-  // })
 
-  const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")  // zavrsiti. stao si kod mnozenja
-
-  fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
+  info.forEach(pohoto => {
+    downloadImage(pohoto.imageUrl, pohoto.id + ".png");
+  })
 
   const collection = await db.collection("products").find({ "collection": "adores_it" }).toArray()
   collection.reverse()
@@ -588,8 +587,22 @@ app.get("/admin/edit/:id", async (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
-  const date = ms("3d") + Date.now()
-  res.render("test", { siteName: siteName, req: req, date: date });
+  const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")
+
+  req.session.value = "usd";
+
+  fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
+
+  const price = require("./eur-usd.json");
+  
+  function eurtousd(pric) {
+    const result = Number(pric / price.close)
+    console.log(Math.round(result).toFixed(1))
+    
+    return result;
+  }
+
+  res.render("test", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/admin/add", async (req, res) => {

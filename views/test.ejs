@@ -6,94 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <%- include('./partials/css.ejs') %>
-        <style>
-            .gw-container {
-                background-image: linear-gradient(to bottom right, #7f25f5, #7100ad);
-                padding-top: 2%;
-                padding-left: 2%;
-                padding-right: 2%;
-                padding-bottom: 2%;
-                width: 80%;
-                margin-top: 20%;
-                margin-left: auto;
-                margin-right: auto;
-                border-radius: 15px;
-            }
-
-            .gw-subject {
-                font-size: 20px;
-                padding-top: 2%;
-                color: white;
-            }
-
-            .gw-title {
-                font-size: 30px;
-                color: white;
-            }
-
-            .gw-timer {
-                padding-top: 2%;
-                font-size: 40px;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, serif;
-                font-weight: 800;
-            }
-
-            .timer-tt {
-                color: white;
-                font-size: 20px;
-                padding-top: 2%;
-                font-weight: 600;
-            }
-        </style>
+    <% let total=3; %>
+    <%- include("./partials/css.ejs") %>
 </head>
 
-<body class="bg-dark">
-    <div class="container">
-        <div class="text-center">
-            <div class="gw-container">
-                <div class="gw-title">Dobrodosli</div>
-                <div class="gw-subject">Dobrodosli na otvaranje Adores Brenda
-                </div>
-                <div class="gw-timer" id="timer">
-                    0h 0m 0s
-                </div>
+<body>
+    <%- include('./partials/secNavbar.ejs') %>
+        <div class="container">
+            <div class="text-center">
+                <% if(req.session.value=="usd" ) {%>
+                    <%= console.log(eurtousd(3)) %>
+                        <% } %>
             </div>
         </div>
-    </div>
-    <script>
-        const timer = document.getElementById("timer");
-        var countDownDate = new Date("07/01/2023 08:00:00").getTime();
-
-        var x = setInterval(function () {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            if (days == 0) {
-                timer.innerHTML = hours + "h "
-                    + minutes + "m " + seconds + "s ";
-            }
-            if (days == 0 && hours == 0) {
-                timer.innerHTML = minutes + "m " + seconds + "s ";
-            }
-            if (days == 0 && hours == 0 && minutes == 0) {
-                timer.innerHTML = seconds + "s ";
-            } else {
-                timer.innerHTML = days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s ";
-            }
-            if (distance < 0) {
-                clearInterval(x);
-                timer.innerHTML = "OTVORENO";
-                window.location.reload()
-            }
-        }, 1000);
-    </script>
-
+        <%- include('./partials/js.ejs') %>
 </body>
 
 </html>
