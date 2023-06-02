@@ -158,7 +158,7 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  const info = await ig.posts();
+  const info = fs.readFileSync("./photos.json");
   
   async function downloadImage(url, filename) {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
