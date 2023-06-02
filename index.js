@@ -158,7 +158,7 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  const info = require("./instagram-cache.json");
+  const info = await ig.posts();
   
   async function downloadImage(url, filename) {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
@@ -166,7 +166,7 @@ app.get("/", async (req, res) => {
       if (err) throw err;
     });
   }
-
+  
   info.forEach(pohoto => {
     downloadImage(pohoto.imageUrl, pohoto.id + ".png");
   })

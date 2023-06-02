@@ -5,11 +5,6 @@ const _cookie = 'mid=ZHHtNwALAAFhjIXkUfuez44cOUL8; ig_did=0CAFBA4C-1695-43A3-B18
 const _userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
 const _xIgAppId = '936619743392459'
 async function posts() {
-    try {
-        fs.unlinkSync("./instagram-cache.json")
-    } catch (err) {
-        return;
-    }
 
     const responseIwa = await iwa({
 
@@ -32,8 +27,6 @@ async function posts() {
 
     })
 
-    console.log({ responseIwa })
-
     const results = [];
 
     await responseIwa.forEach(res => {
@@ -49,7 +42,8 @@ async function posts() {
         results.push(final)
     })
 
-    
+    fs.unlinkSync("./instagram-cache.json")
+    fs.writeFileSync("./photos.json", JSON.stringify(results))
 
     return results;
 }
