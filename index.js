@@ -158,15 +158,18 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  const info = fs.readFileSync("./photos.json");
+  const data = fs.readFileSync("./photos.json");
+  const info = JSON.parse(data)
   
+  // const info = await ig.posts()
+
   async function downloadImage(url, filename) {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     fs.writeFile("public/tempImage/" + filename, response.data, (err) => {
       if (err) throw err;
     });
   }
-  
+
   info.forEach(pohoto => {
     downloadImage(pohoto.imageUrl, pohoto.id + ".png");
   })
