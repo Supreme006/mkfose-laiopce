@@ -600,7 +600,7 @@ app.get("/test", async (req, res) => {
   
   function eurtousd(pric) {
     const result = Number(pric / price.close)
-    console.log(Math.round(result).toFixed(1))
+    console.log(Math.round(result))
     
     return result;
   }
