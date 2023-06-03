@@ -8,11 +8,16 @@ const { MongoClient } = require("mongodb");
 const multer = require("multer");
 const ms = require("ms");
 const ig = require("./getPosts");
-
 const axios = require('axios');
 const fs = require('fs');
-
 console.clear();
+const price = require("./eur-usd.json");
+
+function eurtousd(pric) {
+  const result = Number(pric / price.close)
+
+  return result.toFixed(2);
+}
 
 let images = [];
 
@@ -592,18 +597,7 @@ app.get("/admin/edit/:id", async (req, res) => {
 app.get("/test", async (req, res) => {
   const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")
 
-  req.session.value = "usd";
-
   fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
-
-  const price = require("./eur-usd.json");
-  
-  function eurtousd(pric) {
-    const result = Number(pric / price.close)
-    console.log(result.toFixed(2))
-    
-    return result;
-  }
 
   res.render("test", { siteName: siteName, req: req, eurtousd: eurtousd });
 });

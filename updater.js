@@ -19,13 +19,13 @@ cron.schedule('*/10 * * * * *', () => {
     });
 });
 
-cron.schedule('0 0 * * * *', async () => {
+cron.schedule('*/10 * * * * *', async () => {
     await ig.posts()
     console.log("Got posts")
 })
 
-// cron.schedule('* */4 * * * *', async () => {
-//     const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.USD?fmt=json&&api_token=6478bd499255a6.76524263")
+cron.schedule('* */10 * * * *', async () => {
+    const fet = await fetch("https://eodhistoricaldata.com/api/real-time/EUR.FOREX?api_token=demo&fmt=json")
 
-//     fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
-// })
+    fs.writeFileSync("./eur-usd.json", JSON.stringify(await fet.json()))
+})
