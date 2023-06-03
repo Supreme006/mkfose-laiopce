@@ -44,7 +44,7 @@ async function posts() {
 
     fs.unlinkSync("./instagram-cache.json")
     console.log(results)
-    fs.writeFileSync("./photos.json", JSON.stringify(results))
+    fs.writeFileSync("./photoss.json", JSON.stringify(results))
 
     return results;
 }
