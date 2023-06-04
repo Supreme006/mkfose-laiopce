@@ -55,21 +55,38 @@
                                             <%= product.s_description %>
                                         </small>
                                     </div>
-                                    <span class="text-muted">$<%= product.price %></span>
+                                    <% if(req.session.value=="usd" ) {%>
+                                        <span class="text-muted">$<%= eurtousd(product.price) %></span>
+                                        <% } else { %>
+                                            <span class="text-muted">
+                                                <%= product.price %>€
+                                            </span>
+                                            <% } %>
                                 </li>
                                 <% }) %>
                                     <% if(promo) { total=total - promo.price;%>
                                         <li class="list-group-item d-flex justify-content-between bg-light">
                                             <div class="text-success">
                                                 <h6 class="my-0">Promo code</h6>
-                                                <small><%= promo.code %></small>
+                                                <small>
+                                                    <%= promo.code %>
+                                                </small>
                                             </div>
-                                            <span class="text-success">−$<%= promo.price %></span>
+                                            <% if(req.session.value=="usd" ) {%>
+                                                <span class="text-success">−$<%= eurtousd(promo.price) %></span>
+                                                <% } else { %>
+                                                    <span class="text-success">−<%= promo.price %>€</span>
+                                                    <%}%>
                                         </li>
                                         <% } %>
                                             <li class="list-group-item d-flex justify-content-between">
-                                                <span>Total (USD)</span>
-                                                <strong>$<%= total %></strong>
+                                                <% if(req.session.value=="usd" ) {%>
+                                                    <span>Total (USD)</span>
+                                                    <strong>$<%= eurtousd(total) %></strong>
+                                                    <% } else { %>
+                                                        <span>Total (EUR)</span>
+                                                        <strong>€<%= total %></strong>
+                                                        <%}%>
                                             </li>
                         </ul>
 
@@ -166,12 +183,6 @@
 
                             <hr class="my-4">
 
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="same-address">
-                                <label class="form-check-label" for="same-address">Shipping address is the same as
-                                    my
-                                    billing address</label>
-                            </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="save-info">
@@ -182,24 +193,6 @@
                             <hr class="my-4">
 
                             <h4 class="mb-3">Payment</h4>
-
-                            <div class="my-3">
-                                <div class="form-check">
-                                    <input id="credit" name="paymentMethod" type="radio" class="form-check-input"
-                                        checked required>
-                                    <label class="form-check-label" for="credit">Credit card</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="debit" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
-                                    <label class="form-check-label" for="debit">Debit card</label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="form-check-input"
-                                        required>
-                                    <label class="form-check-label" for="paypal">PayPal</label>
-                                </div>
-                            </div>
 
                             <div class="row gy-3">
                                 <div class="col-md-6">

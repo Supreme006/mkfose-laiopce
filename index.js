@@ -20,7 +20,6 @@ function eurtousd(pric) {
 }
 
 let images = [];
-
 const uri =
   "mongodb+srv://darkstar:miabeba1@cluster0.myl0e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const mongo = new MongoClient(uri, { useUnifiedTopology: true });
@@ -38,7 +37,6 @@ function removeFromArray(arr, value) {
 }
 
 connect();
-
 const db = mongo.db("Adores");
 
 function imageName(length) {
@@ -117,21 +115,21 @@ app.get("/checkout", async (req, res) => {
       siteName: siteName,
       req: req,
       cart: arr,
-      promo: promo
+      promo: promo, eurtousd: eurtousd
     });
   if (req.session.language == "de")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
       cart: arr,
-      promo: promo
+      promo: promo, eurtousd: eurtousd
     });
   if (req.session.language == "en")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
       cart: arr,
-      promo: promo
+      promo: promo, eurtousd: eurtousd
     });
 });
 
@@ -148,11 +146,11 @@ app.get("/products/:name", async (req, res) => {
   const result = await db.collection("products").find({ "title": title }).toArray();
 
   if (req.session.language == "hr")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0] });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
 });
 
 app.get("/", async (req, res) => {
@@ -165,7 +163,7 @@ app.get("/", async (req, res) => {
 
   const data = fs.readFileSync("./customs/tempFiles/disposedPhotos.json");
   const info = JSON.parse(data)
-  
+
   // const info = await ig.posts()
 
   async function downloadImage(url, filename) {
@@ -189,11 +187,11 @@ app.get("/", async (req, res) => {
   }
 
   if (req.session.language == "hr")
-    return res.render("languages/hr/home", { siteName: siteName, req: req, posts: info, collection: coll });
+    return res.render("languages/hr/home", { siteName: siteName, req: req, posts: info, collection: coll, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/home", { siteName: siteName, req: req, posts: info, collection: coll });
+    return res.render("languages/de/home", { siteName: siteName, req: req, posts: info, collection: coll, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/home", { siteName: siteName, req: req, posts: info, collection: coll });
+    return res.render("languages/en/home", { siteName: siteName, req: req, posts: info, collection: coll, eurtousd: eurtousd });
 });
 
 app.get("/register", async (req, res) => {
@@ -239,11 +237,11 @@ app.get("/new", async (req, res) => {
     req.session.language = "hr";
   }
   if (req.session.language == "hr")
-    return res.render("languages/hr/novo", { siteName: siteName, req: req });
+    return res.render("languages/hr/novo", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/novo", { siteName: siteName, req: req });
+    return res.render("languages/de/novo", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/novo", { siteName: siteName, req: req });
+    return res.render("languages/en/novo", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/dresses", async (req, res) => {
@@ -255,11 +253,11 @@ app.get("/dresses", async (req, res) => {
     req.session.language = "hr";
   }
   if (req.session.language == "hr")
-    return res.render("languages/hr/haljine", { siteName: siteName, req: req });
+    return res.render("languages/hr/haljine", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/haljine", { siteName: siteName, req: req });
+    return res.render("languages/de/haljine", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/haljine", { siteName: siteName, req: req });
+    return res.render("languages/en/haljine", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/clothing", async (req, res) => {
@@ -271,11 +269,11 @@ app.get("/clothing", async (req, res) => {
     req.session.language = "hr";
   }
   if (req.session.language == "hr")
-    return res.render("languages/hr/majice", { siteName: siteName, req: req });
+    return res.render("languages/hr/majice", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/majice", { siteName: siteName, req: req });
+    return res.render("languages/de/majice", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/majice", { siteName: siteName, req: req });
+    return res.render("languages/en/majice", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/cart", async (req, res) => {
@@ -293,19 +291,19 @@ app.get("/cart", async (req, res) => {
     return res.render("languages/hr/cart", {
       siteName: siteName,
       req: req,
-      products: cart,
+      products: cart, eurtousd: eurtousd
     });
   if (req.session.language == "de")
     return res.render("languages/de/cart", {
       siteName: siteName,
       req: req,
-      products: cart,
+      products: cart, eurtousd: eurtousd
     });
   if (req.session.language == "en")
     return res.render("languages/en/cart", {
       siteName: siteName,
       req: req,
-      products: cart,
+      products: cart, eurtousd: eurtousd
     });
 });
 
@@ -322,23 +320,23 @@ app.get("/search", async (req, res) => {
   if (req.session.language == "hr")
     return res.render("languages/hr/search", {
       siteName: siteName,
-      req,
+      req:
       req,
       products: products,
     });
   if (req.session.language == "de")
     return res.render("languages/de/search", {
       siteName: siteName,
+      req:
       req,
-      req,
-      products: products,
+      products: products, eurtousd: eurtousd
     });
   if (req.session.language == "en")
     return res.render("languages/en/search", {
       siteName: siteName,
+      req:
       req,
-      req,
-      products: products,
+      products: products, eurtousd: eurtousd
     });
 });
 
@@ -351,11 +349,11 @@ app.get("/tops", async (req, res) => {
     req.session.language = "hr";
   }
   if (req.session.language == "hr")
-    return res.render("languages/hr/topici", { siteName: siteName, req: req });
+    return res.render("languages/hr/topici", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/topici", { siteName: siteName, req: req });
+    return res.render("languages/de/topici", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/topici", { siteName: siteName, req: req });
+    return res.render("languages/en/topici", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/collections", async (req, res) => {
@@ -369,17 +367,17 @@ app.get("/collections", async (req, res) => {
   if (req.session.language == "hr")
     return res.render("languages/hr/kolekcije", {
       siteName: siteName,
-      req: req,
+      req: req, eurtousd: eurtousd
     });
   if (req.session.language == "de")
     return res.render("languages/de/kolekcije", {
       siteName: siteName,
-      req: req,
+      req: req, eurtousd: eurtousd
     });
   if (req.session.language == "en")
     return res.render("languages/en/kolekcije", {
       siteName: siteName,
-      req: req,
+      req: req, eurtousd: eurtousd
     });
 });
 
@@ -393,11 +391,11 @@ app.get("/account/orders", async (req, res) => {
   }
   if (!req.session.user) return res.redirect("/login");
   if (req.session.language == "hr")
-    return res.render("languages/hr/orders", { siteName: siteName, req: req });
+    return res.render("languages/hr/orders", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "de")
-    return res.render("languages/de/orders", { siteName: siteName, req: req });
+    return res.render("languages/de/orders", { siteName: siteName, req: req, eurtousd: eurtousd });
   if (req.session.language == "en")
-    return res.render("languages/en/orders", { siteName: siteName, req: req });
+    return res.render("languages/en/orders", { siteName: siteName, req: req, eurtousd: eurtousd });
 });
 
 app.get("/account/adresses", async (req, res) => {
@@ -635,6 +633,7 @@ app.post("/addToCart", async function (req, res) {
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
   console.log(cart)
+  console.log(result)
   cart.push(result);
   req.session.cart = await cart;
   console.log(await req.session.cart);

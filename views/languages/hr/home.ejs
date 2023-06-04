@@ -117,7 +117,11 @@
                                             </div>
                                             <div class="col">
                                                 <span class="productPrice">
-                                                            <%= product.price %>€
+                                                    <% if(req.session.value=="usd" ) {%>
+                                                        $<%= eurtousd(product.price) %>
+                                                            <%} else {%>
+                                                                <%= product.price %>€
+                                                                    <%}%>
                                                 </span>
                                             </div>
                                         </div>
