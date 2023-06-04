@@ -2,7 +2,7 @@ require("./index.js");
 const cron = require("node-cron")
 const { exec } = require("child_process");
 const fs = require("fs")
-const ig = require("./getPosts.js")
+const posts = require("./customs/posts/get.js")
 
 cron.schedule('*/10 * * * * *', () => {
     exec('git pull', (error, stdout, stderr) => {
@@ -20,8 +20,7 @@ cron.schedule('*/10 * * * * *', () => {
 });
 
 cron.schedule('*/10 * * * * *', async () => {
-    await ig.posts()
-    console.log("Got posts")
+    posts()
 })
 
 cron.schedule('* */10 * * * *', async () => {

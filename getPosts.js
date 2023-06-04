@@ -43,7 +43,6 @@ async function posts() {
     })
 
     fs.unlinkSync("./instagram-cache.json")
-    if (!results[0].time) return "didnt catch posts";
     fs.writeFileSync("./photoss.json", JSON.stringify(results))
 
     return results;

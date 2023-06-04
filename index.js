@@ -163,7 +163,7 @@ app.get("/", async (req, res) => {
     req.session.language = "hr";
   }
 
-  const data = fs.readFileSync("./photos.json");
+  const data = fs.readFileSync("./customs/tempFiles/disposedPhotos.json");
   const info = JSON.parse(data)
   
   // const info = await ig.posts()
