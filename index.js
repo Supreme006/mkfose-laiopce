@@ -7,12 +7,11 @@ const { port, siteName } = require("./config.json");
 const { MongoClient } = require("mongodb");
 const multer = require("multer");
 const ms = require("ms");
-const ig = require("./getPosts");
 const axios = require('axios');
 const fs = require('fs');
 console.clear();
 const price = require("./eur-usd.json");
-
+const stripe = require("stripe")('sk_test_51LOUl6JKjzcCysBWf60dwWUvdmlghsO9ALZzFv2suXQLduy2bw2wsoI8vb8Gzvv6WrxeRygJAPhjZEgjImj7tjUI00EmvaDvC5')
 function eurtousd(pric) {
   const result = Number(pric / price.close)
 
@@ -98,38 +97,38 @@ app.get("/policy/data", async (req, res) => {
 })
 
 app.get("/checkout", async (req, res) => {
+  let arr = req.session.cart
+  let promo = req.session.code;
+
+  function percentageOff(price, percentage) {
+    return price * (1 - percentage / 100).toFixed(2)
+  }
+
   if (!req.session.value) {
     req.session.value = "eur";
   }
-
   if (!req.session.language) {
     req.session.language = "hr";
   }
-  let arr = [{ "title": "Hose Monte", "price": 31, "s_description": "This is short description" }, { "title": "Hosin", "price": 20, "s_description": "This is short description" }, { "title": "Minte", "price": 95, "s_description": "This is short description" }]
-  const promo = {
-    "code": "DISCOUNT20",
-    "price": 13
-  }
+
   if (req.session.language == "hr")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
-      cart: arr,
-      promo: promo, eurtousd: eurtousd
+      promo: promo,
+      cart: arr, eurtousd: eurtousd, percentageOff: percentageOff
     });
   if (req.session.language == "de")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
-      cart: arr,
-      promo: promo, eurtousd: eurtousd
+      promo: promo, cart: arr, eurtousd: eurtousd, percentageOff: percentageOff
     });
   if (req.session.language == "en")
     return res.render("languages/hr/checkout", {
       siteName: siteName,
       req: req,
-      cart: arr,
-      promo: promo, eurtousd: eurtousd
+      promo: promo, cart: arr, eurtousd: eurtousd, percentageOff: percentageOff
     });
 });
 
@@ -286,7 +285,6 @@ app.get("/cart", async (req, res) => {
   }
   let cart = req.session.cart;
   if (!cart) cart = "empty";
-  console.log(cart)
   if (req.session.language == "hr")
     return res.render("languages/hr/cart", {
       siteName: siteName,
@@ -321,21 +319,21 @@ app.get("/search", async (req, res) => {
     return res.render("languages/hr/search", {
       siteName: siteName,
       req:
-      req,
+        req,
       products: products,
     });
   if (req.session.language == "de")
     return res.render("languages/de/search", {
       siteName: siteName,
       req:
-      req,
+        req,
       products: products, eurtousd: eurtousd
     });
   if (req.session.language == "en")
     return res.render("languages/en/search", {
       siteName: siteName,
       req:
-      req,
+        req,
       products: products, eurtousd: eurtousd
     });
 });
@@ -624,19 +622,67 @@ app.post("/removeFromCart", async (req, res) => {
     req.session.user.cart = removeFromArray(cart, result);
     res.send("removed");
   }
-});
+}); 
+
+app.post("/checkout", async function (req, res) {
+  const expirem = req.body.expirem
+  const expirey = req.body.expirey
+  const holder = req.body.holder
+  const number = req.body.number
+  const cvv = req.body.cvv
+  const zip = req.body.zip
+  const country = req.body.country
+  const fName = req.body.fName
+  const lName = req.body.lName
+  const address = req.body.address
+  const email = req.body.email
+  const username = req.body.username
+  let amount = req.body.total;
+
+  console.log(amount)
+
+  amount = amount.replace(".", "")
+
+  let paymentMethod = await stripe.paymentMethods.create({
+    type: "card",
+    card: {
+      number: number,
+      exp_month: expirem,
+      exp_year: "20"+expirey,
+      cvc: cvv
+    }
+  })
+
+  let paymentIntent = await stripe.paymentIntents.create({
+    payment_method: paymentMethod.id,
+    amount: amount,
+    currency: req.session.value,
+    confirm: true,
+    payment_method_types: ['card'],
+  })
+
+  res.send(paymentIntent)
+
+})
+
+app.post("/checkCode", async function (req, res) {
+  const codes = require("./customs/percentage/scripts/check")
+  const prome = await codes.checkPromo(req.body.promo)
+  if (prome) {
+    req.session.code = prome;
+    return res.redirect("/checkout");
+  } else {
+    return res.send({ "code": "invalid" });
+  }
+})
 
 app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
-  console.log(id)
   const result = await db.collection("products").findOne({ title: id });
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
-  console.log(cart)
-  console.log(result)
   cart.push(result);
   req.session.cart = await cart;
-  console.log(await req.session.cart);
   return res.json({ response: "added" });
 });
 

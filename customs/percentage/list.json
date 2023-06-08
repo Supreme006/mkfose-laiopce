@@ -1,0 +1,32 @@
+[
+    {
+        "code": "20ADORES",
+        "shipping": 0,
+        "products": 20
+    },
+    {
+        "code": "TOXICTHEDOG",
+        "shipping": 100,
+        "products": 100
+    },
+    {
+        "code": "FREESHIPPING",
+        "shipping": 100,
+        "products": 20
+    },
+    {
+        "code": "OPENING30",
+        "shipping": 30,
+        "products": 30
+    },
+    {
+        "code": "ADORES.FSH",
+        "shipping": 0,
+        "products": 15
+    },
+    {
+        "code": "ADORESFSH",
+        "shipping": 5,
+        "products": 5
+    }
+]

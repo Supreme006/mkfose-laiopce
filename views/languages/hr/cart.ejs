@@ -34,12 +34,11 @@
                                                 <div class="margin1-right">Total: <%= total %>€
                                                 </div>
                                                 <% } %>
-                                                    <div class="btn btn-success">Check Out</div>
+                                                    <a class="btn btn-success" href="/checkout">Check Out</a>
                                                     <% } %>
                 </h3>
             </div>
             <hr>
-            <%= console.log(products)%>
                 <%if (products=="empty" ){%>
                     <h3 class="text-center">Cart is empty</h3>
                     <% } else {products.forEach(item=> {%>

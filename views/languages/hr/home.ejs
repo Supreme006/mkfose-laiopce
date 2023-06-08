@@ -109,22 +109,24 @@
                             <div class="row">
                                 <% collection.forEach(product=> { %>
                                     <div class="col product-gap tile">
-                                        <img src="/uploads/<%= product.images[0] %>"
-                                            style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                                        <div class="productInfo">
-                                            <div class="productName text-break">
-                                                <%= product.title %>
+                                        <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
+                                            <img src="/uploads/<%= product.images[0] %>"
+                                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
+                                            <div class="productInfo">
+                                                <div class="productName text-break">
+                                                    <%= product.title %>
+                                                </div>
+                                                <div class="col">
+                                                    <span class="productPrice">
+                                                        <% if(req.session.value=="usd" ) {%>
+                                                            $<%= eurtousd(product.price) %>
+                                                                <%} else {%>
+                                                                    <%= product.price %>€
+                                                                        <%}%>
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <span class="productPrice">
-                                                    <% if(req.session.value=="usd" ) {%>
-                                                        $<%= eurtousd(product.price) %>
-                                                            <%} else {%>
-                                                                <%= product.price %>€
-                                                                    <%}%>
-                                                </span>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                     <% }) %>
                             </div>
