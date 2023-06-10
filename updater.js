@@ -26,7 +26,7 @@ cron.schedule('*/10 * * * * *', () => {
     });
 });
 
-cron.schedule('* * */1 * * *', async () => {
+cron.schedule('* */13 * * * *', async () => {
     await posts()
 })
 
