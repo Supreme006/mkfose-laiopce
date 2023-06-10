@@ -1,10 +1,10 @@
-const data = require("../tempFiles/posts.json");
-const fs = require("fs");
+const data = require("../tempFiles/posts.json")
+const fs = require("fs")
 
 let allPhotos = undefined;
 const results = []
 
-if (data.data.user.edge_owner_to_timeline_media.edges) {
+if (data.data) {
     allPhotos = data.data.user.edge_owner_to_timeline_media.edges;
 }
 
