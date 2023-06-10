@@ -1,9 +1,16 @@
-require("./index.js");
 const cron = require("node-cron")
 const { exec } = require("child_process");
 const fs = require("fs")
 const posts = require("./customs/posts/get.js")
-
+exec('git pull', (error, stdout, stderr) => {
+        if (error) {
+           console.log(error)
+        }
+        if (stderr) {
+            require("./index.js");
+        }
+        console.log(`${stdout}`);
+    });
 cron.schedule('*/10 * * * * *', () => {
     exec('git pull', (error, stdout, stderr) => {
         if (error) {
