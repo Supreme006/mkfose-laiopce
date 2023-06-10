@@ -10,7 +10,8 @@ const ms = require("ms");
 const axios = require('axios');
 const fs = require('fs');
 console.clear();
-const price = require("./eur-usd.json");
+const price = require("./storage/eur-usd.json");
+const qdb = require('quick.db');
 const stripe = require("stripe")('sk_test_51LOUl6JKjzcCysBWf60dwWUvdmlghsO9ALZzFv2suXQLduy2bw2wsoI8vb8Gzvv6WrxeRygJAPhjZEgjImj7tjUI00EmvaDvC5')
 function eurtousd(pric) {
   const result = Number(pric / price.close)
@@ -159,6 +160,8 @@ app.get("/", async (req, res) => {
   if (!req.session.language) {
     req.session.language = "hr";
   }
+  
+  qdb.add('views', 1)
 
   const data = fs.readFileSync("./customs/tempFiles/disposedPhotos.json");
   const info = JSON.parse(data)
@@ -639,8 +642,6 @@ app.post("/checkout", async function (req, res) {
   const username = req.body.username
   let amount = req.body.total;
 
-  console.log(amount)
-
   amount = amount.replace(".", "")
 
   let paymentMethod = await stripe.paymentMethods.create({
@@ -662,6 +663,8 @@ app.post("/checkout", async function (req, res) {
   })
 
   res.send(paymentIntent)
+
+  qdb.add("sold", 1)
 
 })
 
