@@ -665,10 +665,18 @@ app.post("/checkout", async function (req, res) {
 
   res.send(paymentIntent)
 
-  cart.forEach(item => {
-    qdb.add(`sold.${item.title}`, 1)
+  cart.forEach(async item => {
+    const old = await db.collection("sold").findOne({ title: item.title });
+    const newVal = {
+      "title": `${item.title}`,
+      "sold": old.sold + 1
+    }
+    db.collection("sold").updateOne(old, newVal, function(err, res) {
+      console.log(res)
+    })
     qdb.add(`totalSold`, 1)
   })
+  
 })
 
 app.post("/checkCode", async function (req, res) {
