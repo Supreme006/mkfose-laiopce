@@ -664,7 +664,10 @@ app.post("/checkout", async function (req, res) {
 
   res.send(paymentIntent)
 
-  qdb.add("sold", 1)
+  for (let i = 0; i < cart.length; i++) {
+    console.log(cart)
+    
+  }
 
 })
 
