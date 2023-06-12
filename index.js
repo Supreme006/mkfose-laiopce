@@ -644,7 +644,7 @@ app.post("/checkout", async function (req, res) {
   let amount = req.body.total;
 
   amount = amount.replace(".", "")
-
+  try{
   let paymentMethod = await stripe.paymentMethods.create({
     type: "card",
     card: {
@@ -662,6 +662,13 @@ app.post("/checkout", async function (req, res) {
     confirm: true,
     payment_method_types: ['card'],
   })
+} catch (e){
+  switch (e.type) {
+    case 'StripeCardError':
+      res.send({"message": e.message})
+      break;
+  }
+}
 
   res.send(paymentIntent)
 

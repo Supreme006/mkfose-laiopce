@@ -349,6 +349,9 @@
                                 if (r.code == "invalid") {
                                     alert("invalid")
                                 }
+                            },
+                            error: (e) => {
+                                alert(e.message)
                             }
                         });
                     }
