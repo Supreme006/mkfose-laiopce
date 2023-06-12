@@ -670,6 +670,9 @@ app.post("/checkout", async function (req, res) {
     let a;
     if(old) a = true;
     if(!old) a = false;
+
+    console.log(a)
+
     if(old){
     const newVal = {
       "title": `${item.title}`,
