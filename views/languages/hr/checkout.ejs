@@ -37,20 +37,7 @@
         <%- include("../../partials/navbar.ejs") %>
             <div class="container margin3-top">
 
-                <div class="modal" id="success">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal body -->
-                            <div class="modal-body text-center">
-                                test
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <button data-bs-toggle="modal" data-bs-target="#success">ae</button>
+                <button data-bs-toggle="modal" data-bs-target="#loading">ae</button>
 
                 <div class="row g-5">
                     <div class="col-md-5 col-lg-4 order-md-last">
@@ -290,6 +277,56 @@
                                     With Credit Card</button>
                                 <% } %>
 
+                    </div>
+                </div>
+
+                <div class="modal checkoutModal" id="loading">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header text-center">
+                                <i class="fas fa-spinner fa-pulse fa-2x"></i>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body text-center">
+                                <div>Your payment is loading...</div>
+                                <div>This can take few seconds.</div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                               
+                                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal checkoutModal" id="success">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body text-center">
+                                <div>Your payment is loading...</div>
+                                <div>This can take few seconds.</div>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                               
+                                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
