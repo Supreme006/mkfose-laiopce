@@ -668,22 +668,22 @@ app.post("/checkout", async function (req, res) {
   cart.forEach(async item => {
     const old = await db.collection("sold").findOne({ title: item.title });
     let a;
-    if(old) a = true;
-    if(!old) a = false;
+    if(await old) a = true;
+    if(!await old) a = false;
 
     console.log(a)
 
-    if(old){
+    if(await old){
     const newVal = {
       "title": `${item.title}`,
       "sold": old.sold + 1
     }
-    db.collection("sold").updateOne(old, {$set: newVal}, function(err, res) {
+    await db.collection("sold").updateOne(old, {$set: newVal}, function(err, res) {
       console.log(res)
     })
     qdb.add(`totalSold`, 1)
   } else {
-    db.collection("sold").insertOne(
+    await db.collection("sold").insertOne(
       JSON.parse(`{
         "title": "${item.title}",
         "sold": 1
