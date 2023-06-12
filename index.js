@@ -658,7 +658,7 @@ app.post("/checkout", async function (req, res) {
   let paymentIntent = await stripe.paymentIntents.create({
     payment_method: paymentMethod.id,
     amount: amount,
-    currency: req.session.value,
+    currency: req.session.value || "eur",
     confirm: true,
     payment_method_types: ['card'],
   })
@@ -667,11 +667,8 @@ app.post("/checkout", async function (req, res) {
 
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
-    let a;
-    if (await old) a = true;
-    if (!await old) a = false;
 
-    console.log(a)
+    qdb.add(`totalSold`, 1)
 
     if (await old) {
       const newVal = {
@@ -681,7 +678,6 @@ app.post("/checkout", async function (req, res) {
       await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
         console.log(res)
       })
-      qdb.add(`totalSold`, 1)
     } else {
       await db.collection("sold").insertOne(
         JSON.parse(`{
@@ -692,32 +688,7 @@ app.post("/checkout", async function (req, res) {
     }
   }
 
-  // cart.forEach(async item => {
-  //   const old = await db.collection("sold").findOne({ title: item.title });
-  //   let a;
-  //   if (await old) a = true;
-  //   if (!await old) a = false;
-
-  //   console.log(a)
-
-    // if (await old) {
-    //   const newVal = {
-    //     "title": `${item.title}`,
-    //     "sold": old.sold + 1
-    //   }
-    //   await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
-    //     console.log(res)
-    //   })
-    //   qdb.add(`totalSold`, 1)
-    // } else {
-    //   await db.collection("sold").insertOne(
-    //     JSON.parse(`{
-    //     "title": "${item.title}",
-    //     "sold": 1
-    //   }`)
-    //   )
-    // }
-  // })
+  req.session.cart = [];
 
 })
 
