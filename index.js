@@ -671,7 +671,7 @@ app.post("/checkout", async function (req, res) {
       "title": `${item.title}`,
       "sold": old.sold + 1
     }
-    db.collection("sold").update(old, {$set: newVal}, function(err, res) {
+    db.collection("sold").updateOne(old, {$set: newVal}, function(err, res) {
       console.log(res)
     })
     qdb.add(`totalSold`, 1)
