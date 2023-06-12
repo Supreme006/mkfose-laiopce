@@ -12,7 +12,7 @@ body {
 }
 
 .checkoutModal .modal-header{
-    border-bottom: 0 !important;
+    border-bottom:  solid !important;
 }
 
 .brk {
