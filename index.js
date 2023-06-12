@@ -642,12 +642,10 @@ app.post("/checkout", async function (req, res) {
   const username = req.body.username
   const cart = req.session.cart;
   let amount = req.body.total;
-  let paymentMethod;
-  let paymentIntent
 
   amount = amount.replace(".", "")
   try{
-  paymentMethod = await stripe.paymentMethods.create({
+  let paymentMethod = await stripe.paymentMethods.create({
     type: "card",
     card: {
       number: number,
@@ -657,22 +655,24 @@ app.post("/checkout", async function (req, res) {
     }
   })
 
-  paymentIntent = await stripe.paymentIntents.create({
+  let paymentIntent = await stripe.paymentIntents.create({
     payment_method: paymentMethod.id,
     amount: amount,
     currency: req.session.value || "eur",
     confirm: true,
     payment_method_types: ['card'],
   })
+
+  res.send(paymentIntent)
 } catch (e){
   switch (e.type) {
     case 'StripeCardError':
-      res.send({"message": e.message})
+      console.log(e.message)
+      res.send({"message": `${e.message}`})
       break;
   }
 }
 
-  res.send(paymentIntent)
 
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
