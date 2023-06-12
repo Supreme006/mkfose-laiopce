@@ -655,7 +655,7 @@ app.post("/checkout", async function (req, res) {
     }
   })
 
-  let paymentIntent = await stripe.paymentIntents.create({
+  await stripe.paymentIntents.create({
     payment_method: paymentMethod.id,
     amount: amount,
     currency: req.session.value || "eur",
@@ -663,7 +663,7 @@ app.post("/checkout", async function (req, res) {
     payment_method_types: ['card'],
   })
 
-  res.send(paymentIntent)
+  res.send({"response": "success"});
 } catch (e){
   switch (e.type) {
     case 'StripeCardError':
