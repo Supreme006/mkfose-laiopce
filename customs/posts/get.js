@@ -13,6 +13,8 @@ const options = {
     headers
 }
 request(options, async (error, res, body) => {
+    if(body){
     fs.writeFileSync("./customs/tempFiles/posts.json", await body);
+    }
 })
 dispose;
