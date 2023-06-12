@@ -667,6 +667,9 @@ app.post("/checkout", async function (req, res) {
 
   cart.forEach(async item => {
     const old = await db.collection("sold").findOne({ title: item.title });
+    let a;
+    if(old) a = true;
+    if(!old) a = false;
     if(old){
     const newVal = {
       "title": `${item.title}`,
