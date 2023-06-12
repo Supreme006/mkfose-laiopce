@@ -346,12 +346,9 @@
                                 "total": "${amount}"
                             }`),
                             success: (r) => {
-                                if (r.code == "invalid") {
-                                    alert("invalid")
+                                if (r.message) {
+                                    alert(r.message)
                                 }
-                            },
-                            error: (e) => {
-                                alert(e.message)
                             }
                         });
                     }
