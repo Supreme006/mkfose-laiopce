@@ -6,6 +6,11 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
+.checkoutModal{
+    background-color: #bb9797;
+    
+}
+
 .brk {
     white-space: pre-line
 }
