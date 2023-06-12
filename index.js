@@ -665,11 +665,10 @@ app.post("/checkout", async function (req, res) {
 
   res.send(paymentIntent)
 
-  for (let i = 0; i < cart.length; i++) {
-    console.log(cart)
-    
-  }
-
+  cart.forEach(item => {
+    qdb.add(`sold.${item.title}`, 1)
+    qdb.add(`totalSold`, 1)
+  })
 })
 
 app.post("/checkCode", async function (req, res) {
