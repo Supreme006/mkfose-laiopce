@@ -8,7 +8,11 @@ body {
 
 .checkoutModal{
     background-color: #bb9797;
-    
+
+}
+
+.checkoutModal .modal-header{
+    border-bottom: 0 !important;
 }
 
 .brk {
