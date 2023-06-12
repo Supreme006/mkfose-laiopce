@@ -160,7 +160,7 @@ app.get("/", async (req, res) => {
   if (!req.session.language) {
     req.session.language = "hr";
   }
-  
+
   qdb.add('views', 1)
 
   const data = fs.readFileSync("./customs/tempFiles/disposedPhotos.json");
@@ -625,7 +625,7 @@ app.post("/removeFromCart", async (req, res) => {
     req.session.user.cart = removeFromArray(cart, result);
     res.send("removed");
   }
-}); 
+});
 
 app.post("/checkout", async function (req, res) {
   const expirem = req.body.expirem
@@ -650,7 +650,7 @@ app.post("/checkout", async function (req, res) {
     card: {
       number: number,
       exp_month: expirem,
-      exp_year: "20"+expirey,
+      exp_year: "20" + expirey,
       cvc: cvv
     }
   })
@@ -665,33 +665,44 @@ app.post("/checkout", async function (req, res) {
 
   res.send(paymentIntent)
 
-  cart.forEach(async item => {
-    const old = await db.collection("sold").findOne({ title: item.title });
+  for (let i = 0; i < cart.length; i++) {
+    const old = await db.collection("sold").findOne({ title: cart[i].title });
     let a;
-    if(await old) a = true;
-    if(!await old) a = false;
+    if (await old) a = true;
+    if (!await old) a = false;
 
     console.log(a)
 
-    if(await old){
-    const newVal = {
-      "title": `${item.title}`,
-      "sold": old.sold + 1
-    }
-    await db.collection("sold").updateOne(old, {$set: newVal}, function(err, res) {
-      console.log(res)
-    })
-    qdb.add(`totalSold`, 1)
-  } else {
-    await db.collection("sold").insertOne(
-      JSON.parse(`{
-        "title": "${item.title}",
-        "sold": 1
-      }`)
-    )
+    console.log("\n\n")
   }
+
+  cart.forEach(async item => {
+    const old = await db.collection("sold").findOne({ title: item.title });
+    let a;
+    if (await old) a = true;
+    if (!await old) a = false;
+
+    console.log(a)
+
+    // if (await old) {
+    //   const newVal = {
+    //     "title": `${item.title}`,
+    //     "sold": old.sold + 1
+    //   }
+    //   await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
+    //     console.log(res)
+    //   })
+    //   qdb.add(`totalSold`, 1)
+    // } else {
+    //   await db.collection("sold").insertOne(
+    //     JSON.parse(`{
+    //     "title": "${item.title}",
+    //     "sold": 1
+    //   }`)
+    //   )
+    // }
   })
-  
+
 })
 
 app.post("/checkCode", async function (req, res) {
