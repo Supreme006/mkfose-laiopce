@@ -642,10 +642,12 @@ app.post("/checkout", async function (req, res) {
   const username = req.body.username
   const cart = req.session.cart;
   let amount = req.body.total;
+  let paymentMethod;
+  let paymentIntent
 
   amount = amount.replace(".", "")
   try{
-  let paymentMethod = await stripe.paymentMethods.create({
+  paymentMethod = await stripe.paymentMethods.create({
     type: "card",
     card: {
       number: number,
@@ -655,7 +657,7 @@ app.post("/checkout", async function (req, res) {
     }
   })
 
-  let paymentIntent = await stripe.paymentIntents.create({
+  paymentIntent = await stripe.paymentIntents.create({
     payment_method: paymentMethod.id,
     amount: amount,
     currency: req.session.value || "eur",
