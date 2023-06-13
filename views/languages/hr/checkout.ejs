@@ -425,21 +425,21 @@
                         $.ajax({
                             url: "/checkout",
                             type: "POST",
-                            data: JSON.parse(`{
-                                "expirem": "${expirem}",
-                                "expirey": "${expirey}",
-                                "holder": "${holder}",
-                                "number": "${number}",
-                                "cvv": "${cvv}",
-                                "zip": "${zip}",
-                                "country": "${country}",
-                                "fName": "${fName}",
-                                "lName": "${lName}",
-                                "address": "${address}",
-                                "email": "${email}",
-                                "username": "${username}",
-                                "total": "${amount}"
-                            }`),
+                            data: {
+                                "expirem": `${expirem}`,
+                                "expirey": `${expirey}`,
+                                "holder": `${holder}`,
+                                "number": `${number}`,
+                                "cvv": `${cvv}`,
+                                "zip": `${zip}`,
+                                "country": `${country}`,
+                                "fName": `${fName}`,
+                                "lName": `${lName}`,
+                                "address": `${address}`,
+                                "email": `${email}`,
+                                "username": `${username}`,
+                                "total": `${amount}`
+                            },
                             success: (r) => {
                                 // if (r.message) {
                                 //     emsg.textContent = r.message;
