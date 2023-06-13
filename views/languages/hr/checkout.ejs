@@ -88,12 +88,16 @@
                                                         <% if(req.session.value=="usd" ) {%>
                                                             <span>Total (USD)</span>
                                                             <div>
-                                                                $<strong id="total"><%= eurtousd(total.toFixed(2)) %></strong>
+                                                                $<strong id="total">
+                                                                    <%= eurtousd(total.toFixed(2)) %>
+                                                                </strong>
                                                             </div>
                                                             <% } else { %>
                                                                 <span>Total (EUR)</span>
                                                                 <div>
-                                                                    <strong id="total"><%= total.toFixed(2) %></strong>€
+                                                                    <strong id="total">
+                                                                        <%= total.toFixed(2) %>
+                                                                    </strong>€
                                                                 </div>
                                                                 <%}%>
                                                     </li>
@@ -284,8 +288,8 @@
                             <!-- Modal Header -->
                             <div class="checkoutModal">
                                 <div class="modal-header d-flex justify-content-center">
-                                <i class="fas fa-spinner fa-pulse fa-5x"></i>
-                            </div>
+                                    <i class="fas fa-spinner fa-pulse fa-5x"></i>
+                                </div>
                             </div>
 
                             <!-- Modal body -->
@@ -296,9 +300,9 @@
 
                             <!-- Modal footer -->
                             <div class="checkoutModal">
-                               <div class="modal-footer">
-                                
-                               </div>
+                                <div class="modal-footer">
+
+                                </div>
                                 <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
                             </div>
 
@@ -306,49 +310,57 @@
                     </div>
                 </div>
 
-                <div class="modal checkoutModal" id="success">
+                <div class="modal" id="success">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <div class="checkoutModal">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
                             </div>
 
                             <!-- Modal body -->
-                            <div class="modal-body text-center">
+                            <div class="modal-body text-center checkoutModal">
                                 <div>Your payment is loading...</div>
                                 <div>This can take few seconds.</div>
                             </div>
 
                             <!-- Modal footer -->
-                            <div class="modal-footer">
-                               
-                                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                            <div class="checkoutModal">
+                                <div class="modal-footer">
+
+                                    <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                                </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="modal checkoutModal" id="error">
+                <div class="modal" id="error">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <div class="checkoutModal">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
                             </div>
 
                             <!-- Modal body -->
-                            <div class="modal-body text-center">
+                            <div class="modal-body text-center checkoutModal">
                                 <div id="emessage"></div>
                             </div>
 
                             <!-- Modal footer -->
-                            <div class="modal-footer">
-                               
-                                <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                            <div class="checkoutModal">
+                                <div class="modal-footer">
+
+                                    <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                                </div>
                             </div>
 
                         </div>
@@ -430,14 +442,13 @@
                             }`),
                             success: (r) => {
                                 if (r.message) {
-                                    alert(r.message)
-                                   emsg.textContent = r.message; 
+                                    emsg.textContent = r.message;
                                     loading.hide();
                                     error.show();
-                                } else{
+                                } else {
                                     setTimeout(() => {
                                         loading.hide();
-                                    },1000)
+                                    }, 1000)
                                     success.show();
                                 }
                             }
