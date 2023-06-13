@@ -441,13 +441,16 @@
                                 "total": "${amount}"
                             }`),
                             success: (r) => {
-                                if (r.message) {
-                                    emsg.textContent = r.message;
-                                    loading.hide();
-                                    error.show();
-                                } else {
-                                    loading.hide()
-                                    success.show();
+                                // if (r.message) {
+                                //     emsg.textContent = r.message;
+                                //     loading.hide();
+                                //     error.show();
+                                // } else {
+                                //     loading.hide()
+                                //     success.show();
+                                // }
+                                if(r.message){
+                                    alert(r.message)
                                 }
                             }
                         });
