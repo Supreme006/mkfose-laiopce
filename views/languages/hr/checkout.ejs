@@ -350,6 +350,7 @@
                 <script src="/js/form-validation.js"></script>
 
                 <script>
+
                     async function checkPromo() {
                         const code = document.getElementById("promoCode").value
                         console.log(code)
@@ -381,8 +382,9 @@
                         const email = document.getElementById("email").value;
                         const username = document.getElementById("username").value;
                         const amount = document.getElementById("total").textContent;
+                        const modal = document.getElementById("loading");
 
-                        console.log(amount)
+                        modal.show();
 
                         $.ajax({
                             url: "/checkout",
@@ -405,6 +407,9 @@
                             success: (r) => {
                                 if (r.message) {
                                     alert(r.message)
+                                } else{
+                                    
+
                                 }
                             }
                         });
