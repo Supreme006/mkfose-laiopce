@@ -316,11 +316,8 @@
 
                             <!-- Modal Header -->
                             <div class="checkoutModal">
-                                <div class="modal-header">
-                                    <div class="d-flex justify-content-center">
-                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x"></i>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <div class="modal-header d-flex justify-content-center">
+                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x" style="color: green;"></i>
                                 </div>
                             </div>
 
@@ -349,8 +346,8 @@
 
                             <!-- Modal Header -->
                             <div class="checkoutModal">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <div class="modal-header d-flex justify-content-center">
+                                    <i class="fa-solid fa-circle-exclamation fa-beat-fade" style="color: red;"></i>
                                 </div>
                             </div>
 
@@ -487,9 +484,9 @@
                                 }
                                 if (!r.erroro) {
                                     if (r.response) {
-                                        loading.hide();
                                         orID.textContent = Order_id;
                                         setTimeout(() => {
+                                            loading.hide();
                                             successs.show();
                                         }, 1500)
                                     }
