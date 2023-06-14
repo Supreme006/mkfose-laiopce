@@ -643,7 +643,7 @@ app.post("/checkout", async function (req, res) {
   const orderID = req.body.orderID
   const cart = req.session.cart;
   let amount = req.body.total;
-  let err;
+  let err = false;
 
   amount = amount.replace(".", "")
   try {
@@ -669,7 +669,9 @@ app.post("/checkout", async function (req, res) {
 
 
   } catch (e) {
+    if(e){
     err = true;
+    }
     switch (e.type) {
       case 'StripeCardError':
         res.send({ "error": `${e.message}` })
