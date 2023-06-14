@@ -317,14 +317,18 @@
                             <!-- Modal Header -->
                             <div class="checkoutModal">
                                 <div class="modal-header">
+                                    <div class="d-flex justify-content-center">
+                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x"></i>
+                                    </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body text-center checkoutModal">
-                                <div>Your payment is loading...</div>
-                                <div>This can take few seconds.</div>
+                                <div>Your payment is completed.</div>
+                                <div>Please save <b>ORDER ID</b> if you want to replace your package.</div>
+                                <b><div id="orderID"></div></b>
                             </div>
 
                             <!-- Modal footer -->
@@ -383,15 +387,15 @@
                 <script src="/js/form-validation.js"></script>
 
                 <script>
+                    let Order_id;
 
                     async function checkPromo() {
                         const code = document.getElementById("promoCode").value
-                        console.log(code)
                         $.ajax({
                             url: "/checkCode",
                             type: "POST",
                             data: {
-                                promo: code
+                                "promo": `${code}`
                             },
                             success: (r) => {
                                 if (r.code == "invalid") {
@@ -401,7 +405,40 @@
                         });
                     }
 
+                    function makeid(length) {
+                        let result = '';
+                        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                        const charactersLength = characters.length;
+                        let counter = 0;
+                        while (counter < length) {
+                            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                            counter += 1;
+                        }
+                        return result;
+                    }
+
+                    async function checkID() {
+                        const order_id = makeid(18);
+
+                        $.ajax({
+                            url: "/checkOrderId",
+                            type: "POST",
+                            data: {
+                                "order_id": `${order_id}`
+                            },
+                            success: (r) => {
+                                if (r.message == "exist") {
+                                    checkID()
+                                } else {
+                                    Order_id = order_id;
+                                }
+                            }
+                        });
+                    }
+
                     async function checkOut() {
+                        loading.show();
+
                         const expirem = document.getElementById("expirem").value;
                         const expirey = document.getElementById("expirey").value;
                         const holder = document.getElementById("cc-name").value;
@@ -419,8 +456,7 @@
                         const successs = new bootstrap.Modal("#successs");
                         const error = new bootstrap.Modal("#error");
                         const emsg = document.getElementById("emessage")
-
-                        loading.show();
+                        const orID = document.getElementById("orderID")
 
                         $.ajax({
                             url: "/checkout",
@@ -438,7 +474,8 @@
                                 "address": `${address}`,
                                 "email": `${email}`,
                                 "username": `${username}`,
-                                "total": `${amount}`
+                                "total": `${amount}`,
+                                "orderID": `${Order_id}`
                             },
                             success: (r) => {
                                 console.log(r)
@@ -446,13 +483,16 @@
                                     emsg.textContent = r.message;
                                     loading.hide();
                                     error.show();
-                                } 
-                                if(!r.erroro){
-                                if(r.response) {
-                                    loading.hide();
-                                    successs.show();
                                 }
-                            }
+                                if (!r.erroro) {
+                                    if (r.response) {
+                                        loading.hide();
+                                        orID.textContent = Order_id;
+                                        setTimeout(() => {
+                                            successs.show();
+                                        }, 1500)
+                                    }
+                                }
                             },
                             error: (e) => {
                                 console.log(e)

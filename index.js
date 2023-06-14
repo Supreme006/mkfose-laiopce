@@ -640,6 +640,7 @@ app.post("/checkout", async function (req, res) {
   const address = req.body.address
   const email = req.body.email
   const username = req.body.username
+  const orderID = req.body.orderID
   const cart = req.session.cart;
   let amount = req.body.total;
 
