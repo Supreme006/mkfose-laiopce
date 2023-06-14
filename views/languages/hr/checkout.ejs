@@ -445,7 +445,8 @@
                                     emsg.textContent = r.message;
                                     loading.hide();
                                     error.show();
-                                } else {
+                                } 
+                                if(r.response) {
                                     loading.hide();
                                     success.show();
                                 }
