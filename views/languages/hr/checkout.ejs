@@ -441,6 +441,7 @@
                                 "total": `${amount}`
                             },
                             success: (r) => {
+                                console.log(r)
                                 if (r.message) {
                                     emsg.textContent = r.message;
                                     loading.hide();
@@ -451,6 +452,9 @@
                                     loading.hide();
                                     success.show();
                                 }
+                            },
+                            error: (e) => {
+                                console.log(e)
                             }
                         });
                     }
