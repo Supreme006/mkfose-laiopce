@@ -310,7 +310,7 @@
                     </div>
                 </div>
 
-                <div class="modal" id="success">
+                <div class="modal" id="successs">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -416,7 +416,7 @@
                         const username = document.getElementById("username").value;
                         const amount = document.getElementById("total").textContent;
                         const loading = new bootstrap.Modal("#loading");
-                        const success = new bootstrap.Modal("#success");
+                        const successs = new bootstrap.Modal("#successs");
                         const error = new bootstrap.Modal("#error");
                         const emsg = document.getElementById("emessage")
 
@@ -449,9 +449,8 @@
                                 } 
                                 if(!r.erroro){
                                 if(r.response) {
-                                    alert("success")
                                     loading.hide();
-                                    success.show();
+                                    successs.show();
                                 }
                             }
                             },
