@@ -644,38 +644,38 @@ app.post("/checkout", async function (req, res) {
   let amount = req.body.total;
 
   amount = amount.replace(".", "")
-  try{
-  let paymentMethod = await stripe.paymentMethods.create({
-    type: "card",
-    card: {
-      number: number,
-      exp_month: expirem,
-      exp_year: "20" + expirey,
-      cvc: cvv
+  try {
+    let paymentMethod = await stripe.paymentMethods.create({
+      type: "card",
+      card: {
+        number: number,
+        exp_month: expirem,
+        exp_year: "20" + expirey,
+        cvc: cvv
+      }
+    })
+
+    console.log("checked card")
+
+    await stripe.paymentIntents.create({
+      payment_method: paymentMethod.id,
+      amount: amount,
+      currency: req.session.value || "eur",
+      confirm: true,
+      payment_method_types: ['card'],
+    })
+
+    console.log("payed")
+
+  } catch (e) {
+    switch (e.type) {
+      case 'StripeCardError':
+        res.send({ "error": `${e.message}` })
+        break;
     }
-  })
-
-  await stripe.paymentIntents.create({
-    payment_method: paymentMethod.id,
-    amount: amount,
-    currency: req.session.value || "eur",
-    confirm: true,
-    payment_method_types: ['card'],
-  })
-
-} catch (e){
-  switch (e.type) {
-    case 'StripeCardError':
-      res.send({"error": `${e.message}`})
-      break;
   }
-}
 
-return res.send({"response": "success"}).then(r => {
-  console.log(r)
-  console.log("done")
-});
-
+  console.log("next")
 
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
@@ -701,6 +701,9 @@ return res.send({"response": "success"}).then(r => {
   }
 
   req.session.cart = [];
+
+  res.send({ "response": "success" })
+  console.log("done")
 
 })
 

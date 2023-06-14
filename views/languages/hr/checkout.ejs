@@ -442,16 +442,18 @@
                             },
                             success: (r) => {
                                 console.log(r)
-                                if (r.message) {
+                                if (r.error) {
                                     emsg.textContent = r.message;
                                     loading.hide();
                                     error.show();
                                 } 
+                                if(!r.erroro){
                                 if(r.response) {
                                     alert("success")
                                     loading.hide();
                                     success.show();
                                 }
+                            }
                             },
                             error: (e) => {
                                 console.log(e)
