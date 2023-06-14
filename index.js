@@ -665,8 +665,6 @@ app.post("/checkout", async function (req, res) {
       payment_method_types: ['card'],
     })
 
-    console.log("payed")
-
   } catch (e) {
     switch (e.type) {
       case 'StripeCardError':
@@ -674,8 +672,6 @@ app.post("/checkout", async function (req, res) {
         break;
     }
   }
-
-  console.log("next")
 
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
@@ -703,7 +699,6 @@ app.post("/checkout", async function (req, res) {
   req.session.cart = [];
 
   res.send({ "response": "success" })
-  console.log("done")
 
 })
 
