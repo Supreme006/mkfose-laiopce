@@ -663,17 +663,18 @@ app.post("/checkout", async function (req, res) {
     payment_method_types: ['card'],
   })
 
-  return res.send({"response": "success"}).then(r => {
-    console.log(r)
-    console.log("done")
-  });
 } catch (e){
   switch (e.type) {
     case 'StripeCardError':
-      res.send({"message": `${e.message}`})
+      res.send({"error": `${e.message}`})
       break;
   }
 }
+
+return res.send({"response": "success"}).then(r => {
+  console.log(r)
+  console.log("done")
+});
 
 
   for (let i = 0; i < cart.length; i++) {
