@@ -474,7 +474,7 @@
                             success: (r) => {
                                 console.log(r)
                                 if (r.error) {
-                                    emsg.textContent = r.message;
+                                    emsg.textContent = r.error;
                                     loading.hide();
                                     error.show();
                                 }
