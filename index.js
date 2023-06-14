@@ -666,6 +666,34 @@ app.post("/checkout", async function (req, res) {
       payment_method_types: ['card'],
     })
 
+  
+
+  for (let i = 0; i < cart.length; i++) {
+    const old = await db.collection("sold").findOne({ title: cart[i].title });
+
+    qdb.add(`totalSold`, 1)
+
+    if (await old) {
+      const newVal = {
+        "title": `${cart[i].title}`,
+        "sold": old.sold + 1
+      }
+      await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
+        console.log(res)
+      })
+    } else {
+      await db.collection("sold").insertOne(
+        JSON.parse(`{
+        "title": "${cart[i].title}",
+        "sold": 1
+      }`)
+      )
+    }
+  }
+
+  req.session.cart = undefined;
+
+  return res.send({ "response": "success" })
 } catch (e) {
   switch (e.type) {
     case 'StripeCardError':
@@ -673,40 +701,12 @@ app.post("/checkout", async function (req, res) {
       break;
   }
 }
-
-for (let i = 0; i < cart.length; i++) {
-  const old = await db.collection("sold").findOne({ title: cart[i].title });
-
-  qdb.add(`totalSold`, 1)
-
-  if (await old) {
-    const newVal = {
-      "title": `${cart[i].title}`,
-      "sold": old.sold + 1
-    }
-    await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
-      console.log(res)
-    })
-  } else {
-    await db.collection("sold").insertOne(
-      JSON.parse(`{
-      "title": "${cart[i].title}",
-      "sold": 1
-    }`)
-    )
-  }
-}
-
-req.session.cart = undefined;
-
-res.send({ "response": "success" })
-
 })
 
 app.post("/checkOrderId", async function (req, res) {
   const result = await db.collection("orders").findOne({orderID: req.body.order_id});
   if(result) return res.send({"message": "exist"});
-  if(!result) return res.send({"message": "approved"});
+  if(!result) return res.send({"message": "approved"})
 })
 
 app.post("/checkCode", async function (req, res) {
