@@ -663,7 +663,10 @@ app.post("/checkout", async function (req, res) {
     payment_method_types: ['card'],
   })
 
-  return res.send({"response": "success"});
+  return res.send({"response": "success"}).then(r => {
+    console.log(r)
+    console.log("done")
+  });
 } catch (e){
   switch (e.type) {
     case 'StripeCardError':
