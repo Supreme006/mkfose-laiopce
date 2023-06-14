@@ -437,6 +437,7 @@
                     }
 
                     async function checkOut() {
+                        const loading = new bootstrap.Modal("#loading");
                         loading.show();
 
                         const expirem = document.getElementById("expirem").value;
@@ -452,7 +453,6 @@
                         const email = document.getElementById("email").value;
                         const username = document.getElementById("username").value;
                         const amount = document.getElementById("total").textContent;
-                        const loading = new bootstrap.Modal("#loading");
                         const successs = new bootstrap.Modal("#successs");
                         const error = new bootstrap.Modal("#error");
                         const emsg = document.getElementById("emessage")
