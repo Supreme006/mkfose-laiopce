@@ -643,6 +643,7 @@ app.post("/checkout", async function (req, res) {
   const orderID = req.body.orderID
   const cart = req.session.cart;
   let amount = req.body.total;
+  let err;
 
   amount = amount.replace(".", "")
   try {
@@ -668,6 +669,7 @@ app.post("/checkout", async function (req, res) {
 
 
   } catch (e) {
+    err = true;
     switch (e.type) {
       case 'StripeCardError':
         res.send({ "error": `${e.message}` })
@@ -675,7 +677,7 @@ app.post("/checkout", async function (req, res) {
     }
   }
 
-
+  if(err)return;
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
 
