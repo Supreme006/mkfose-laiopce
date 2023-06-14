@@ -693,7 +693,6 @@ app.post("/checkout", async function (req, res) {
 
   req.session.cart = undefined;
 
-  return res.send({ "response": "success" })
 } catch (e) {
   switch (e.type) {
     case 'StripeCardError':
@@ -701,6 +700,8 @@ app.post("/checkout", async function (req, res) {
       break;
   }
 }
+return res.send({ "response": "success" })
+
 })
 
 app.post("/checkOrderId", async function (req, res) {
