@@ -666,7 +666,15 @@ app.post("/checkout", async function (req, res) {
       payment_method_types: ['card'],
     })
 
-  
+
+  } catch (e) {
+    switch (e.type) {
+      case 'StripeCardError':
+        res.send({ "error": `${e.message}` })
+        break;
+    }
+  }
+
 
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
@@ -684,30 +692,23 @@ app.post("/checkout", async function (req, res) {
     } else {
       await db.collection("sold").insertOne(
         JSON.parse(`{
-        "title": "${cart[i].title}",
-        "sold": 1
-      }`)
+      "title": "${cart[i].title}",
+      "sold": 1
+    }`)
       )
     }
   }
 
   req.session.cart = undefined;
 
-} catch (e) {
-  switch (e.type) {
-    case 'StripeCardError':
-      res.send({ "error": `${e.message}` })
-      break;
-  }
-}
-return res.send({ "response": "success" })
+  return res.send({ "response": "success" })
 
 })
 
 app.post("/checkOrderId", async function (req, res) {
-  const result = await db.collection("orders").findOne({orderID: req.body.order_id});
-  if(result) return res.send({"message": "exist"});
-  if(!result) return res.send({"message": "approved"})
+  const result = await db.collection("orders").findOne({ orderID: req.body.order_id });
+  if (result) return res.send({ "message": "exist" });
+  if (!result) return res.send({ "message": "approved" })
 })
 
 app.post("/checkCode", async function (req, res) {
