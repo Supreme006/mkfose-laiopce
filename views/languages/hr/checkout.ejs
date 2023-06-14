@@ -428,9 +428,9 @@
                             },
                             success: (r) => {
                                 if (r.message == "exist") {
-                                    checkID()
+                                    return checkID();
                                 } else {
-                                    Order_id = order_id;
+                                    return Order_id = order_id;
                                 }
                             }
                         });
@@ -458,6 +458,7 @@
                         const emsg = document.getElementById("emessage")
                         const orID = document.getElementById("orderID")
 
+                        checkID().then(() => {
                         $.ajax({
                             url: "/checkout",
                             type: "POST",
@@ -498,6 +499,7 @@
                                 console.log(e)
                             }
                         });
+                    })
                     }
                 </script>
 </body>
