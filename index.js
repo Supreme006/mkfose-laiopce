@@ -657,8 +657,6 @@ app.post("/checkout", async function (req, res) {
       }
     })
 
-    console.log("checked card")
-
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
       amount: amount,
@@ -680,6 +678,8 @@ app.post("/checkout", async function (req, res) {
   }
 
   if(err)return;
+
+  const orders = db.collection("orders")
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
 
@@ -690,9 +690,7 @@ app.post("/checkout", async function (req, res) {
         "title": `${cart[i].title}`,
         "sold": old.sold + 1
       }
-      await db.collection("sold").updateOne(old, { $set: newVal }, function (err, res) {
-        console.log(res)
-      })
+      await db.collection("sold").updateOne(old, { $set: newVal })
     } else {
       await db.collection("sold").insertOne(
         JSON.parse(`{
@@ -701,6 +699,31 @@ app.post("/checkout", async function (req, res) {
     }`)
       )
     }
+
+    const date = new Date();
+    const day = date.getDate()
+    const month = date.getMonth()
+    const minute = date.getMinutes()
+    const hour = date.getHours();
+    const year = date.getFullYear();
+
+    orders.insertOne(
+      JSON.parse(`{
+        "title": "${cart[i].tite}",
+        "address": "${address}",
+        "zip": "${zip}",
+        "country": "${country}",
+        "firstName": "${fName}",
+        "lastName": "${lName}",
+        "email": "${email}",
+        "color": "${cart[i].color}",
+        "size": "${cart[i].size}",
+        "orderID": "${orderID}",
+        "username": "${username}",
+        "date": "${day}.${month}.${year}",
+        "time": "${hour}:${minute}"
+      }`)
+    )
   }
 
   req.session.cart = undefined;

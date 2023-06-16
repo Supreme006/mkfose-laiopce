@@ -3,7 +3,7 @@ const fs = require("fs");
 const dispose = require("./dispose");
 
 const headers = {
-    "cookie": 'ig_did=F829A967-4B3F-4CFE-AF14-6221069E695A; ig_nrcb=1; mid=ZIRXOgALAAHrCVP8UsWRbA5aFTOa; datr=OleEZJdW1AIszsFbYuxr-uvp; dpr=0.5; csrftoken=WD2G4225dB6wEJMpWgtwEK4gqZBNbANQ; ds_user_id=44432295043; sessionid=44432295043%3AwCndDZI6xJ9EL5%3A9%3AAYc0ZmX2PlhI_ufNVF4jqplojrG_1ywpx68FB898-A; shbid="3462\05444432295043\0541717930938:01f70a992330bbda95befaad97b5d37721dc5eba9cc2f14e35a8df68d18b59d96908ea15"; shbts="1686394938\05444432295043\0541717930938:01f77fd37cc3ae945b95ac26cdb38e7d9086aa97826bf6207a016dd529c502c87b3ffa71"; rur="LDC\05444432295043\0541717931119:01f7a9a5742da90f30e29ec1c6b82a1da7a47685637750b726d0d541e0de22f47dd3e0a1"',
+    "cookie": 'ig_did=F829A967-4B3F-4CFE-AF14-6221069E695A; ig_nrcb=1; mid=ZIRXOgALAAHrCVP8UsWRbA5aFTOa; datr=OleEZJdW1AIszsFbYuxr-uvp; dpr=0.5; ds_user_id=44432295043; csrftoken=YpTuejXM9mpncZUKeXuB2ppTbIkg1BPH; sessionid=44432295043%3A7gW75X6InQKgin%3A9%3AAYdHNMKvcRyxUDHyNRYBggyoOKqTqWO9Y7a2YmMF4Q; shbid="3462\05444432295043\0541718457603:01f7ee8527324b9c1b393046864d9c2d4ea7cc5ca4fa00a4333ecdc42ca344c72d63b137"; shbts="1686921603\05444432295043\0541718457603:01f772e154560c9773bf03d97e9610a3679570d824340a16d2d4e4dd0780dd51f18e2212"; rur="LDC\05444432295043\0541718457670:01f7ed81b0d5cc13d7be39e6b7187ca3a13542ae2fc94a0c3f0ec3adaaebe66deaf800fa"',
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
     "x-ig-app-id": "936619743392459"
 }
@@ -12,9 +12,13 @@ const options = {
     url,
     headers
 }
+try{
 request(options, async (error, res, body) => {
     if(body){
     fs.writeFileSync("./customs/tempFiles/posts.json", await body);
     }
 })
+} catch(err){
+    console.log(err)
+}
 dispose;
