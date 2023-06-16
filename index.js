@@ -167,12 +167,16 @@ app.get("/", async (req, res) => {
   const info = JSON.parse(data)
 
   // const info = await ig.posts()
-
+  
   async function downloadImage(url, filename) {
+    try{
     const response = await axios.get(url, { responseType: 'arraybuffer' });
     fs.writeFile("public/tempImage/" + filename, response.data, (err) => {
       if (err) throw err;
     });
+  } catch(err){
+    console.log("error")
+  }
   }
 
   info.forEach(pohoto => {
