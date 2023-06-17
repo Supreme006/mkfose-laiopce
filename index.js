@@ -827,6 +827,7 @@ app.post("/changeLanguage", async (req, res) => {
 
 app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   let mi = "";
+  let si = [];
   mi = images.toLocaleString();
 
   const category = req.body.category;
@@ -839,6 +840,10 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const price = req.body.price;
   const collection = req.body.collection;
   const sizes = req.body.sizes
+
+  sizes.forEach(size => {
+    si.push(`\"${size}\"`)
+  })
 
   db.collection("products").insertOne(
     JSON.parse(`{
@@ -854,7 +859,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "black": ${black},
                 "white": ${white}
             },
-            "sizes": [${sizes}]
+            "sizes": [${si}]
         }`)
   );
 
