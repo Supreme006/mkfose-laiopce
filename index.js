@@ -841,6 +841,9 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const collection = req.body.collection;
   const sizes = req.body.sizes
 
+
+    console.log(sizes)
+
   sizes.forEach(size => {
     si.push(`\"${size}\"`)
   })
