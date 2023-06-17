@@ -854,7 +854,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "black": ${black},
                 "white": ${white}
             },
-            "sizes": ${sizes}
+            "sizes": [${sizes}]
         }`)
   );
 
