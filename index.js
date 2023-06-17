@@ -838,10 +838,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const white = req.body.white;
   const price = req.body.price;
   const collection = req.body.collection;
-  const xs = req.body.xs;
-  const s = req.body.s;
-  const m = req.body.m;
-  const l = req.body.l;
+  const sizes = req.body.sizes
 
   db.collection("products").insertOne(
     JSON.parse(`{
@@ -857,12 +854,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "black": ${black},
                 "white": ${white}
             },
-            "sizes": {
-                "s": ${s},
-                "xs": ${xs},
-                "m": ${m},
-                "l": ${l}
-            }
+            "sizes": ${sizes}
         }`)
   );
 

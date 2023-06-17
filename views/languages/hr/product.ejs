@@ -107,48 +107,15 @@
                                     Sizes:
                                 </div>
                                 <div class="sizeList d-flex">
-                                    <div class="xs" onclick="selectXS()">
-                                        <div class="sizeXS1">
+                                    <% result.sizes.forEach(size => {%>
+                                    <div class="<%=size%>" onclick="check(this)">
+                                        <div class="size<%=size.toUpperCase()%>1">
                                             <div class="colorCentarWite">
-                                                <div class="" id="xs">
-                                                    XS
-                                                </div>
+                                                <div class="" id="<%=size%>"><%=size.toUpperCase()%></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="s" onclick="selectS()">
-                                        <div class="color-gap s">
-                                            <div class="sizeS1">
-                                                <div class="colorCentarWite">
-                                                    <div class="" id="s">
-                                                        S
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="m" onclick="selectM()">
-                                        <div class="color-gap s">
-                                            <div class="sizeM1">
-                                                <div class="colorCentarWite">
-                                                    <div class="" id="m">
-                                                        M
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="l" onclick="selectL()">
-                                        <div class="color-gap s">
-                                            <div class="sizeL1">
-                                                <div class="colorCentarWite">
-                                                    <div class="" id="l">
-                                                        L
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <%})%>
                                 </div>
                                 <div class="product_info modelInfo">
                                     Mia je <b>5'1"</b> i nosi velicinu <b>XS</b>
@@ -177,26 +144,7 @@
 
                                 </div>
                                 <div class="description hidden" id="description">
-                                    Super mekane i dizajnirane da traju, Athletics široke trenirke
-                                    dizajnirane za vrhunsku udobnost. Izrađene od naše vrhunske,
-                                    330 g/m2 teške, brušene pamučne tkanine s podstavom od flisa
-                                    iznutra za nevjerojatnu udobnost, Athletics trenirke širokog su kroja
-                                    ravnih nogavica. S izvezenim Sport logotipom na stražnjoj strani,
-                                    Athletics trenirke su upotpunjene podesivom, skrivenom uzicom koja
-                                    steže struk. Zarazno mekane i nevjerojatno udobne, sportske hlače
-                                    Athletics dizajnirane su da podignu vašu odjeću za slobodno vrijeme
-                                    na višu razinu.
-                                    330gsm super soft, fleece back fabric (80% Cotton, 20% Polyester)
-                                    High, elasticated waistband with drawcord
-                                    Relaxed, oversized fit with wide legEmbroidered, Bo+Tee Sport logo on rear
-                                    Pull on design
-                                    Full length
-                                    Product code: BT0825
-                                    Wash inside out, on a gentle setting and low temperature.
-                                    We do our best to ensure that our photos are as true to colour as possible.
-                                    However, due to inconsistencies in monitors, digital photography and production
-                                    variations, we cannot guarantee that the colour you see on your screen accurately
-                                    portrays the true colour of the product.
+                                    <%= result.description%>
                                 </div>
                             </div>
                         </div>

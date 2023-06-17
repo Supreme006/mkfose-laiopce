@@ -290,10 +290,6 @@
                         details.classList.value = 'avaliableColors margin2-top hidden'
                     }
                 }
-
-                function add(element) {
-                    console.log(element.value)
-                }
             </script>
 
             <script type="text/javascript">
@@ -342,6 +338,25 @@
                     handleFiles(files);
                     // submitFilesForm(document.getElementById("filesfrm"));
                 }
+
+                let sizes = [];
+
+                function removeFromArray(arr, value) {
+                    var index = arr.indexOf(value);
+                    if (index > -1) {
+                        arr.splice(index, 1);
+                    }
+                    return arr;
+                }
+
+                function add(element) {
+                    if(sizes.includes(element.value)){
+                        removeFromArray(sizes, element.value)
+                    } else {
+                        sizes.push(element.value)
+                    }
+                }
+
                 function submitFilesForm(form) {
                     var label = document.getElementById("fileslbl");
                     const title = document.getElementById("title")
@@ -353,10 +368,6 @@
                     const black = document.getElementById("black").checked
                     const white = document.getElementById("white").checked
                     const price = document.getElementById("price");
-                    const xs = document.getElementById("xs").checked
-                    const s = document.getElementById("s").checked
-                    const m = document.getElementById("m").checked
-                    const l = document.getElementById("l").checked
 
                     dragOver(label, "Ucitavanje na server..."); // set the drop zone text and styling
                     var fd = new FormData();
@@ -398,13 +409,10 @@
                     fd.append('pink', pink)
                     fd.append('black', black)
                     fd.append('white', white)
-                    fd.append('s', s)
-                    fd.append('xs', xs)
-                    fd.append('m', m)
-                    fd.append('l', l)
+                    fd.append("sizes", sizes)
                     x.open("post", form.action, true);
                     x.send(fd)
-                    window.location.replace("http://localhost:2357/admin/uploaded")
+                    window.location.replace("http://41.216.188.63:2357/admin/uploaded")
                     return false;
                 }
             </script>
