@@ -844,10 +844,6 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
 
     console.log(sizes)
 
-  sizes.forEach(size => {
-    si.push(`\"${size}\"`)
-  })
-
   db.collection("products").insertOne(
     JSON.parse(`{
             "title": "${title}",
@@ -862,7 +858,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "black": ${black},
                 "white": ${white}
             },
-            "sizes": [${si}]
+            "sizes": ${sizes}
         }`)
   );
 
