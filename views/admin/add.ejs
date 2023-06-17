@@ -150,11 +150,11 @@
                                 </div>
                                 <div class="margin2-top">
                                     <div class="choose">
-                                        <div class="btn btn-primary">Brojevi (36, 37, 38)</div>
-                                        <div class="btn btn-primary">Slova (xs, m, l)</div>
+                                        <div class="btn btn-primary" onclick="brojevi()">Brojevi (36, 37, 38)</div>
+                                        <div class="btn btn-primary" onclick="slova()">Slova (xs, m, l)</div>
                                     </div>
                                 </div>
-                                <div class="avaliableColors margin2-top hidden" id="slova" onclick="slova()">
+                                <div class="avaliableColors margin2-top hidden" id="slova">
                                     <div class="list-group">
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" name="size-xs" id="xs" type="checkbox" onchange="add(element)">
@@ -174,7 +174,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="avaliableColors margin2-top hidden" id="brojevi" onclick="brojevi()">
+                                <div class="avaliableColors margin2-top hidden" id="brojevi" >
                                     <div class="list-group">
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
