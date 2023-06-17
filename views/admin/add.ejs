@@ -130,7 +130,8 @@
                                     Kratki opis (bice prikazan ispod naslova)
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="form-control noresize" name="shortDescription" id="shortDescription" rows="1"></textarea>
+                                    <textarea class="form-control noresize" name="shortDescription"
+                                        id="shortDescription" rows="1"></textarea>
                                 </div>
                             </div>
                             <div class="margin2-top">
@@ -157,56 +158,56 @@
                                 <div class="avaliableColors margin2-top hidden" id="slova">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-xs" id="xs" type="checkbox" onchange="add(this)">
-                                            XS
+                                            <button class="form-check-input me-1" type="checkbox"
+                                                onchange="add(this)">XS</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-s" id="s" type="checkbox" onchange="add(this)">
-                                            S
+                                            <button class="form-check-input me-1" type="checkbox"
+                                                onchange="add(this)">S</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-m" id="m" type="checkbox" onchange="add(this)">
-                                            M
+                                            <button class="form-check-input me-1" type="checkbox"
+                                            onchange="add(this)">M</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-l" id="l" type="checkbox" onchange="add(this)">
-                                            L
+                                            <button class="form-check-input me-1" type="checkbox"
+                                                onchange="add(this)">L</button>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="avaliableColors margin2-top hidden" id="brojevi" >
+                                <div class="avaliableColors margin2-top hidden" id="brojevi">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            32
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">32</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            34
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">34</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            36
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">36</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            38
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">38</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            40
+                                            <button class="form-check-input me-1"
+                                            onchange="add(this)">40</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            42
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">42</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            44
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">44</button>
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" onchange="add(this)">
-                                            46
+                                            <button class="form-check-input me-1"
+                                                onchange="add(this)">46</button>
                                         </label>
                                     </div>
                                 </div>
@@ -218,17 +219,17 @@
                                 <div class="avaliableColors margin2-top">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="pink" id="pink" type="checkbox">
+                                            <input class="form-check-input me-1" name="pink" id="pink">
                                             Roza
                                         </label>
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" name="black" id="black"
-                                                type="checkbox">
+                                               >
                                             Crna
                                         </label>
                                         <label class="list-group-item">
                                             <input class="form-check-input me-1" name="white" id="white"
-                                                type="checkbox">
+                                               >
                                             Bela
                                         </label>
                                     </div>
@@ -244,7 +245,8 @@
                             <div class="price margin2-top">
                                 <div class="editTitle">Kolekcija</div>
                                 <div class="mb-3">
-                                    <textarea class="form-control noresize" name="collection" id="collection" rows="1" style="width: 7rem;"></textarea>
+                                    <textarea class="form-control noresize" name="collection" id="collection" rows="1"
+                                        style="width: 7rem;"></textarea>
                                 </div>
                             </div>
                             <div class="category margin2-top">
@@ -272,26 +274,26 @@
 
             <script>
                 function slova() {
-                var details = document.getElementById('slova')
-                if (details.classList.value.includes("hidden")) {
-                    details.classList.value = 'avaliableColors margin2-top';
-                } else {
-                    details.classList.value = 'avaliableColors margin2-top hidden'
+                    var details = document.getElementById('slova')
+                    if (details.classList.value.includes("hidden")) {
+                        details.classList.value = 'avaliableColors margin2-top';
+                    } else {
+                        details.classList.value = 'avaliableColors margin2-top hidden'
+                    }
                 }
-            }
 
-            function brojevi() {
-                var details = document.getElementById('brojevi')
-                if (details.classList.value.includes("hidden")) {
-                    details.classList.value = 'avaliableColors margin2-top';
-                } else {
-                    details.classList.value = 'avaliableColors margin2-top hidden'
+                function brojevi() {
+                    var details = document.getElementById('brojevi')
+                    if (details.classList.value.includes("hidden")) {
+                        details.classList.value = 'avaliableColors margin2-top';
+                    } else {
+                        details.classList.value = 'avaliableColors margin2-top hidden'
+                    }
                 }
-            }
 
-            function add(element){
-                console.log(element.innerText)
-            }
+                function add(element) {
+                    console.log(element.textContent)
+                }
             </script>
 
             <script type="text/javascript">
