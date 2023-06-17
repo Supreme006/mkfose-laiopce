@@ -148,23 +148,65 @@
                                 <div class="editTitle text-center">
                                     Dostupne Velicine
                                 </div>
-                                <div class="avaliableColors margin2-top">
+                                <div class="margin2-top">
+                                    <div class="choose">
+                                        <div class="btn btn-primary">Brojevi (36, 37, 38)</div>
+                                        <div class="btn btn-primary">Slova (xs, m, l)</div>
+                                    </div>
+                                </div>
+                                <div class="avaliableColors margin2-top hidden" id="slova">
                                     <div class="list-group">
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-xs" id="xs" type="checkbox">
+                                            <input class="form-check-input me-1" name="size-xs" id="xs" type="checkbox" onchange="add(element)">
                                             XS
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-s" id="s" type="checkbox">
+                                            <input class="form-check-input me-1" name="size-s" id="s" type="checkbox" onchange="add(element)">
                                             S
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-m" id="m" type="checkbox">
+                                            <input class="form-check-input me-1" name="size-m" id="m" type="checkbox" onchange="add(element)">
                                             M
                                         </label>
                                         <label class="list-group-item">
-                                            <input class="form-check-input me-1" name="size-l" id="l" type="checkbox">
+                                            <input class="form-check-input me-1" name="size-l" id="l" type="checkbox" onchange="add(element)">
                                             L
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="avaliableColors margin2-top hidden" id="brojevi">
+                                    <div class="list-group">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            32
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            34
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            36
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            38
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            40
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            42
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            44
+                                        </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" onchange="add(element)">
+                                            46
                                         </label>
                                     </div>
                                 </div>
@@ -227,6 +269,26 @@
             </div>
         </div>
         <%- include("../partials/js.ejs") %>
+
+            <script>
+                function slova() {
+                var details = document.getElementById('slova')
+                if (details.classList.value.includes("hidden")) {
+                    details.classList.value = 'avaliableColors margin2-top';
+                } else {
+                    details.classList.value = 'avaliableColors margin2-top hidden'
+                }
+            }
+            
+            function brojevi() {
+                var details = document.getElementById('brojevi')
+                if (details.classList.value.includes("hidden")) {
+                    details.classList.value = 'avaliableColors margin2-top';
+                } else {
+                    details.classList.value = 'avaliableColors margin2-top hidden'
+                }
+            }
+            </script>
 
             <script type="text/javascript">
                 const fileInput = document.getElementById("filesfld");
