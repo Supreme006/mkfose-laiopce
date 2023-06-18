@@ -29,7 +29,8 @@ function color(element){
   const id = document.getElementById(selected_color)
   if(colors.includes(selected_color)){
     removeFromArray(colors, selected_color)
-    id.classList.remove("colorCentarWite")
+    id.classList.remove("colorCentarSelected")
+    id.classList.add("colorCentarWite")
   } else {
     colors.push(selected_color)
     id.classList.add("colorCentarSelected")
