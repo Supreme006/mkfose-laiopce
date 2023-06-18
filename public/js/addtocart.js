@@ -12,13 +12,10 @@ function removeFromArray(arr, value) {
 function size(element){
   const selected_size = element.className
   const id = document.getElementById(selected_size)
-  console.log(sizes)
   if(sizes.includes(selected_size)){
-    console.log("Finded")
     removeFromArray(sizes, selected_size)
     id.classList.remove("sizeS2")
   } else {
-    console.log("adding")
     sizes.push(selected_size)
     id.classList.add("sizeS2")
   }
