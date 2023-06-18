@@ -22,7 +22,10 @@ function size(element){
 }
 
 function color(element){
-  const selected_color = element.className
+  const selected_color = element.className;
+
+  console.log(selected_color)
+
   const id = document.getElementById(selected_color)
   if(sizes.includes(selected_color)){
     removeFromArray(sizes, selected_color)
