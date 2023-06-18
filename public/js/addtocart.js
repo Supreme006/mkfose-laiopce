@@ -19,7 +19,7 @@ function size(element){
     id.classList.remove("sizeS2")
   } else {
     console.log("adding")
-    sizes.push(`\"${selected_size}\"`)
+    sizes.push(selected_size)
     id.classList.add("sizeS2")
   }
 }
