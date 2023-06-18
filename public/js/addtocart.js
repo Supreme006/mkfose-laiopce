@@ -22,7 +22,7 @@ function size(element){
 }
 
 function color(element){
-  const selected_color = element.classList[1];
+  const selected_color = element.classList[1] || element.classList[0];
 
   console.log(selected_color)
 
