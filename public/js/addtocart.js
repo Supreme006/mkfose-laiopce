@@ -25,7 +25,7 @@ async function selectXSs() {
 }
 
 function check(element){
-  console.log(element)
+  console.log(element.className)
 }
 
 async function red() {
