@@ -24,8 +24,16 @@ async function selectXSs() {
   }
 }
 
-function check(element){
-  console.log(element.className)
+function size(element){
+  const selected_size = element.className
+  const id = document.getElementById(selected_size)
+  if(sizes.includes(selected_size)){
+    removeFromArray(sizes, selected_size)
+    id.classList.remove("sizeS2")
+  } else {
+    sizes.push(`\"${selected_size}\"`)
+    id.classList.add("sizeS2")
+  }
 }
 
 async function red() {
@@ -93,62 +101,6 @@ async function grey() {
     element2.classList.remove("colorCentarWite")
     element2.classList.add("colorCentarSelected")
     color = "grey"
-  }
-}
-
-async function selectXS() {
-  if (!size) {
-    size = "xs";
-    const element = document.getElementById("xs")
-    element.classList.add("sizeXS2")
-  } else {
-    const element = document.getElementById(size)
-    const element2 = document.getElementById("xs")
-    element.classList.remove("size" + size.toUpperCase() + "2")
-    element2.classList.add("sizeXS2")
-    size = "xs"
-  }
-}
-
-async function selectS() {
-  if (!size) {
-    size = "s";
-    const element = document.getElementById("s")
-    element.classList.add("sizeS2")
-  } else {
-    const element = document.getElementById(size)
-    const element2 = document.getElementById("s")
-    element.classList.remove("size" + size.toUpperCase() + "2")
-    element2.classList.add("sizeS2")
-    size = "s"
-  }
-}
-
-async function selectM() {
-  if (!size) {
-    size = "m";
-    const element = document.getElementById("m")
-    element.classList.add("sizeM2")
-  } else {
-    const element = document.getElementById(size)
-    const element2 = document.getElementById("m")
-    element.classList.remove("size" + size.toUpperCase() + "2")
-    element2.classList.add("sizeM2")
-    size = "m"
-  }
-}
-
-async function selectL() {
-  if (!size) {
-    size = "l";
-    const element = document.getElementById("l")
-    element.classList.add("sizeL2")
-  } else {
-    const element = document.getElementById(size)
-    const element2 = document.getElementById("l")
-    element.classList.remove("size" + size.toUpperCase() + "2")
-    element2.classList.add("sizeL2")
-    size = "l"
   }
 }
 
