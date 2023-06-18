@@ -27,13 +27,15 @@ function color(element){
   console.log(selected_color)
 
   const id = document.getElementById(selected_color)
-  if(sizes.includes(selected_color)){
-    removeFromArray(sizes, selected_color)
+  if(colors.includes(selected_color)){
+    removeFromArray(colors, selected_color)
     id.classList.remove("colorCentarWite")
   } else {
-    sizes.push(selected_color)
+    colors.push(selected_color)
     id.classList.add("colorCentarSelected")
   }
+
+  console.log(colors)
 }
 
 
