@@ -1,4 +1,4 @@
-let color;
+const colors = [];
 const sizes = [];
 
 function removeFromArray(arr, value) {
@@ -20,6 +20,19 @@ function size(element){
     id.classList.add("sizeS2")
   }
 }
+
+function color(element){
+  const selected_color = element.className
+  const id = document.getElementById(selected_color)
+  if(sizes.includes(selected_color)){
+    removeFromArray(sizes, selected_color)
+    id.classList.remove("colorCentarWite")
+  } else {
+    sizes.push(selected_color)
+    id.classList.add("colorCentarSelected")
+  }
+}
+
 
 async function red() {
   if (!color) {
