@@ -862,6 +862,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
         }`)
   );
 
+
   images = [];
 
   return res.send("test");
