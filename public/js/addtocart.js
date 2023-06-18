@@ -1,5 +1,4 @@
 let color;
-let size;
 const sizes = [];
 
 function removeFromArray(arr, value) {
@@ -8,20 +7,6 @@ function removeFromArray(arr, value) {
       arr.splice(index, 1);
   }
   return arr;
-}
-
-async function selectXSs() {
-  if (!size) {
-    size = "xs";
-    const element = document.getElementById("xs")
-    element.classList.add("sizeXS2")
-  } else {
-    const element = document.getElementById(size)
-    const element2 = document.getElementById("xs")
-    element.classList.remove("size" + size.toUpperCase() + "2")
-    element2.classList.add("sizeXS2")
-    size = "xs"
-  }
 }
 
 function size(element){
