@@ -23,11 +23,7 @@ function size(element){
 
 function color(element){
 
-  console.log(element.classList)
-
   const selected_color = element.classList[1] || element.classList[0];
-
-  console.log(selected_color)
 
   const id = document.getElementById(selected_color)
   if(colors.includes(selected_color)){
@@ -38,8 +34,6 @@ function color(element){
     colors.push(selected_color)
     id.classList.add("colorCentarSelected")
   }
-
-  console.log(colors)
 }
 
 
