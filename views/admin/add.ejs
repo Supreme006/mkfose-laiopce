@@ -353,7 +353,7 @@
                     if(sizes.includes(element.value)){
                         removeFromArray(sizes, element.value)
                     } else {
-                        sizes.push(`\"${element.value}\"`)
+                        sizes.push(element.value)
                     }
                 }
 
@@ -400,6 +400,10 @@
                             }
                         }
                     };
+                    const as = [];
+                    sizes.forEach(siz => {
+                        as.push(`\"${siz}\"`)
+                    })
                     fd.append('title', title.value)
                     fd.append('description', description.value)
                     fd.append('s_description', shortDescription.value)
@@ -409,7 +413,7 @@
                     fd.append('pink', pink)
                     fd.append('black', black)
                     fd.append('white', white)
-                    fd.append("sizes", `[${sizes}]`)
+                    fd.append("sizes", `[${as}]`)
                     x.open("post", form.action, true);
                     x.send(fd)
                     window.location.replace("http://41.216.188.63:2357/admin/uploaded")
