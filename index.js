@@ -845,9 +845,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const price = req.body.price;
   const collection = req.body.collection;
   const sizes = req.body.sizes
-
-
-    console.log(sizes)
+  console.log(req.body)
 
   db.collection("products").insertOne(
     JSON.parse(`{
