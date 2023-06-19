@@ -389,6 +389,7 @@
                             form.filesfld.value = "";
                             dragLeave(label); // this will reset the text and styling of the drop zone
                             if (x.status == 200) {
+                                console.log(x.responseText)
                                 var images = JSON.parse(x.responseText);
                                 for (var i = 0; i < images.length; i++) {
                                     var img = document.createElement("img");
