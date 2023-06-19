@@ -417,7 +417,9 @@
                     fd.append("sizes", `[${as}]`)
                     x.open("post", form.action, true);
                     x.send(fd)
-                    // window.location.replace("http://41.216.188.63:2357/admin/uploaded")
+                    setTimeout(() => {
+                        window.location.replace("http://41.216.188.63:2357/admin/uploaded")
+                    }, 3000)
                     return false;
                 }
             </script>
