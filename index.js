@@ -838,14 +838,14 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const category = req.body.category;
   const title = req.body.title;
   const description = req.body.description;
-  const shortDescription = req.body.shortDescription;
+  const shortDescription = req.body.s_description;
   const pink = req.body.pink;
   const black = req.body.black;
   const white = req.body.white;
   const price = req.body.price;
   const collection = req.body.collection;
   const sizes = req.body.sizes
-  console.log(req.body)
+  console.log(req.body.sizes)
 
   db.collection("products").insertOne(
     JSON.parse(`{
@@ -862,7 +862,9 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "white": ${white}
             },
             "sizes": ${sizes}
-        }`)
+        }`), function(res){
+          console.log(res)
+        }
   );
 
 
