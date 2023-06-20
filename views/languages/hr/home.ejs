@@ -106,7 +106,8 @@
                             <div class="categoryTitle">
                                 <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
                             </div>
-                                <div class="d-none d-lg-block">
+                            <div class="d-none d-lg-block">
+                            <div class="row">
                                 <% collection.forEach(product=> { %>
                                     <div class="col product-gap tile">
                                         <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
@@ -130,7 +131,9 @@
                                     </div>
                                     <% }) %>
                                 </div>
+                                </div>
                                 <div class="d-block d-lg-none d-sm-block d-md-block">
+                                    <div class="row">
                                     <% collection.forEach(product=> { %>
                                         <div class="col product-gap tile">
                                             <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
@@ -154,6 +157,7 @@
                                         </div>
                                         <% }) %>
                                 </div>
+                            </div>
                         </div>
                     </div>
                     <div class="hwrap">
