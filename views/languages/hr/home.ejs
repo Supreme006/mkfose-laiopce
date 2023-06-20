@@ -106,13 +106,13 @@
                             <div class="categoryTitle">
                                 <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
                             </div>
-                            <div class="text-center justify-content-center align-items-center" style="max-width: 80%;">
-                                <div class="row">
+                            <div class="row">
+                                <div class="d-none d-lg-block">
                                 <% collection.forEach(product=> { %>
                                     <div class="col product-gap tile">
                                         <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
                                             <img src="/uploads/<%= product.images[0] %>"
-                                                style="max-height: 516px; border-radius: 15px;">
+                                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
                                             <div class="productInfo">
                                                 <div class="productName text-break">
                                                     <%= product.title %>
@@ -130,6 +130,30 @@
                                         </a>
                                     </div>
                                     <% }) %>
+                                </div>
+                                <div class="d-block d-lg-none d-sm-block d-md-block">
+                                    <% collection.forEach(product=> { %>
+                                        <div class="col product-gap tile">
+                                            <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
+                                                <img src="/uploads/<%= product.images[0] %>"
+                                                    style="max-height: 400px; min-height: 200px; max-width: 200px; min-width: 100px; border-radius: 15px;">
+                                                <div class="productInfo">
+                                                    <div class="productName text-break">
+                                                        <%= product.title %>
+                                                    </div>
+                                                    <div class="col">
+                                                        <span class="productPrice">
+                                                            <% if(req.session.value=="usd" ) {%>
+                                                                $<%= eurtousd(product.price) %>
+                                                                    <%} else {%>
+                                                                        <%= product.price %>€
+                                                                            <%}%>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <% }) %>
                                 </div>
                             </div>
                         </div>
