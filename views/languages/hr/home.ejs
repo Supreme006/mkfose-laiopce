@@ -106,12 +106,13 @@
                             <div class="categoryTitle">
                                 <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
                             </div>
-                            <div class="row">
+                            <div class="row d-flex">
+                                <div class="text-center justify-content-center align-items-center" style="max-width: 100%;">
                                 <% collection.forEach(product=> { %>
                                     <div class="col product-gap tile">
                                         <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
                                             <img src="/uploads/<%= product.images[0] %>"
-                                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
+                                                style="max-height: 516px; border-radius: 15px;">
                                             <div class="productInfo">
                                                 <div class="productName text-break">
                                                     <%= product.title %>
@@ -129,6 +130,7 @@
                                         </a>
                                     </div>
                                     <% }) %>
+                                </div>
                             </div>
                         </div>
                     </div>
