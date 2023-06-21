@@ -6,9 +6,16 @@
             </a>
             <% if (!req.session.user) {%>
                 <div class="mx-left">
-                    <div class="secNav-items">
-                        <a class="opti">English</a>
-                        <a class="opti margin2-left">USD</a>
+                    <div class="secNav-items d-flex justify-content-center align-items-center nav-options">
+                        <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
+                            <option selected>Hrvatski</option>
+                            <option value="english">Engleski</option>
+                            <option value="deutsch">Nemacki</option>
+                        </select>
+                        <select class="form-select margin2-left opti" style="width: auto;">
+                            <option class="text-break" selected>EUR</option>
+                            <option value="euro">USD</option>
+                        </select>
                         <a class="opti margin2-left" href="/login">Prijava</a>
                     </div>
                 </div>
@@ -48,12 +55,19 @@
                     <div class="row">
                         <div class="col">
                             <li class="nav-item margin1-left">
-                                <a class="opti">Hrvatski</a>
+                                <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
+                                    <option selected>Hrvatski</option>
+                                    <option value="english">Engleski</option>
+                                    <option value="deutsch">Nemacki</option>
+                                </select>
                             </li>
                         </div>
                         <div class="col">
                             <li class="nav-item margin1-left">
-                                <a class="opti">USD</a>
+                                <select class="form-select margin2-left opti" style="width: auto;">
+                                    <option class="text-break" selected>EUR</option>
+                                    <option value="euro">USD</option>
+                                </select>
                             </li>
                         </div>
                         <div class="col">
