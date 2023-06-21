@@ -19,7 +19,7 @@
                     <h3>Cart</h3>
                 </div>
                 <h3 class="ms-auto d-flex">
-                    <%if(products=="empty" ){%>
+                    <%if(products=="empty"){%>
                         <%if (req.session.value=="usd" ){%>
                             <div class="margin1-right">Total: $0</div>
                             <% } else {%>
@@ -41,8 +41,7 @@
             <hr>
                 <%if (products=="empty" ){%>
                     <h3 class="text-center">Cart is empty</h3>
-                    <% } else {products.forEach(item=> {%>
-                        <%total=total + item.price;%>
+                    <% } else {products.forEach(item=> { total=total + item.price; console.log(total) console.log(item.price)%>
                             <div class="cartHolder">
                                 <div class="dik">
                                     <div class="d-flex">
