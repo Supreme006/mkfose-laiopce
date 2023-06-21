@@ -8,13 +8,19 @@
                 <div class="mx-left">
                     <div class="secNav-items d-flex justify-content-center align-items-center nav-options">
                         <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
-                            <option selected>Hrvatski</option>
-                            <option value="english">Engleski</option>
-                            <option value="deutsch">Nemacki</option>
+                            <option selected>
+                                <%= req.session.language.toUpperCase(); %>
+                            </option>
+                            <option value="en">EN</option>
+                            <option value="de">DE</option>
+                            <option value="hr">HR</option>
                         </select>
                         <select class="form-select margin2-left opti" style="width: auto;">
-                            <option class="text-break" selected>EUR</option>
-                            <option value="euro">USD</option>
+                            <option selected>
+                                <%= req.session.value.toUpperCase(); %>
+                            </option>
+                            <option value="eur">EUR</option>
+                            <option value="usd">USD</option>
                         </select>
                         <a class="opti margin2-left" href="/login">Prijava</a>
                     </div>
@@ -23,13 +29,19 @@
                     <div class="mx-left">
                         <div class="secNav-items d-flex justify-content-center align-items-center nav-options">
                             <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
-                                <option selected>Hrvatski</option>
-                                <option value="english">Engleski</option>
-                                <option value="deutsch">Nemacki</option>
+                                <option selected>
+                                    <%= req.session.language.toUpperCase(); %>
+                                </option>
+                                <option value="en">EN</option>
+                                <option value="de">DE</option>
+                                <option value="hr">HR</option>
                             </select>
                             <select class="form-select margin2-left opti" style="width: auto;">
-                                <option class="text-break" selected>EUR</option>
-                                <option value="euro">USD</option>
+                                <option selected>
+                                    <%= req.session.value.toUpperCase(); %>
+                                </option>
+                                <option value="eur">EUR</option>
+                                <option value="usd">USD</option>
                             </select>
                             <a class="opti margin2-left" href="/account/orders">Nalog</a>
                         </div>
@@ -54,19 +66,25 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 margin1-top secNav-items">
                     <div class="row">
                         <div class="col">
-                            <li class="nav-item margin1-left">
+                            <li class="nav-item margin1-left nav-options">
                                 <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
-                                    <option selected>Hrvatski</option>
-                                    <option value="english">Engleski</option>
-                                    <option value="deutsch">Nemacki</option>
+                                    <option selected>
+                                        <%= req.session.language.toUpperCase(); %>
+                                    </option>
+                                    <option value="en">EN</option>
+                                    <option value="de">DE</option>
+                                    <option value="hr">HR</option>
                                 </select>
                             </li>
                         </div>
                         <div class="col">
-                            <li class="nav-item margin1-left">
+                            <li class="nav-item margin1-left nav-options">
                                 <select class="form-select margin2-left opti" style="width: auto;">
-                                    <option class="text-break" selected>EUR</option>
-                                    <option value="euro">USD</option>
+                                    <option selected>
+                                        <%= req.session.value.toUpperCase(); %>
+                                    </option>
+                                    <option value="eur">EUR</option>
+                                    <option value="usd">USD</option>
                                 </select>
                             </li>
                         </div>
