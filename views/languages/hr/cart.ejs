@@ -42,9 +42,7 @@
             <hr>
                 <%if (products=="empty" ){%>
                     <h3 class="text-center">Cart is empty</h3>
-                    <% } else {products.forEach(item=> { total=total + item.price; %>
-                        <%= console.log(item.price)%>
-                        <%= console.log(total)%>
+                    <% } else {products.forEach(item=> {%>
                             <div class="cartHolder">
                                 <div class="dik">
                                     <div class="d-flex">
