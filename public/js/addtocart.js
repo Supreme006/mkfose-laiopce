@@ -1,6 +1,6 @@
 // const colors = [];
 // const sizes = [];
-let color;
+let colorr;
 let sizee;
 
 function removeFromArray(arr, value) {
@@ -43,17 +43,17 @@ function color(element){
   //   colors.push(selected_color)
   //   id.classList.add("colorCentarSelected")
   // }
-  if(!color){
+  if(!colorr){
     id.classList.remove("colorCentarWite")
     id.classList.add("colorCentarSelected")
-    color = selected_color;
+    colorr = selected_color;
   } else {
-    const old = document.getElementById(size)
+    const old = document.getElementById(colorr)
     old.classList.remove("colorCentarSelected")
     old.classList.add("colorCentarWite")
     id.classList.remove("colorCentarWite");
     id.classList.add("colorCentarSelected");
-    color = selected_color;
+    colorr = selected_color;
   }
 }
 
@@ -78,7 +78,7 @@ async function addToCart() {
     data: {
       title: title,
       sizes: sizee,
-      colors: color
+      colors: colorr
     },
     success: (r) => {
       if (r.response == "added") {
