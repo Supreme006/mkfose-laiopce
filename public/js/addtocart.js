@@ -1,7 +1,7 @@
 // const colors = [];
 // const sizes = [];
 let color;
-let size;
+let sizee;
 
 function removeFromArray(arr, value) {
   var index = arr.indexOf(value);
@@ -21,14 +21,14 @@ function size(element){
   //   sizes.push(selected_size)
   //   id.classList.add("sizeS2")
   // }
-  if(!size){
+  if(!sizee){
     id.classList.add("sizeS2")
-    size = selected_size;
+    sizee = selected_size;
   } else {
-    const old = document.getElementById(size)
+    const old = document.getElementById(sizee)
     old.classList.remove("sizeS2")
     id.classList.add("sizeS2");
-    size = selected_size;
+    sizee = selected_size;
   }
 }
 
@@ -77,7 +77,7 @@ async function addToCart() {
     type: "POST",
     data: {
       title: title,
-      sizes: size,
+      sizes: sizee,
       colors: color
     },
     success: (r) => {
