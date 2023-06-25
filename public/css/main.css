@@ -11,6 +11,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     width: 0;
+    color: #62656E;
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
   }
   
