@@ -551,7 +551,9 @@
                                     if (word.length > 0) {
                                         document.getElementById('word').innerHTML += word.shift();
                                     } else {
+                                        setTimeout(()=> {
                                         deletingEffect();
+                                        }, 1000)
                                         return false;
                                     };
                                     timer = setTimeout(loopTyping, 100);
@@ -574,7 +576,7 @@
                                         typingEffect();
                                         return false;
                                     };
-                                    timer = setTimeout(loopDeleting, 200);
+                                    timer = setTimeout(loopDeleting, 50);
                                 };
                                 loopDeleting();
                             };
