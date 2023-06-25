@@ -87,9 +87,8 @@
                             style="background-image: url('/images/head1.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 40rem; padding-top: 15px; padding-bottom: 15px;">
                         </div>
                         <div class="bottomText">
-                            <div class="typing-animation">
-                                <span class="text"></span>
-                                <span class="cursor"></span>
+                            <div class="d-flex">
+                                <p class="header-sub-title" id="word"></p><p class="header-sub-title blink">|</p>
                               </div>                              
                         </div>
                     </div>
@@ -542,44 +541,45 @@
 
                         <%- include('../../partials/js.ejs') %>
                         <script>
-                            const phrase = 'Osjecaj se njezno. Osjecaj se mocno. Osjecaj se Etericno.';
+                            const words = ["CSS3."];
+                            let i = 0;
+                            let timer;
 
-function typeText() {
-  let textIndex = 0;
-  let isDeleting = false;
-  let delay = isDeleting ? 2000 : 1000;
+                            function typingEffect() {
+                                let word = words[i].split("");
+                                var loopTyping = function() {
+                                    if (word.length > 0) {
+                                        document.getElementById('word').innerHTML += word.shift();
+                                    } else {
+                                        deletingEffect();
+                                        return false;
+                                    };
+                                    timer = setTimeout(loopTyping, 500);
+                                };
+                                loopTyping();
+                            };
 
-  function updateText() {
-    const text = document.querySelector('.typing-animation .text');
-    const currentText = phrase.slice(0, textIndex);
+                            function deletingEffect() {
+                                let word = words[i].split("");
+                                var loopDeleting = function() {
+                                    if (word.length > 0) {
+                                        word.pop();
+                                        document.getElementById('word').innerHTML = word.join("");
+                                    } else {
+                                        if (words.length > (i + 1)) {
+                                            i++;
+                                        } else {
+                                            i = 0;
+                                        };
+                                        typingEffect();
+                                        return false;
+                                    };
+                                    timer = setTimeout(loopDeleting, 200);
+                                };
+                                loopDeleting();
+                            };
 
-    text.textContent = currentText;
-
-    if (!isDeleting) {
-      textIndex++;
-
-      if (currentText === phrase) {
-        isDeleting = true;
-        delay = 2000;
-      }
-    } else {
-      textIndex--;
-
-      if (textIndex === 0) {
-        isDeleting = false;
-        delay = 1000;
-      }
-    }
-
-    setTimeout(updateText, delay);
-  }
-
-  updateText();
-}
-
-typeText();
-
-
+                            typingEffect();
                         </script>
 </body>
 
