@@ -6,9 +6,13 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
+.headText{
+    color: #62656E;
+    font-family: 'Kalam', cursive;
+}
+
 .checkoutModal{
     background-color: #bb9797;
-
 }
 
 .checkoutModal .modal-header{
