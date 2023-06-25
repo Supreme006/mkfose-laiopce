@@ -11,10 +11,12 @@ body {
 }
 
 .header-sub-title {
-    color: #fff;
-    font-family: "Courier";
+    color: #62656E;
+    font-family: 'Kalam', cursive;
     font-size: 20px;
-    padding: 0.1em;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
 .headText{
