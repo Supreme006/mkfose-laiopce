@@ -80,31 +80,24 @@
                             <div class="hitem">NOVA KOLEKCIJA ADORE IT</div>
                         </div>
                     </div>
-                    <div class="d-none d-lg-block">
-                        <div style="background-color: white;">
-                            <div class="headText">ADORES IT</div>
+                    <div style="background-color: white;">
+                        <div class="headText">ADORES IT</div>
+                        <div class="d-none d-lg-block">
                             <div class="view img-center"
                                 style="background-image: url('/images/head1.svg'); background-repeat: no-repeat; background-position: center center; background-size: cover; min-height: 35rem; max-width: 90%; padding-top: 15px; padding-bottom: 15px;">
                             </div>
-                            <div class="bottomText">
-                                <div class="d-flex text-center align-items-center justify-content-center">
-                                    <p class="header-sub-title" id="word"></p><p class="header-sub-title blink">|</p>
-                                </div>                              
+                        </div>
+                        <div class="d-block d-lg-none d-sm-block d-md-block">
+                            <div class="view img-center"
+                                style="background-image: url('/images/head1.svg'); background-repeat: no-repeat; background-position: center center; background-size: cover; min-height: 20rem; padding-top: 15px; padding-bottom: 15px;">
                             </div>
-                    </div>
-                    </div>
-                    <div class="d-block d-lg-none d-sm-block d-md-block">
-                        <div style="background-color: white;">
-                            <div class="headText">ADORES IT</div>
-                        <div class="view img-center"
-                            style="background-image: url('/images/head1.svg'); background-repeat: no-repeat; background-position: center center; background-size: cover; min-height: 20rem; padding-top: 15px; padding-bottom: 15px;">
                         </div>
                         <div class="bottomText">
                             <div class="d-flex text-center align-items-center justify-content-center">
-                                <p class="header-sub-title" id="word"></p><p class="header-sub-title blink">|</p>
-                              </div>                              
+                                <p class="header-sub-title" id="word"></p>
+                                <p class="header-sub-title blink">|</p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="togeder" style="background-color: #FAE0DF;">
                         <div class="row text-center" style="margin:auto">
@@ -123,36 +116,38 @@
                                 <a href="/" style="font-weight: 500;">KOLEKCIJA</a>
                             </div>
                             <div class="d-none d-lg-block">
-                            <div class="row">
-                                <% collection.forEach(product=> { %>
-                                    <div class="col product-gap tile">
-                                        <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
-                                            <img src="/uploads/<%= product.images[0] %>"
-                                                style="max-height: 516px; max-width: 344px; border-radius: 15px;">
-                                            <div class="productInfo">
-                                                <div class="productName text-break">
-                                                    <%= product.title %>
-                                                </div>
-                                                <div class="col">
-                                                    <span class="productPrice">
-                                                        <% if(req.session.value=="usd" ) {%>
-                                                            $<%= eurtousd(product.price) %>
-                                                                <%} else {%>
-                                                                    <%= product.price %>€
-                                                                        <%}%>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <% }) %>
-                                </div>
-                                </div>
-                                <div class="d-block d-lg-none d-sm-block d-md-block">
-                                    <div class="row">
+                                <div class="row">
                                     <% collection.forEach(product=> { %>
                                         <div class="col product-gap tile">
-                                            <a href="/products/<%=product.title.replaceAll(' ', '_')%>" style="text-decoration: none;">
+                                            <a href="/products/<%=product.title.replaceAll(' ', '_')%>"
+                                                style="text-decoration: none;">
+                                                <img src="/uploads/<%= product.images[0] %>"
+                                                    style="max-height: 516px; max-width: 344px; border-radius: 15px;">
+                                                <div class="productInfo">
+                                                    <div class="productName text-break">
+                                                        <%= product.title %>
+                                                    </div>
+                                                    <div class="col">
+                                                        <span class="productPrice">
+                                                            <% if(req.session.value=="usd" ) {%>
+                                                                $<%= eurtousd(product.price) %>
+                                                                    <%} else {%>
+                                                                        <%= product.price %>€
+                                                                            <%}%>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                            <div class="d-block d-lg-none d-sm-block d-md-block">
+                                <div class="row">
+                                    <% collection.forEach(product=> { %>
+                                        <div class="col product-gap tile">
+                                            <a href="/products/<%=product.title.replaceAll(' ', '_')%>"
+                                                style="text-decoration: none;">
                                                 <img src="/uploads/<%= product.images[0] %>"
                                                     style="max-height: 400px; min-height: 200px; max-width: 200px; min-width: 100px; border-radius: 15px;">
                                                 <div class="productInfo">
@@ -196,31 +191,37 @@
                                 <div class="columnn">
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[0].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[0].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[0].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[1].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[1].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[1].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                 </div>
                                 <div class="columnn">
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[2].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[2].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[2].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[3].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[3].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[3].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                 </div>
                                 <div class="columnn">
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[4].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[4].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[4].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                     <button class="nothing" data-bs-toggle="modal" data-bs-target="#a<%= posts[5].id %>"
                                         style="width: 100%;">
-                                        <img src="/tempImage/<%= posts[5].id %>.png" style="max-width: 289px; height: 171.73px;">
+                                        <img src="/tempImage/<%= posts[5].id %>.png"
+                                            style="max-width: 289px; height: 171.73px;">
                                     </button>
                                 </div>
                             </div>
@@ -546,49 +547,49 @@
 
 
                         <%- include('../../partials/js.ejs') %>
-                        <script>
-                            const words = ["Osjecaj se njezno. Osjecaj se mocno, Osjecaj se Etericno."];
-                            let i = 0;
-                            let timer;
+                            <script>
+                                const words = ["Osjecaj se njezno. Osjecaj se mocno, Osjecaj se Etericno."];
+                                let i = 0;
+                                let timer;
 
-                            function typingEffect() {
-                                let word = words[i].split("");
-                                var loopTyping = function() {
-                                    if (word.length > 0) {
-                                        document.getElementById('word').innerHTML += word.shift();
-                                    } else {
-                                        setTimeout(()=> {
-                                        deletingEffect();
-                                        }, 1000)
-                                        return false;
-                                    };
-                                    timer = setTimeout(loopTyping, 80);
-                                };
-                                loopTyping();
-                            };
-
-                            function deletingEffect() {
-                                let word = words[i].split("");
-                                var loopDeleting = function() {
-                                    if (word.length > 0) {
-                                        word.pop();
-                                        document.getElementById('word').innerHTML = word.join("");
-                                    } else {
-                                        if (words.length > (i + 1)) {
-                                            i++;
+                                function typingEffect() {
+                                    let word = words[i].split("");
+                                    var loopTyping = function () {
+                                        if (word.length > 0) {
+                                            document.getElementById('word').innerHTML += word.shift();
                                         } else {
-                                            i = 0;
+                                            setTimeout(() => {
+                                                deletingEffect();
+                                            }, 1000)
+                                            return false;
                                         };
-                                        typingEffect();
-                                        return false;
+                                        timer = setTimeout(loopTyping, 80);
                                     };
-                                    timer = setTimeout(loopDeleting, 50);
+                                    loopTyping();
                                 };
-                                loopDeleting();
-                            };
 
-                            typingEffect();
-                        </script>
+                                function deletingEffect() {
+                                    let word = words[i].split("");
+                                    var loopDeleting = function () {
+                                        if (word.length > 0) {
+                                            word.pop();
+                                            document.getElementById('word').innerHTML = word.join("");
+                                        } else {
+                                            if (words.length > (i + 1)) {
+                                                i++;
+                                            } else {
+                                                i = 0;
+                                            };
+                                            typingEffect();
+                                            return false;
+                                        };
+                                        timer = setTimeout(loopDeleting, 50);
+                                    };
+                                    loopDeleting();
+                                };
+
+                                typingEffect();
+                            </script>
 </body>
 
 </html>
