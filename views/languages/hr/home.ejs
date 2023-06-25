@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="d-none d-lg-block">
-                        <div style="background-color: black;">
+                        <div style="background-color: white;">
                             <div class="headText">ADORES IT</div>
                         <div class="view"
                             style="background-image: url('/images/head1.svg'); background-repeat: no-repeat; background-size: cover; background-position: center center; min-height: 40rem; padding-top: 15px; padding-bottom: 15px;">
@@ -90,7 +90,7 @@
                             <div class="typing-animation">
                                 <span class="text"></span>
                                 <span class="cursor"></span>
-                            </div>
+                              </div>                              
                         </div>
                     </div>
                     </div>
@@ -543,41 +543,40 @@
                         <%- include('../../partials/js.ejs') %>
                         <script>
                             const phrase = 'Osjecaj se njezno. Osjecaj se mocno. Osjecaj se Etericno.';
+                            function typeText() {
+                            let textIndex = 0;
+                            let isDeleting = false;
+                            let delay = isDeleting ? 2000 : 1000;
 
-function typeText() {
-  let textIndex = 0;
-  let isDeleting = false;
-  let delay = isDeleting ? 2000 : 1000;
+                            function updateText() {
+                                const text = document.querySelector('.typing-animation .text');
+                                const currentText = phrase.slice(0, textIndex);
 
-  function updateText() {
-    const text = document.querySelector('.typing-animation .text');
-    const currentText = phrase.slice(0, textIndex);
+                                if (!isDeleting) {
+                                text.textContent = currentText;
+                                textIndex++;
 
-    if (!isDeleting) {
-      text.textContent = currentText;
-      textIndex++;
+                                if (currentText === phrase) {
+                                    isDeleting = true;
+                                    delay = 2000;
+                                }
+                                } else {
+                                textIndex--;
 
-      if (currentText === phrase) {
-        isDeleting = true;
-        delay = 2000;
-      }
-    } else {
-      text.textContent = currentText;
-      textIndex--;
+                                if (textIndex === 0) {
+                                    isDeleting = false;
+                                    delay = 1000;
+                                }
+                                }
 
-      if (currentText === '') {
-        isDeleting = false;
-        delay = 1000;
-      }
-    }
+                                setTimeout(updateText, delay);
+                            }
 
-    setTimeout(updateText, delay);
-  }
+                            updateText();
+                            }
 
-  updateText();
-}
+                            typeText();
 
-typeText();
                         </script>
 </body>
 
