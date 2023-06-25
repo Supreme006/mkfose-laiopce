@@ -543,39 +543,42 @@
                         <%- include('../../partials/js.ejs') %>
                         <script>
                             const phrase = 'Osjecaj se njezno. Osjecaj se mocno. Osjecaj se Etericno.';
-                            function typeText() {
-                            let textIndex = 0;
-                            let isDeleting = false;
-                            let delay = isDeleting ? 2000 : 1000;
 
-                            function updateText() {
-                                const text = document.querySelector('.typing-animation .text');
-                                const currentText = phrase.slice(0, textIndex);
+function typeText() {
+  let textIndex = 0;
+  let isDeleting = false;
+  let delay = isDeleting ? 2000 : 1000;
 
-                                if (!isDeleting) {
-                                text.textContent = currentText;
-                                textIndex++;
+  function updateText() {
+    const text = document.querySelector('.typing-animation .text');
+    const currentText = phrase.slice(0, textIndex);
 
-                                if (currentText === phrase) {
-                                    isDeleting = true;
-                                    delay = 2000;
-                                }
-                                } else {
-                                textIndex--;
+    text.textContent = currentText;
 
-                                if (textIndex === 0) {
-                                    isDeleting = false;
-                                    delay = 1000;
-                                }
-                                }
+    if (!isDeleting) {
+      textIndex++;
 
-                                setTimeout(updateText, delay);
-                            }
+      if (currentText === phrase) {
+        isDeleting = true;
+        delay = 2000;
+      }
+    } else {
+      textIndex--;
 
-                            updateText();
-                            }
+      if (textIndex === 0) {
+        isDeleting = false;
+        delay = 1000;
+      }
+    }
 
-                            typeText();
+    setTimeout(updateText, delay);
+  }
+
+  updateText();
+}
+
+typeText();
+
 
                         </script>
 </body>
