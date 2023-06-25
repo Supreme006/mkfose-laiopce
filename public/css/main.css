@@ -6,6 +6,39 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
+.typing-animation .text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #000; }
+  }
+  
+  .typing-animation .cursor {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2px;
+    height: 18px;
+    background-color: #000;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+
 .headText{
     color: #62656E;
     font-family: 'Kalam', cursive;
