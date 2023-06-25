@@ -6,15 +6,13 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
-.bottomText{
-    color: #62656E;
-}
-
 .header-sub-title {
     color: #62656E;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     font-family: 'Kalam', cursive;
     font-size: 20px;
-    text-align: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
