@@ -621,14 +621,10 @@ app.get("/admin/uploaded", async (req, res) => {
 
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
-  if (!req.session.user) {
-    res.send("unauthorized");
-  } else {
     let cart = req.session.user.cart;
     const result = db.collection("products").find({ title: id }).toArray();
     req.session.user.cart = removeFromArray(cart, result);
     res.send("removed");
-  }
 });
 
 app.post("/checkout", async function (req, res) {

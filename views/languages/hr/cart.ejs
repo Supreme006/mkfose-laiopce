@@ -43,11 +43,11 @@
                 <%if (products=="empty" ){%>
                     <h3 class="text-center">Cart is empty</h3>
                     <% } else {products.forEach(item=> {%>
-                            <div class="cartHolder">
+                            <div class="cartHolder" id="c<%= item.title %>">
                                 <div class="dik">
                                     <div class="d-flex">
                                         <div class="ms-auto">
-                                            <div class="x">&#10005;</div>
+                                            <div class="x" onclick="removeFromCart(this)" id="<%= item.title%>">&#10005;</div>
                                         </div>
                                     </div>
                                     <div class="cartContainer">
@@ -64,9 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="cartTitle">
-                                                    <%= item.title %>
-                                                </div>
+                                                <div class="cartTitle" id="t<%= item.title %>"><%= item.title %></div>
                                                 <div class="cartDescription text-center">
                                                     <%= item.description %>
                                                 </div>
@@ -90,6 +88,7 @@
 
 
         <%- include('../../partials/js.ejs') %>
+        <script src="/js/removefromcart"></script>
 </body>
 
 </html>
