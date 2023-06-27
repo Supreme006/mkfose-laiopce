@@ -402,8 +402,7 @@
                     sizes.forEach(siz => {
                         as.push(`\"${siz}\"`)
                     })
-                    var replacedText = description.value.replace(/\n\n/g, "|||").replace(/\n/g, "|");
-                    replacedText = replacedText.replace(/\|\|\|/g, "\\n").replace(/\|/g, "\\n");
+                    var replacedText = description.value.replace(/\n/g, "\\n")
                     console.log(replacedText)
                     fd.append('title', title.value)
                     fd.append('description', replacedText)
