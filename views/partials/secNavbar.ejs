@@ -91,7 +91,11 @@
                         <div class="col">
                             <li class="nav-item margin1-left">
                                 <% if(req.session.user){ %>
-                                    <a class="opti" href="/account/orders">Nalog</a>
+                                    <% if(req.session.user.isAdmin) { %>
+                                        <a href="/admin/dashboard" class="opti"><img src="/images/user.png" width="25"></a>
+                                        <% } else {%>
+                                            <a href="/account/orders" class="opti"><img src="/images/user.png" width="25"></a>
+                                        <% } %>
                                     <% } else {%>
                                         <a class="opti" href="/login">Prijava</a>
                                         <% } %>

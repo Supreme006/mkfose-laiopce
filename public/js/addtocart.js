@@ -71,7 +71,8 @@ async function addToCart() {
   // colors.forEach(col => {
   //   s.push(`\"${col}\"`)
   // })
-
+  if(!sizee) return alert("No size");
+  if(!colorr) return alert("No color");
   $.ajax({
     url: "/addToCart",
     type: "POST",

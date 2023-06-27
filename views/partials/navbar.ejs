@@ -50,7 +50,11 @@
                     <% if(!req.session.user){ %>
                         <a href="/login" class="opti"><img src="/images/user.png" width="25" height="25"></a>
                         <% } else { %>
-                            <a href="/account/orders" class="opti"><img src="/images/user.png" width="25"></a>
+                            <% if(req.session.user.isAdmin) { %>
+                                <a href="/admin/dashboard" class="opti"><img src="/images/user.png" width="25"></a>
+                                <% } else {%>
+                                    <a href="/account/orders" class="opti"><img src="/images/user.png" width="25"></a>
+                                <% } %>
                             <% } %>
                                 <a href="/cart"><img src="/images/cart.png" width="25" height="25"></a>
                 </div>
