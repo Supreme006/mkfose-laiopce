@@ -4,7 +4,7 @@ const fs = require("fs")
 const posts = require("./customs/posts/get.js")
 const qdb = require("quick.db")
 require("./index.js");
-
+const { MongoClient } = require("mongodb");
 const uri =
         "mongodb+srv://darkstar:miabeba1@cluster0.myl0e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     const mongo = new MongoClient(uri, { useUnifiedTopology: true });
