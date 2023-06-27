@@ -845,7 +845,6 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const price = req.body.price;
   const collection = req.body.collection;
   const sizes = req.body.sizes
-  console.log(req.body.sizes)
 
   db.collection("products").insertOne(
     JSON.parse(`{
@@ -870,7 +869,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
 
   images = [];
 
-  return res.send("test");
+  return res.send(JSON.stringify([mi]));
 });
 
 app.get("*", async (req, res) => {
