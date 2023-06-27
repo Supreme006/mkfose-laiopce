@@ -402,8 +402,9 @@
                     sizes.forEach(siz => {
                         as.push(`\"${siz}\"`)
                     })
+                    const ds = description.value.replace(/\r/g, /\n/)
                     fd.append('title', title.value)
-                    fd.append('description', description.textContent)
+                    fd.append('description', description.value)
                     fd.append('s_description', shortDescription.value)
                     fd.append('category', category.value)
                     fd.append('price', price.value)
