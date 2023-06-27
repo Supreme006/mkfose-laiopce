@@ -175,7 +175,7 @@ app.get("/", async (req, res) => {
       if (err) throw err;
     });
   } catch(err){
-    console.log("error")
+    console.log(err)
   }
   }
 
@@ -686,17 +686,12 @@ app.post("/checkout", async function (req, res) {
   const orders = db.collection("orders")
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
-    const colors = cart[i].colors.length;
-    const sizes = cart[i].sizes.length;
-    let sold;
-    if(colors > sizes) sold = colors;
-    if(sizes > colors) sold = sizes;
     qdb.add(`totalSold`, 1)
 
     if (await old) {
       const newVal = {
         "title": `${cart[i].title}`,
-        "sold": old.sold + sold
+        "sold": old.sold + 1
       }
       await db.collection("sold").updateOne(old, { $set: newVal })
     } else {
