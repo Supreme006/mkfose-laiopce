@@ -389,15 +389,12 @@
                             form.filesfld.value = "";
                             dragLeave(label); // this will reset the text and styling of the drop zone
                             if (x.status == 200) {
-                                console.log(x.responseText)
                                 var images = JSON.parse(x.responseText);
                                 for (var i = 0; i < images.length; i++) {
                                     var img = document.createElement("img");
                                     img.src = images[i];
                                     document.body.appendChild(img);
                                 }
-                            }
-                            else {
                             }
                         }
                     };
@@ -417,13 +414,10 @@
                     fd.append("sizes", `[${as}]`)
                     x.open("post", form.action, true);
                     x.send(fd)
-                    setTimeout(() => {
-                        window.location.replace("http://41.216.188.63:2357/admin/uploaded")
-                    }, 3000)
-                    return false;
+                    console.log(x.response)
                 }
 
-                //srediti product stranu, dodati "added to cart" modal i namestiti /admin/uploaded.
+                //dodati "added to cart" modal.
 
             </script>
 </body>
