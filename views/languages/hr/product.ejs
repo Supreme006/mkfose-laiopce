@@ -21,31 +21,43 @@
                         <div class="col-lg-2 order-lg-1 order-2 ">
                             <div class="max13">
                                 <ul class="image_list">
-                                    <% product.images.forEach(img => {%>
-                                    <li data-image="/uploads/<%= img %>">
-                                        <img onclick="changeImage(this)" src="/uploads/<%= img %>" alt=""
-                                            style="max-height: 165px !important;">
-                                    </li>
-                                    <% }) %>
+                                    <% product.images.forEach(img=> {%>
+                                        <li data-image="/uploads/<%= img %>">
+                                            <img onclick="changeImage(this)" src="/uploads/<%= img %>" alt=""
+                                                style="max-height: 165px !important;">
+                                        </li>
+                                        <% }) %>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-4 order-lg-2 order-1">
-                            <div class="image_selected"><img id="main_selected_image" src="/uploads/<%= product.images[0]%>" alt="" style="max-height: 520px;">
+                            <div class="image_selected"><img id="main_selected_image"
+                                    src="/uploads/<%= product.images[0]%>" alt="" style="max-height: 520px;">
                             </div>
                         </div>
 
                         <div class="col-lg-6 order-3">
                             <div class="product_description">
-                                <span class="product_name" id="title"><%= product.title %></span>
+                                <span class="product_name" id="title">
+                                    <%= product.title %>
+                                </span>
                                 <div class="product_shortDescription" id="s_description">
                                     <%= product.s_description || "Kratak opis nije pronadjen" %>
                                 </div>
                                 <div>
-                                    <div class="product_price" id="value">$</div>
-                                    <div class="product_price" id="price" style="padding-left: 0;">
-                                        <%= product.price %>
-                                    </div>
+                                    <%if (req.session.value=="usd" ){%>
+                                        <div class="product_price" id="value">$</div>
+                                        <div class="product_price" id="price" style="padding-left: 0;">
+                                            <%= eurtousd(product.price) %>
+                                        </div>
+                                        <% } else {%>
+                                            <div class="product_price" id="value">€</div>
+                                            <div class="product_price" id="price" style="padding-left: 0;">
+                                                <%= product.price %>
+                                            </div>
+
+                                            <% } %>
+
                                 </div>
                                 <hr>
                                 <div class="product_info">
@@ -53,49 +65,51 @@
                                 </div>
                                 <div class="colorList d-flex">
                                     <% if(product.colors.black){%>
-                                    <div class="black" onclick="color(this)">
-                                        <div class="colorblack1">
-                                            <div class="colorCentarWite" id="black">
-                                                <div class="colorblack2">
+                                        <div class="black" onclick="color(this)">
+                                            <div class="colorblack1">
+                                                <div class="colorCentarWite" id="black">
+                                                    <div class="colorblack2">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <% } %>
-                                    <% if(product.colors.black){%>
-                                    <div class="color-gap pink" onclick="color(this)">
-                                        <div class="colorpink1">
-                                            <div class="colorCentarWite" id="pink">
-                                                <div class="colorpink2">
+                                        <% } %>
+                                            <% if(product.colors.pink){%>
+                                                <div class="color-gap pink" onclick="color(this)">
+                                                    <div class="colorpink1">
+                                                        <div class="colorCentarWite" id="pink">
+                                                            <div class="colorpink2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
-                                    <% if(product.colors.black){%>
-                                    <div class="color-gap gray" onclick="color(this)">
-                                        <div class="colorgrey1">
-                                            <div class="colorCentarWite" id="gray">
-                                                <div class="colorgrey2">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } %>
+                                                <% } %>
+                                                    <% if(product.colors.white){%>
+                                                        <div class="color-gap gray" onclick="color(this)">
+                                                            <div class="colorgrey1">
+                                                                <div class="colorCentarBlack" id="gray">
+                                                                    <div class="colorgrey2">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% } %>
                                 </div>
                                 <div class="product_info">
                                     Sizes:
                                 </div>
                                 <div class="sizeList d-flex">
-                                    <% product.sizes.forEach(size => {%>
-                                    <div class="<%=size%>" onclick="size(this)">
-                                        <div class="sizeS1">
-                                            <div class="colorCentarWite">
-                                                <div class="" id="<%=size%>"><%=size.toUpperCase()%></div>
+                                    <% product.sizes.forEach(size=> {%>
+                                        <div class="<%=size%>" onclick="size(this)">
+                                            <div class="sizeS1">
+                                                <div class="colorCentarWite">
+                                                    <div class="" id="<%=size%>">
+                                                        <%=size.toUpperCase()%>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <%})%>
+                                        <%})%>
                                 </div>
                                 <div class="product_info modelInfo">
                                     Mia je <b>5'1"</b> i nosi velicinu <b>XS</b>

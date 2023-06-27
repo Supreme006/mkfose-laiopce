@@ -557,6 +557,16 @@ ul {
   height: 43px !important;
 }
 
+.colorCentarBlack {
+  background-color: #000000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 43px !important;
+  height: 43px !important;
+}
+
 .colorCentarSelected {
   background-color: #79d7ff;
   border-radius: 50%;

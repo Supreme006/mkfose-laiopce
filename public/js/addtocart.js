@@ -44,14 +44,26 @@ function color(element){
   //   id.classList.add("colorCentarSelected")
   // }
   if(!colorr){
-    id.classList.remove("colorCentarWite")
+    if(id == 'gray'){
+      id.classList.remove("colorCentarBlack")
+    } else {
+      id.classList.remove("colorCentarWite")
+    }
     id.classList.add("colorCentarSelected")
     colorr = selected_color;
   } else {
     const old = document.getElementById(colorr)
     old.classList.remove("colorCentarSelected")
-    old.classList.add("colorCentarWite")
-    id.classList.remove("colorCentarWite");
+    if(id == 'gray'){
+      old.classList.add("colorCentarBlack")
+    } else {
+      old.classList.add("colorCentarWite")
+    }
+    if(id == 'gray'){
+      id.classList.remove("colorCentarBlack")
+    } else {
+      id.classList.remove("colorCentarWite")
+    }
     id.classList.add("colorCentarSelected");
     colorr = selected_color;
   }
