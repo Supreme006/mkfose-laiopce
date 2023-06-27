@@ -402,7 +402,7 @@
                     sizes.forEach(siz => {
                         as.push(`\"${siz}\"`)
                     })
-                    const ds = description.value.replace(/(?:\r|\n|\r\n)/g, '\n');
+                    const ds = description.value.replace(/(?:\r|\n|\r\n)/g, "\\n");
                     console.log(ds)
                     fd.append('title', title.value)
                     fd.append('description', ds)
