@@ -15,7 +15,6 @@ const options = {
 try{
 request(options, async (error, res, body) => {
     if(await body){
-        console.log(await body)
     fs.writeFileSync("./customs/tempFiles/posts.json", await body);
     }
 })
