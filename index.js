@@ -171,11 +171,12 @@ app.get("/", async (req, res) => {
   async function downloadImage(url, filename) {
     try{
     const response = await axios.get(url, { responseType: 'arraybuffer' });
-    fs.writeFile("public/tempImage/" + filename, response.data, (err) => {
+    fs.writeFileSync("public/tempImage/" + filename, response.data, (err) => {
       if (err) throw err;
+      if(err) console.log("err: " + err)
     });
   } catch(err){
-    console.log(err)
+    console.log("error")
   }
   }
 
