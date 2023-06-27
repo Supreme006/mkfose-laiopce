@@ -123,7 +123,7 @@
                                     </div>
 
                                 </div>
-                                <div class="description hidden" id="description">
+                                <div class="description brk hidden" id="description">
                                     <%= product.description%>
                                 </div>
                             </div>
@@ -180,11 +180,11 @@
                 var details = document.getElementById('description')
                 var arrow = document.getElementById("arrow")
                 if (details.classList.value.includes("hidden")) {
-                    details.classList.value = 'description';
+                    details.classList.value = 'description brk';
                     arrow.classList.value = "fa-solid fa-arrow-up fa-xl"
                 } else {
                     arrow.classList.value = "fa-solid fa-arrow-down fa-xl"
-                    details.classList.value = 'description hidden'
+                    details.classList.value = 'description brk hidden'
                 }
             }
 
