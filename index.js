@@ -842,7 +842,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const white = req.body.white;
   const gold = req.body.gold;
   console.log(gold)
-  const price = req.body.price.toFixed(2);
+  const price = req.body.price;
   const collection = req.body.collection;
   const sizes = req.body.sizes
 
