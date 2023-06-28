@@ -595,7 +595,9 @@ app.get("/admin/edit/:id", async (req, res) => {
 
   const id = req.params.id;
 
-  res.render("admin/edit", { siteName: siteName, req: req });
+  const product = await db.collection("products").find({title: id})
+
+  res.render("admin/edit", { siteName: siteName, req: req, product: product });
 });
 
 app.get("/test", async (req, res) => {
@@ -847,7 +849,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
             "shortDescription": "${shortDescription}",
             "category": "${category}",
             "images": [${mi}],
-            "price": ${price},
+            "price: ${NumberDecimal(price)},
             "collection": "${collection}",
             "colors": {
                 "pink": ${pink},
