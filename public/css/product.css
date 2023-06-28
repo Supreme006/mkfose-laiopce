@@ -607,6 +607,27 @@ ul {
   height: 39px !important;
 }
 
+.colorgold1 {
+  background-color: #e0c422;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 47px !important;
+  height: 47px !important;
+}
+
+.colorgold2 {
+  background-color: #e0c422;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 39px !important;
+  height: 39px !important;
+}
+
+
 .colorgrey1 {
   background-color: #fafafc;
   border-radius: 50%;

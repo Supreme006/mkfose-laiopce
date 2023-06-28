@@ -232,6 +232,11 @@
                                                 type="checkbox">
                                             Bela
                                         </label>
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" name="gold" id="gold"
+                                                type="checkbox">
+                                            Zlatna
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -367,6 +372,7 @@
                     const pink = document.getElementById("pink").checked
                     const black = document.getElementById("black").checked
                     const white = document.getElementById("white").checked
+                    const gold = document.getElementById("gold").checked
                     const price = document.getElementById("price");
 
                     dragOver(label, "Ucitavanje na server..."); // set the drop zone text and styling
@@ -414,6 +420,7 @@
                     fd.append('pink', pink)
                     fd.append('black', black)
                     fd.append('white', white)
+                    fd.append('gold', gold)
                     fd.append("sizes", `[${as}]`)
                     x.open("post", form.action, true);
                     x.send(fd)
