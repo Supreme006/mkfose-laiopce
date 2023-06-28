@@ -404,6 +404,7 @@
                     })
                     var replacedText = description.value.replace(/\n/g, "\\n")
                     console.log(replacedText)
+                    if(price.value.includes(",")) return alert("NE ZAREZ NEGO TACKA NA CENI!");
                     fd.append('title', title.value)
                     fd.append('description', replacedText)
                     fd.append('s_description', shortDescription.value)
