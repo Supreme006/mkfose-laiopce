@@ -855,7 +855,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
             "shortDescription": "${shortDescription}",
             "category": "${category}",
             "images": [${mi}],
-            "price: ${Number(price)},
+            "price": ${Number(price)},
             "collection": "${collection}",
             "colors": {
                 "pink": ${pink},
