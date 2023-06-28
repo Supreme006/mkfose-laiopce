@@ -85,6 +85,10 @@ app.use(
   })
 );
 
+app.get("/aboutus", async (req, res) => {
+  res.render("languages/hr/policy/aboutUs", { req: req, siteName: siteName })
+})
+
 app.get("/policy/returns", async (req, res) => {
   res.render("languages/hr/policy/nacinpovrata", { req: req, siteName: siteName })
 })
