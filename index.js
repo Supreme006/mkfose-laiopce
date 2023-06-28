@@ -828,7 +828,8 @@ app.post("/changeLanguage", async (req, res) => {
   res.redirect("/");
 });
 
-app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
+app.post("/edit", upload.array("filesfld", 10), async (req, res) => {
+
   let mi = "";
   let si = [];
   mi = images.toLocaleString();
@@ -845,8 +846,45 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
   const collection = req.body.collection;
   const sizes = req.body.sizes
 
-  console.log(price)
+  db.collection("products").insertOne(
+    JSON.parse(`{
+            "title": "${title}",
+            "description": "${description}",
+            "shortDescription": "${shortDescription}",
+            "category": "${category}",
+            "images": [${mi}],
+            "price": ${Number(price)},
+            "collection": "${collection}",
+            "colors": {
+                "pink": ${pink},
+                "black": ${black},
+                "white": ${white},
+                "gold": ${gold}
+            },
+            "sizes": ${sizes}
+        }`), function(res){
+          console.log(res)
+        }
+  );
+  
+});
 
+app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
+  let mi = "";
+  let si = [];
+  mi = images.toLocaleString();
+
+  const category = req.body.category;
+  const title = req.body.title;
+  const description = req.body.description;
+  const shortDescription = req.body.s_description;
+  const pink = req.body.pink;
+  const black = req.body.black;
+  const white = req.body.white;
+  const gold = req.body.gold;
+  const price = req.body.price;
+  const collection = req.body.collection;
+  const sizes = req.body.sizes
 
   db.collection("products").insertOne(
     JSON.parse(`{
