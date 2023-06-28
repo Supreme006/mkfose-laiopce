@@ -829,7 +829,7 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
 
   const category = req.body.category;
   const title = req.body.title;
-  const description = req.body.description;
+  const description = req.body.description.toFixed(2);
   const shortDescription = req.body.s_description;
   const pink = req.body.pink;
   const black = req.body.black;
