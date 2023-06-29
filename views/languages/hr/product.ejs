@@ -161,10 +161,10 @@
                         <div class="recommendedItemsList row">
                             <% other.forEach(ot => { %>
                             <div class="col product-gap tile">
-                                <img src="/uploads/<%= ot[0] %>.png" style="max-height: 378px; border-radius: 15px;">
+                                <img src="/uploads/<%= ot.images[0] %>.png" style="max-height: 378px; border-radius: 15px;">
                                 <div class="productInfo">
                                     <div class="productName text-break">
-                                        <%= ot.tittle %>
+                                        <%= ot.title %>
                                     </div>
                                 </div>
                             </div>
