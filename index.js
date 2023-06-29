@@ -85,6 +85,10 @@ app.use(
   })
 );
 
+app.get("/info/media", async (req, res) => {
+  res.render("languages/hr/policy/media", { req: req, siteName: siteName })
+})
+
 app.get("/help/delivery", async (req, res) => {
   res.render("languages/hr/policy/shipping", { req: req, siteName: siteName })
 })
