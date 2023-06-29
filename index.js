@@ -85,6 +85,10 @@ app.use(
   })
 );
 
+app.get("/adores", async (req, res) => {
+  res.render("languages/hr/policy/tvrtka", { req: req, siteName: siteName })
+})
+
 app.get("/info/media", async (req, res) => {
   res.render("languages/hr/policy/media", { req: req, siteName: siteName })
 })
