@@ -73,9 +73,9 @@
                                             <h3 class="ms-auto">
                                                 <div class="cartPrice">
                                                     <%if (req.session.value=="usd" ){%>
-                                                        $<%= eurtousd(item.price) %>
-                                                            <% } else {%>
-                                                                <%= item.price %>€
+                                                        $<%= eurtousd(item.price).toFixed(2) %>
+                                                            <% } else { let price = parseFloat(item.price['$numberDecimal'])%>
+                                                                <%= price.toFixed(2) %>€
                                                                     <% } %>
                                                 </div>
                                             </h3>
