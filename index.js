@@ -784,6 +784,7 @@ app.post("/addToCart", async function (req, res) {
   if (req.session.cart) cart = req.session.cart;
   cart.push(result);
   req.session.cart = await cart;
+  console.log(req.session.cart)
   return res.json({ response: "added" });
 });
 
