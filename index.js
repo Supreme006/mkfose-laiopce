@@ -780,9 +780,11 @@ app.post("/checkCode", async function (req, res) {
 app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
   const result = await db.collection("products").findOne({ title: id });
+  if(!result)return;
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
   cart.push(result);
+  console.log(cart)
   req.session.cart = await cart;
   console.log(req.session.cart)
   return res.json({ response: "added" });
