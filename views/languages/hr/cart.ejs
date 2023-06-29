@@ -18,7 +18,7 @@
                 <div class="me-auto m-0">
                     <h3>Cart</h3>
                 </div>
-                <% if(products) { products.forEach(item=> { let price = parseFloat(item.price['$numberDecimal']); total= total + price.toFixed(2)})} %>
+                <% if(products) { products.forEach(item=> { let price = parseFloat(item.price['$numberDecimal']); total= total + Number(price.toFixed(2))})} %>
                 <h3 class="ms-auto d-flex">
                     <%if(products=="empty"){%>
                         <%if (req.session.value=="usd" ){%>
