@@ -1,4 +1,4 @@
-function removefromcart(element){
+function removeFromCart(element){
     const id = element.id;
     const div = document.getElementById("c"+id)
     const title = document.getElementById("t"+id)
