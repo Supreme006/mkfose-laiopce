@@ -85,21 +85,23 @@ async function addToCart() {
   // })
   if(!sizee) return alert("No size");
   if(!colorr) return alert("No color");
-  $.ajax({
-    url: "/addToCart",
-    type: "POST",
-    data: {
-      title: title,
-      sizes: sizee,
-      colors: colorr
-    },
-    success: (r) => {
-      if (r.response == "added") {
-        alert("ADDED TO CART")
+  if(colorr && sizee){
+    $.ajax({
+      url: "/addToCart",
+      type: "POST",
+      data: {
+        title: title,
+        sizes: sizee,
+        colors: colorr
+      },
+      success: (r) => {
+        if (r.response == "added") {
+          alert("ADDED TO CART")
+        }
+        if (r.response == "unauthorized") {
+          alert("UNAUTHORIZED")
+        }
       }
-      if (r.response == "unauthorized") {
-        alert("UNAUTHORIZED")
-      }
-    }
-  });
+    });
+  }
 }
