@@ -18,6 +18,7 @@
                 <div class="me-auto m-0">
                     <h3>Cart</h3>
                 </div>
+                <%= console.log(item) %>
                 <% if(products) { products.forEach(item=> { total=total + item.price;})} %>
                 <h3 class="ms-auto d-flex">
                     <%if(products=="empty"){%>
