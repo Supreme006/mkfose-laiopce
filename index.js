@@ -166,6 +166,8 @@ app.get("/products/:name", async (req, res) => {
   const result = await db.collection("products").find({ "title": title }).toArray();
   const other = await db.collection("products").find({"collection": result[0].collection}).toArray()
 
+  console.log(result)
+
   removeFromArray(other, result)
 
   if (req.session.language == "hr")
