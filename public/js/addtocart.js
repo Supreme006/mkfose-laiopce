@@ -85,7 +85,6 @@ async function addToCart() {
   // })
   if(!sizee) return alert("No size");
   if(!colorr) return alert("No color");
-  if(colorr && sizee){
     $.ajax({
       url: "/addToCart",
       type: "POST",
@@ -103,5 +102,4 @@ async function addToCart() {
         }
       }
     });
-  }
 }
