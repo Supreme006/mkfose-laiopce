@@ -164,13 +164,16 @@ app.get("/products/:name", async (req, res) => {
   const name = req.params.name;
   const title = name.replace(/_/g, " ");
   const result = await db.collection("products").find({ "title": title }).toArray();
+  const other = await db.collection("products").find({"collection": result[0].collection}).toArray()
+
+  removeFromArray(other, result)
 
   if (req.session.language == "hr")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd, other: other });
   if (req.session.language == "de")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd, other: other });
   if (req.session.language == "en")
-    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd });
+    return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd, other: other });
 });
 
 app.get("/", async (req, res) => {

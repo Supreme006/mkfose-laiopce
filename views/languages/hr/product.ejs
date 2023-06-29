@@ -122,7 +122,7 @@
                                         <%})%>
                                 </div>
                                 <div class="product_info modelInfo">
-                                    Mia je <b>5'1"</b> i nosi velicinu <b>XS</b>
+                                    Mia je visoka <b>160cm</b> i nosi velicinu <b>XS</b>
                                 </div>
                                 <div class="checkout text-center">
                                     <div class="wud btn btn-classic" style="width: auto; padding: 8px 15px 8px 15px;"
@@ -159,30 +159,16 @@
                             Ostali proizvodi iz ove kolekcije.
                         </div>
                         <div class="recommendedItemsList row">
+                            <% other.forEach(ot => { %>
                             <div class="col product-gap tile">
-                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
+                                <img src="/uploads/<%= ot[0] %>.png" style="max-height: 378px; border-radius: 15px;">
                                 <div class="productInfo">
                                     <div class="productName text-break">
-                                        Majica
+                                        <%= ot.tittle %>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col product-gap tile">
-                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
-                                <div class="productInfo">
-                                    <div class="productName text-break">
-                                        Korset
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col product-gap tile">
-                                <img src="/images/mia10.png" style="max-height: 378px; border-radius: 15px;">
-                                <div class="productInfo">
-                                    <div class="productName text-break">
-                                        Crop Top
-                                    </div>
-                                </div>
-                            </div>
+                            <% }) %>
                         </div>
                     </div>
                 </div>
