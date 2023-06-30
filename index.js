@@ -662,7 +662,7 @@ app.post("/removeFromCart", async (req, res) => {
   }
 
   req.session.cart = newArr;
-  res.send({response: "removed"});
+  res.json({response: "removed"});
 });
 
 app.post("/checkout", async function (req, res) {
