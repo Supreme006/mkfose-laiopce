@@ -271,9 +271,6 @@
 
                 async function addToCart() {
                     const title = document.getElementById("title").textContent;
-                    const cart = "<%if(req.session.cart){%><%= JSON.stringfy(req.session.cart) %><%}else{%>[]<%}%>"
-                    const now = JSON.parse(cart);
-                    console.log(now)
                     // const price = document.getElementById("price").innerText;
                     // const value = document.getElementById("value").innerText;
                     // const s_description = document.getElementById("s_description")
@@ -299,6 +296,9 @@
                         success: (r) => {
                             if (r.response == "added") {
                                 alert("ADDED TO CART")
+                            }
+                            if(r.response == "failed"){
+                                alert("Already in cart")
                             }
                             if (r.response == "unauthorized") {
                                 alert("UNAUTHORIZED")
