@@ -38,7 +38,7 @@
 
                         <div class="col-lg-6 order-3">
                             <div class="product_description">
-                                <span class="product_name" id="title"><%= product.title %></span>
+                                <div class="product_name" id="title"><%= product.title %></div>
                                 <div class="product_shortDescription" id="s_description">
                                     <%= product.shortDescription || "Kratak opis nije pronadjen" %>
                                 </div>
@@ -92,16 +92,16 @@
                                                             </div>
                                                         </div>
                                                         <% } %>
-                                                        <% if(product.colors.gold){%>
-                                                            <div class="color-gap gold" onclick="color(this)">
-                                                                <div class="colorgold1">
-                                                                    <div class="colorCentarWite" id="gold">
-                                                                        <div class="colorgold2">
+                                                            <% if(product.colors.gold){%>
+                                                                <div class="color-gap gold" onclick="color(this)">
+                                                                    <div class="colorgold1">
+                                                                        <div class="colorCentarWite" id="gold">
+                                                                            <div class="colorgold2">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <% } %>
+                                                                <% } %>
                                 </div>
                                 <div class="product_info">
                                     Veličine:
@@ -125,7 +125,8 @@
                                 <div class="checkout text-center">
                                     <div class="wud btn btn-classic" style="width: auto; padding: 8px 15px 8px 15px;"
                                         onclick="addToCart();">
-                                        <img src="/images/bag.png" width="25" height="25" style="margin-right: 8px;">Dodaj u košaricu
+                                        <img src="/images/bag.png" width="25" height="25"
+                                            style="margin-right: 8px;">Dodaj u košaricu
                                     </div>
                                 </div>
                                 <hr>
@@ -157,16 +158,19 @@
                             Ostali proizvodi iz ove kolekcije.
                         </div>
                         <div class="recommendedItemsList row">
-                            <% other.forEach(ot => { %>
-                            <a class="col product-gap tile" href="/products/<%=ot.title.replaceAll(' ', '_')%>">
-                                <img src="/uploads/<%= ot.images[0] %>" style="max-height: 378px; border-radius: 15px;">
-                                <div class="productInfo">
-                                    <div class="productName text-break">
-                                        <%= ot.title %>
+                            <% other.forEach(ot=> { %>
+                                <div class="col product-gap tile">
+                                    <a href="/products/<%=ot.title.replaceAll(' ', '_')%>">
+                                        <img src="/uploads/<%= ot.images[0] %>"
+                                            style="max-height: 378px; border-radius: 15px;">
+                                    </a>
+                                    <div class="productInfo">
+                                        <a class="productName text-break" href="/products/<%=ot.title.replaceAll(' ', '_')%>">
+                                            <%= ot.title %>
+                                        </a>
                                     </div>
                                 </div>
-                            </a>
-                            <% }) %>
+                                <% }) %>
                         </div>
                     </div>
                 </div>
