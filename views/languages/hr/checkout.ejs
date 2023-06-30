@@ -50,7 +50,7 @@
                         </h4>
                         <ul class="list-group mb-3">
                             <% if(cart){ %>
-                                <% cart.forEach(product=> { let price = parseFloat(item.price['$numberDecimal']); total=
+                                <% cart.forEach(product=> { let price = parseFloat(product.price['$numberDecimal']); total=
                                 total + Number(price) ; %>
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
