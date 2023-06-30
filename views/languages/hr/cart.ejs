@@ -95,7 +95,8 @@
                     const div = document.getElementById("c" + id)
                     const title = document.getElementById("t" + id).textContent;
 
-                    console.log(title)
+                    console.log(div.innerHTML)
+                    console.log(div.outerHTML)
 
                     $.ajax({
                         url: "/removeFromCart",
