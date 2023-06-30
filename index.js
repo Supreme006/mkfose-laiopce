@@ -792,17 +792,22 @@ app.post("/addToCart", async function (req, res) {
 });
 
 app.post("/register", async (req, res) => {
+
+  console.log("test1")
+
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
   let offers = req.body.offers;
+  console.log("test2")
 
   if (offers == "on") offers = true;
   if (offers == "off") offers = false;
 
   const user = await db.collection("users").findOne({ email: email });
   if (user) return res.send("Already registred email");
+  console.log("test3")
 
   if (firstName && lastName && email && password && offers) {
     db.collection("users").insertOne(
@@ -815,6 +820,7 @@ app.post("/register", async (req, res) => {
             "isAdmin": false
         }`)
     );
+    console.log("test4")
 
     return res.redirect("/");
   }
