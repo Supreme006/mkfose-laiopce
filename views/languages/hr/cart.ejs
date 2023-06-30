@@ -104,7 +104,7 @@
                         success: (r) => {
                             if (r.response == "removed") {
                                 div.remove;
-                                alert("REMOVED")
+                                location.reload()
                             }
                             if (r.response == "unauthorized") {
                                 alert("UNAUTHORIZED")
