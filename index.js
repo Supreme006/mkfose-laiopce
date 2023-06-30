@@ -793,6 +793,7 @@ app.post("/addToCart", async function (req, res) {
   if (!result) return;
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
+  console.log(result)
   if(cart.includes(result))return res.json({response: "failed"})
   cart.push(result);
   req.session.cart = await cart;
