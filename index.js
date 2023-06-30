@@ -661,7 +661,7 @@ app.post("/removeFromCart", async (req, res) => {
     if (cart[i].title == result[0].title) { }
   }
 
-  if (newArr == []) newArr = false;
+  if (newArr == []) newArr = "empty";
 
   req.session.cart = newArr;
   return res.json({ response: "removed" });
