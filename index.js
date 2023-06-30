@@ -649,7 +649,7 @@ app.get("/admin/uploaded", async (req, res) => {
 
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
-  let cart = req.session.user.cart;
+  let cart = req.session.cart;
   const result = db.collection("products").find({ title: id }).toArray();
   req.session.cart = removeFromArray(cart, result);
   res.send("removed");
