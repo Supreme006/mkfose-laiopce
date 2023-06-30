@@ -192,7 +192,7 @@ body {
 
 .hitem {
     flex-shrink: 0;
-    width: 25%;
+    width: 30%;
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
