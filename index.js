@@ -801,7 +801,7 @@ app.post("/register", async (req, res) => {
   if (offers == "on") offers = true;
   if (offers == "off") offers = false;
 
-  const user = await usersCollection.findOne({ email });
+  const user = await usersCollection.findOne({ email: email });
   if (user) return res.send("Already registred email");
 
   if (firstName && lastName && email && password && offers) {
