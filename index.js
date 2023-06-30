@@ -650,7 +650,7 @@ app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
   let cart = req.session.cart;
   const result = await db.collection("products").find({ title: id }).toArray();
-  const newArr = []
+  let newArr = []
 
   for (let i = 0; i < cart.length; i++) {
 
@@ -660,6 +660,8 @@ app.post("/removeFromCart", async (req, res) => {
 
     if (cart[i].title == result[0].title) { }
   }
+
+  if (newArr == []) newArr = false;
 
   req.session.cart = newArr;
   return res.json({ response: "removed" });
