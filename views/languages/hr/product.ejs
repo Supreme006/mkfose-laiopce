@@ -173,6 +173,63 @@
                                 <% }) %>
                         </div>
                     </div>
+
+                    <div class="modal" id="successs">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                    
+                                <!-- Modal Header -->
+                                <div class="checkoutModal">
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x" style="color: green;"></i>
+                                    </div>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body text-center checkoutModal">
+                                    <div>Proizvod je dodat u korpu</div>
+                                    <div>Vas proizvod je uspesno dodat u korpu. Zelimo vam ugodan dan.</div>
+                                </div>
+                    
+                                <!-- Modal footer -->
+                                <div class="checkoutModal">
+                                    <div class="modal-footer">
+                    
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Zatvori</button>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="error">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                    
+                                <!-- Modal Header -->
+                                <div class="checkoutModal">
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <i class="fa-solid fa-circle-exclamation fa-beat- fa-5x" style="color: red;"></i>
+                                    </div>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body text-center checkoutModal">
+                                    <div>Proizvod koji pokusavate da dodate je vec u korpi. Trenutno nije moguce dodati 2 ista proizvoda. Mozete platiti trenutni pa se vratiti i naruciti jos jedan. Bice vam upakovani zajedno.</div>
+                                </div>
+                    
+                                <!-- Modal footer -->
+                                <div class="checkoutModal">
+                                    <div class="modal-footer">
+                    
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Zatvori</button>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -271,6 +328,8 @@
 
                 async function addToCart() {
                     const title = document.getElementById("title").textContent;
+                    const successs = new bootstrap.Modal("#successs");
+                    const error = new bootstrap.Modal("#error");
                     // const price = document.getElementById("price").innerText;
                     // const value = document.getElementById("value").innerText;
                     // const s_description = document.getElementById("s_description")
@@ -295,10 +354,10 @@
                         },
                         success: (r) => {
                             if (r.response == "added") {
-                                alert("ADDED TO CART")
+                                successs.show();
                             }
                             if(r.response == "failed"){
-                                alert("Already in cart")
+                                error.show()
                             }
                             if (r.response == "unauthorized") {
                                 alert("UNAUTHORIZED")
