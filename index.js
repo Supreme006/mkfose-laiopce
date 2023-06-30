@@ -736,9 +736,10 @@ app.post("/checkout", async function (req, res) {
     } else {
       await db.collection("sold").insertOne(
         JSON.parse(`{
-      "title": "${cart[i].title}",
-      "sold": 1,
-    }`))
+          "title": "${cart[i].title}",
+          "sold": 1,
+        }`)
+      )
     }
 
     const date = new Date();
