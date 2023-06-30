@@ -380,6 +380,7 @@
 
                     async function checkID() {
                         const order_id = makeid(18);
+                        console.log("check1")
 
                         $.ajax({
                             url: "/checkOrderId",
@@ -389,8 +390,12 @@
                             },
                             success: (r) => {
                                 if (r.message == "exist") {
+                        console.log("check2")
+
                                     return checkID();
                                 } else {
+                        console.log("check3")
+
                                     return Order_id = order_id;
                                 }
                             }
@@ -398,8 +403,10 @@
                     }
 
                     async function checkOut() {
+                        console.log("a")
                         const loading = new bootstrap.Modal("#loading");
                         loading.show();
+                        console.log("a2")
 
                         const expirem = document.getElementById("expirem").value;
                         const expirey = document.getElementById("expirey").value;
@@ -412,12 +419,12 @@
                         const lName = document.getElementById("lastName").value
                         const address = document.getElementById("address").value;
                         const email = document.getElementById("email").value;
-                        const username = document.getElementById("username").value;
                         const amount = document.getElementById("total").textContent;
                         const successs = new bootstrap.Modal("#successs");
                         const error = new bootstrap.Modal("#error");
                         const emsg = document.getElementById("emessage")
                         const orID = document.getElementById("orderID")
+                        console.log("a3")
 
                         checkID().then(() => {
                         $.ajax({
@@ -435,7 +442,6 @@
                                 "lName": `${lName}`,
                                 "address": `${address}`,
                                 "email": `${email}`,
-                                "username": `${username}`,
                                 "total": `${amount}`,
                                 "orderID": `${Order_id}`
                             },
