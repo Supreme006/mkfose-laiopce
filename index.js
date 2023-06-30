@@ -662,7 +662,7 @@ app.post("/removeFromCart", async (req, res) => {
     if (cart[i].title == result[0].title) { }
   }
 
-  if (!newArr) newArr = false;
+  if (JSON.stringify(newArr) == "[]") newArr = false;
 
   console.log(newArr)
 
