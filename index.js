@@ -653,17 +653,13 @@ app.post("/removeFromCart", async (req, res) => {
   const newArr = []
 
   for (let i = 0; i < cart.length; i++) {
+    
     if (cart[i].title != result[0].title) {
-      console.log("nije")
       newArr.push(cart[i])
     }
-    if (cart[i].title == result[0].title) {
-      console.log("jeste")
-      
-    }
-  }
 
-  console.log(newArr)
+    if (cart[i].title == result[0].title) { }
+  }
 
   req.session.cart = newArr;
 
