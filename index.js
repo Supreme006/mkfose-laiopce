@@ -649,13 +649,19 @@ app.get("/admin/uploaded", async (req, res) => {
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
   let cart = req.session.cart;
-  console.log(cart)
   const result = await db.collection("products").find({ title: id }).toArray();
-  const emnd = await removeFromArray(await cart, result[0]);
-  console.log(result)
-  console.log("removeing")
-  console.log(emnd)
-  req.session.cart = emnd
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].title != result[0].title) {
+      console.log("nije")
+    }
+    if (cart[i].title == result[0].title) {
+      console.log("jeste")
+    }
+  }
+
+
+
   res.send("removed");
 });
 
