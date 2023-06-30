@@ -164,7 +164,7 @@ app.get("/products/:name", async (req, res) => {
   const name = req.params.name;
   const title = name.replace(/_/g, " ");
   const result = await db.collection("products").find({ "title": title }).toArray();
-  const other = await db.collection("products").find({"collection": result[0].collection}).toArray()
+  const other = await db.collection("products").find({ "collection": result[0].collection }).toArray()
 
   console.log(result)
 
@@ -192,17 +192,17 @@ app.get("/", async (req, res) => {
   const info = JSON.parse(data)
 
   // const info = await ig.posts()
-  
+
   async function downloadImage(url, filename) {
-    try{
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
-    fs.writeFileSync("public/tempImage/" + filename, response.data, (err) => {
-      if (err) throw err;
-      if(err) console.log("err: " + err)
-    });
-  } catch(err){
-    console.log("error")
-  }
+    try {
+      const response = await axios.get(url, { responseType: 'arraybuffer' });
+      fs.writeFileSync("public/tempImage/" + filename, response.data, (err) => {
+        if (err) throw err;
+        if (err) console.log("err: " + err)
+      });
+    } catch (err) {
+      console.log("error")
+    }
   }
 
   info.forEach(pohoto => {
@@ -620,7 +620,7 @@ app.get("/admin/edit/:id", async (req, res) => {
 
   const id = req.params.id;
 
-  const product = await db.collection("products").find({title: id})
+  const product = await db.collection("products").find({ title: id })
 
   res.render("admin/edit", { siteName: siteName, req: req, product: product });
 });
@@ -649,10 +649,10 @@ app.get("/admin/uploaded", async (req, res) => {
 
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
-    let cart = req.session.user.cart;
-    const result = db.collection("products").find({ title: id }).toArray();
-    req.session.user.cart = removeFromArray(cart, result);
-    res.send("removed");
+  let cart = req.session.user.cart;
+  const result = db.collection("products").find({ title: id }).toArray();
+  req.session.user.cart = removeFromArray(cart, result);
+  res.send("removed");
 });
 
 app.post("/checkout", async function (req, res) {
@@ -695,8 +695,8 @@ app.post("/checkout", async function (req, res) {
 
 
   } catch (e) {
-    if(e){
-    err = true;
+    if (e) {
+      err = true;
     }
     switch (e.type) {
       case 'StripeCardError':
@@ -705,7 +705,7 @@ app.post("/checkout", async function (req, res) {
     }
   }
 
-  if(err)return;
+  if (err) return;
 
   const orders = db.collection("orders")
   for (let i = 0; i < cart.length; i++) {
@@ -781,7 +781,7 @@ app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
   console.log(id)
   const result = await db.collection("products").findOne({ title: id });
-  if(!await result)return console.log("not found");
+  if (!await result) return console.log("not found");
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
   cart.push(result);
@@ -793,34 +793,33 @@ app.post("/addToCart", async function (req, res) {
 
 app.post("/register", async (req, res) => {
 
-  console.log("test1")
-
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
   let offers = req.body.offers;
-  console.log("test2")
 
   if (offers == "on") offers = true;
   if (offers == "off") offers = false;
 
   const user = await db.collection("users").findOne({ email: email });
   if (user) return res.send("Already registred email");
-  console.log("test3")
+
+
 
   if (firstName && lastName && email && password && offers) {
-    db.collection("users").insertOne(
-      JSON.parse(`{
+    const data = JSON.parse(`{
             "firstName": "${firstName}",
             "lastName": "${lastName}",
             "email": "${email}",
             "password": "${password}",
             "offers": ${offers},
             "isAdmin": false
-        }`)
+        }`);
+    req.session.user = data;
+    db.collection("users").insertOne(
+      data
     );
-    console.log("test4")
 
     return res.redirect("/");
   }
@@ -893,11 +892,11 @@ app.post("/edit", upload.array("filesfld", 10), async (req, res) => {
                 "gold": ${gold}
             },
             "sizes": ${sizes}
-        }`), function(res){
-          console.log(res)
-        }
+        }`), function (res) {
+    console.log(res)
+  }
   );
-  
+
 });
 
 app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
@@ -933,9 +932,9 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "gold": ${gold}
             },
             "sizes": ${sizes}
-        }`), function(res){
-          console.log(res)
-        }
+        }`), function (res) {
+    console.log(res)
+  }
   );
 
 
