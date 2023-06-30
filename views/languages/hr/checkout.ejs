@@ -50,7 +50,8 @@
                         </h4>
                         <ul class="list-group mb-3">
                             <% if(cart){ %>
-                                <% cart.forEach(product=> { total = total + product.price; %>
+                                <% cart.forEach(product=> { let price = parseFloat(item.price['$numberDecimal']); total=
+                                total + Number(price) ; %>
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
                                             <h6 class="my-0">
@@ -61,10 +62,10 @@
                                             </small>
                                         </div>
                                         <% if(req.session.value=="usd" ) {%>
-                                            <span class="text-muted">$<%= eurtousd(product.price) %></span>
+                                            <span class="text-muted">$<%= eurtousd(price) %></span>
                                             <% } else { %>
                                                 <span class="text-muted">
-                                                    <%= product.price %>€
+                                                    <%= price %>€
                                                 </span>
                                                 <% } %>
                                     </li>
