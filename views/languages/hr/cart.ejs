@@ -95,9 +95,6 @@
                     const div = document.getElementById("c" + id)
                     const title = document.getElementById("t" + id).textContent;
 
-                    console.log(div.innerHTML)
-                    console.log(div.outerHTML)
-
                     $.ajax({
                         url: "/removeFromCart",
                         type: "POST",
@@ -106,7 +103,7 @@
                         },
                         success: (r) => {
                             if (r.response == "removed") {
-                                div.innerHTML = "";
+                                div.remove;
                                 alert("REMOVED")
                             }
                             if (r.response == "unauthorized") {
