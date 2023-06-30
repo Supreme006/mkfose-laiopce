@@ -649,8 +649,9 @@ app.get("/admin/uploaded", async (req, res) => {
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
   let cart = req.session.cart;
+  console.log("cart: " + cart)
   const result = await db.collection("products").find({ title: id }).toArray();
-  req.session.cart = await removeFromArray(cart, result);
+  req.session.cart = await removeFromArray(await cart, result);
   console.log(result)
   console.log("removeing")
   console.log(req.session.cart)
