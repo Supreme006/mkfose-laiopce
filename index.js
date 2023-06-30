@@ -652,6 +652,7 @@ app.post("/removeFromCart", async (req, res) => {
   let cart = req.session.cart;
   const result = db.collection("products").find({ title: id }).toArray();
   req.session.cart = removeFromArray(cart, result);
+  console.log(req.session.cart)
   res.send("removed");
 });
 
