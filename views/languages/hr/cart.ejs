@@ -18,8 +18,7 @@
                 <div class="me-auto m-0">
                     <h3>Cart</h3>
                 </div>
-                <% if(products) { products.forEach(item=> { let price = parseFloat(item.price['$numberDecimal']); total=
-                    total + Number(price)})} %>
+                
                     <h3 class="ms-auto d-flex">
                         <%if(products=="empty"){%>
                             <%if (req.session.value=="usd" ){%>
@@ -29,6 +28,8 @@
                                     <% } %>
                                         <div class="btn btn-success disabled">Check Out</div>
                                         <% } else { %>
+                                            <% products.forEach(item=> { let price = parseFloat(item.price['$numberDecimal']); total=
+                                                total + Number(price)}) %>
                                             <%if (req.session.value=="usd" ){%>
                                                 <div class="margin1-right">Total: $<%=eurtousd(total).toFixed(2) %>
                                                 </div>
