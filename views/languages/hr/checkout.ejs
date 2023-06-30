@@ -62,10 +62,10 @@
                                             </small>
                                         </div>
                                         <% if(req.session.value=="usd" ) {%>
-                                            <span class="text-muted">$<%= eurtousd(price) %></span>
+                                            <span class="text-muted">$<%= eurtousd(price).toFixed(2) %></span>
                                             <% } else { %>
                                                 <span class="text-muted">
-                                                    <%= price %>€
+                                                    <%= price.toFixed(2)%>€
                                                 </span>
                                                 <% } %>
                                     </li>
