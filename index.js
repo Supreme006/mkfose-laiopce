@@ -118,6 +118,9 @@ app.get("/policy/data", async (req, res) => {
 })
 
 app.get("/checkout", async (req, res) => {
+
+
+
   let arr = req.session.cart
   let promo = req.session.code;
 
@@ -669,6 +672,7 @@ app.post("/removeFromCart", async (req, res) => {
 });
 
 app.post("/checkout", async function (req, res) {
+  console.log("got")
   const expirem = req.body.expirem
   const expirey = req.body.expirey
   const holder = req.body.holder
@@ -685,6 +689,7 @@ app.post("/checkout", async function (req, res) {
   const cart = req.session.cart;
   let amount = req.body.total;
   let err = false;
+  console.log("got2")
 
   amount = amount.replace(".", "")
   try {
@@ -697,6 +702,7 @@ app.post("/checkout", async function (req, res) {
         cvc: cvv
       }
     })
+    console.log("got3")
 
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
@@ -705,6 +711,7 @@ app.post("/checkout", async function (req, res) {
       confirm: true,
       payment_method_types: ['card'],
     })
+    console.log("got4")
 
 
   } catch (e) {
@@ -717,21 +724,27 @@ app.post("/checkout", async function (req, res) {
         break;
     }
   }
-
+  console.log(err)
   if (err) return;
+  console.log("got5")
 
   const orders = db.collection("orders")
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
     qdb.add(`totalSold`, 1)
+    console.log("got6")
 
-    if (await old) {
+    if (old) {
       const newVal = {
         "title": `${cart[i].title}`,
         "sold": old.sold + 1
       }
       await db.collection("sold").updateOne(old, { $set: newVal })
+      console.log("got7")
+
     } else {
+      console.log("got8")
+
       await db.collection("sold").insertOne(
         JSON.parse(`{
       "title": "${cart[i].title}",
