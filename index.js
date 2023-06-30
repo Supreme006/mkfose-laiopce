@@ -164,11 +164,10 @@ app.get("/products/:name", async (req, res) => {
   const name = req.params.name;
   const title = name.replace(/_/g, " ");
   const result = await db.collection("products").find({ "title": title }).toArray();
-  const other = await db.collection("products").find({ "collection": result[0].collection }).toArray()
+  let other = await db.collection("products").find({ "collection": result[0].collection }).toArray()
 
-  console.log(result)
 
-  removeFromArray(other, result)
+  other = removeFromArray(other, result)
 
   if (req.session.language == "hr")
     return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd, other: other });
@@ -652,6 +651,8 @@ app.post("/removeFromCart", async (req, res) => {
   let cart = req.session.cart;
   const result = db.collection("products").find({ title: id }).toArray();
   req.session.cart = removeFromArray(cart, result);
+  console.log(result)
+  console.log("removeing")
   console.log(req.session.cart)
   res.send("removed");
 });
@@ -780,15 +781,12 @@ app.post("/checkCode", async function (req, res) {
 
 app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
-  console.log(id)
   const result = await db.collection("products").findOne({ title: id });
-  if (!await result) return console.log("not found");
+  if (!result) return console.log("not found");
   let cart = [];
   if (req.session.cart) cart = req.session.cart;
   cart.push(result);
-  console.log(cart)
   req.session.cart = await cart;
-  console.log(req.session.cart)
   return res.json({ response: "added" });
 });
 
@@ -933,7 +931,6 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
             },
             "sizes": ${sizes}
         }`), function (res) {
-    console.log(res)
   }
   );
 
