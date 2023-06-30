@@ -806,7 +806,6 @@ app.post("/register", async (req, res) => {
   if (user) return res.send("Already registred email");
 
 
-
   if (firstName && lastName && email && password && offers) {
     const data = JSON.parse(`{
             "firstName": "${firstName}",
