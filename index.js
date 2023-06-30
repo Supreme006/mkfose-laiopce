@@ -731,14 +731,15 @@ app.post("/checkout", async function (req, res) {
         "title": `${cart[i].title}`,
         "sold": old.sold + 1
       }
+
       await db.collection("sold").updateOne(old, { $set: newVal })
 
     } else {
       await db.collection("sold").insertOne(
-        JSON.parse(`{
-          "title": "${cart[i].title}",
+        {
+          "title": `${cart[i].title}`,
           "sold": 1,
-        }`)
+        }
       )
     }
 
