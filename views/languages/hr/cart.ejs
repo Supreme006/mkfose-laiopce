@@ -105,7 +105,7 @@
                         },
                         success: (r) => {
                             if (r.response == "removed") {
-                                div.outerHTML = "";
+                                div.innerHTML = "";
                                 alert("REMOVED")
                             }
                             if (r.response == "unauthorized") {
