@@ -71,6 +71,9 @@ function color(element){
 
 async function addToCart() {
   const title = document.getElementById("title").textContent;
+  const cart = "<%= req.session.cart %>"
+  const now = JSON.parse(cart);
+  console.log(now)
   // const price = document.getElementById("price").innerText;
   // const value = document.getElementById("value").innerText;
   // const s_description = document.getElementById("s_description")

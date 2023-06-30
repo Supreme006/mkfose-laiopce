@@ -653,7 +653,7 @@ app.post("/removeFromCart", async (req, res) => {
   const newArr = []
 
   for (let i = 0; i < cart.length; i++) {
-    
+
     if (cart[i].title != result[0].title) {
       newArr.push(cart[i])
     }
@@ -662,7 +662,6 @@ app.post("/removeFromCart", async (req, res) => {
   }
 
   req.session.cart = newArr;
-
   res.send("removed");
 });
 
