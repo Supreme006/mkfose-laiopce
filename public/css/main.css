@@ -731,6 +731,11 @@ body {
 }
 
 .c-black {
+    text-decoration: none;
+    color: black;
+}
+
+.c-black:hover{
     color: black;
 }
 
