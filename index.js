@@ -651,10 +651,11 @@ app.post("/removeFromCart", async (req, res) => {
   let cart = req.session.cart;
   console.log(cart)
   const result = await db.collection("products").find({ title: id }).toArray();
-  req.session.cart = await removeFromArray(await cart, result[0]);
+  const emnd = await removeFromArray(await cart, result[0]);
   console.log(result)
   console.log("removeing")
-  console.log(req.session.cart)
+  console.log(emnd)
+  req.session.cart = emnd
   res.send("removed");
 });
 
