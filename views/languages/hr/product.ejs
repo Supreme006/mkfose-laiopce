@@ -158,14 +158,14 @@
                         </div>
                         <div class="recommendedItemsList row">
                             <% other.forEach(ot => { %>
-                            <div class="col product-gap tile">
+                            <a class="col product-gap tile" href="/products/<%=ot.title.replaceAll(' ', '_')%>">
                                 <img src="/uploads/<%= ot.images[0] %>" style="max-height: 378px; border-radius: 15px;">
                                 <div class="productInfo">
                                     <div class="productName text-break">
                                         <%= ot.title %>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                             <% }) %>
                         </div>
                     </div>
