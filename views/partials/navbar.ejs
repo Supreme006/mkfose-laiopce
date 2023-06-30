@@ -173,7 +173,7 @@
                         </div>
                         <div class="margin1-top row">
                             <div class="col nav-options">
-                                <select class="form-select" aria-label="Hrvatski" style="width: auto;">
+                                <select class="form-select" aria-label="Hrvatski" style="width: auto;" onchange="changeLanguage()" id="language">
                                     <option selected>
                                         <%= req.session.language.toUpperCase(); %>
                                     </option>
@@ -183,7 +183,7 @@
                                 </select>
                             </div>
                             <div class="col nav-options">
-                                <select class="form-select" style="width: auto;">
+                                <select class="form-select" style="width: auto;" onchange="changeValue()" id="value">
                                     <option selected>
                                         <%= req.session.value.toUpperCase(); %>
                                     </option>
