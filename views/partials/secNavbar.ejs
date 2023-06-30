@@ -28,7 +28,7 @@
                 <% } else { %>
                     <div class="mx-left">
                         <div class="secNav-items d-flex justify-content-center align-items-center nav-options">
-                            <select class="form-select opti" aria-label="Hrvatski" style="width: auto;">
+                            <select class="form-select opti" aria-label="Hrvatski" style="width: auto;" onchange="changeLanguage()" id="language">
                                 <option selected>
                                     <%= req.session.language.toUpperCase(); %>
                                 </option>
@@ -36,7 +36,7 @@
                                 <option value="de">DE</option>
                                 <option value="hr">HR</option>
                             </select>
-                            <select class="form-select margin2-left opti" style="width: auto;">
+                            <select class="form-select margin2-left opti" style="width: auto;" onchange="changeValue()" id="value">
                                 <option selected>
                                     <%= req.session.value.toUpperCase(); %>
                                 </option>
