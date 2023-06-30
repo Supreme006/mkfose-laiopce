@@ -789,17 +789,34 @@ app.post("/checkCode", async function (req, res) {
 
 app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
+  const size = req.body.sizes;
+  const color = req.body.colors;
+  let adding;
   const result = await db.collection("products").findOne({ title: id });
+
   if (!result) return;
+
   let err;
   let cart = [];
+
   if (req.session.cart) cart = req.session.cart;
+
   cart.forEach(item => {
     if (item.title == result.title) return err = true;
   })
+
   if (err) return res.json({ response: "failed" });
-  cart.push(result);
+  adding = {
+    "title": result.title,
+    "description": result.description,
+    "images": result.images,
+    "price": result.price,
+    "size": size,
+    "color": color
+  }
+  cart.push(adding);
   req.session.cart = await cart;
+
   return res.json({ response: "added" });
 });
 
