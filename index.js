@@ -316,6 +316,7 @@ app.get("/cart", async (req, res) => {
     req.session.language = "hr";
   }
   let cart = req.session.cart;
+  console.log(cart)
   if (!cart) cart = "empty";
   if (req.session.language == "hr")
     return res.render("languages/hr/cart", {
@@ -661,7 +662,7 @@ app.post("/removeFromCart", async (req, res) => {
     if (cart[i].title == result[0].title) { }
   }
 
-  if (newArr == []) newArr = "empty";
+  if (newArr == []) newArr = false;
 
   req.session.cart = newArr;
   return res.json({ response: "removed" });
