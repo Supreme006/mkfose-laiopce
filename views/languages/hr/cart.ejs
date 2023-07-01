@@ -99,23 +99,27 @@
                                                     <% } %>
                                         </div>
                                         <div class="col">
-                                            <div class="cartTitle" id="t<%= item.title %>">
-                                                <%= item.title %>
+                                            <div class="d-flex">
+                                                <div class="cartTitle" id="t<%= item.title %>">
+                                                    <%= item.title %>
+                                                </div>
+                                                <h3 class="text-center">
+                                                    <div class="cartPrice">
+                                                        <%if (req.session.value=="usd" ){%>
+                                                            $<%= eurtousd(item.price).toFixed(2) %>
+                                                                <% } else { let
+                                                                    price=parseFloat(item.price['$numberDecimal'])%>
+                                                                    <%= price.toFixed(2) %>€
+                                                                        <% } %>
+                                                    </div>
+                                                </h3>
                                             </div>
                                             <div class="cartDescription text-center">
                                                 <%= item.description %>
                                             </div>
 
                                         </div>
-                                        <h3 class="ms-auto">
-                                            <div class="cartPrice">
-                                                <%if (req.session.value=="usd" ){%>
-                                                    $<%= eurtousd(item.price).toFixed(2) %>
-                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
-                                                            <%= price.toFixed(2) %>€
-                                                                <% } %>
-                                            </div>
-                                        </h3>
+
                                     </div>
                                 </div>
                             </div>
