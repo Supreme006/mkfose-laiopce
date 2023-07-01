@@ -516,7 +516,9 @@ app.get("/admin/orders", async (req, res) => {
   if (!req.session.user) return res.redirect("/404");
   if (!req.session.user.isAdmin) return res.redirect("/404");
 
-  res.render("admin/porudzbine", { siteName: siteName, req: req });
+  const orders = db.collection("orders").find({}).toArray();
+
+  res.render("admin/porudzbine", { siteName: siteName, req: req, orders: orders });
 });
 
 app.get("/admin/orders", async (req, res) => {
@@ -765,7 +767,8 @@ app.post("/checkout", async function (req, res) {
         "orderID": "${orderID}",
         "username": "${username}",
         "date": "${day}.${month}.${year}",
-        "time": "${hour}:${minute}"
+        "time": "${hour}:${minute}",
+        "orderStatus": "pakovanje"
       }`)
     )
   }
