@@ -18,18 +18,19 @@
                 <div class="me-auto m-0">
                     <h3>Cart</h3>
                 </div>
-                
-                    <h3 class="ms-auto d-flex">
-                        <%if(products=="empty"){%>
-                            <%if (req.session.value=="usd" ){%>
-                                <div class="margin1-right">Total: $0</div>
-                                <% } else {%>
-                                    <div class="margin1-right">Total: 0€</div>
-                                    <% } %>
-                                        <div class="btn btn-success disabled">Check Out</div>
-                                        <% } else { %>
-                                            <% products.forEach(item=> { let price = parseFloat(item.price['$numberDecimal']); total=
-                                                total + Number(price)}) %>
+
+                <h3 class="ms-auto d-flex">
+                    <%if(products=="empty"){%>
+                        <%if (req.session.value=="usd" ){%>
+                            <div class="margin1-right">Total: $0</div>
+                            <% } else {%>
+                                <div class="margin1-right">Total: 0€</div>
+                                <% } %>
+                                    <div class="btn btn-success disabled">Check Out</div>
+                                    <% } else { %>
+                                        <% products.forEach(item=> { let price =
+                                            parseFloat(item.price['$numberDecimal']); total=
+                                            total + Number(price)}) %>
                                             <%if (req.session.value=="usd" ){%>
                                                 <div class="margin1-right">Total: $<%=eurtousd(total).toFixed(2) %>
                                                 </div>
@@ -39,7 +40,7 @@
                                                     <% } %>
                                                         <a class="btn btn-success" href="/checkout">Check Out</a>
                                                         <% } %>
-                    </h3>
+                </h3>
             </div>
             <hr>
             <%if (products=="empty" ){%>
@@ -53,9 +54,42 @@
                                 </div>
                             </div>
                             <div class="cartContainer">
-                                <div class="d-flex">
-                                    <div class="cartImage">
-                                        <div class="me-auto m-0">
+                                <div class="d-none d-lg-block">
+                                    <div class="d-flex">
+                                        <div class="cartImage">
+                                            <div class="me-auto m-0">
+                                                <% if(item.images[0]) {%>
+                                                    <img src="/uploads/<%= item.images[0] %>" height="250px"
+                                                        style="border-radius: 15px;">
+                                                    <% } else { %>
+                                                        <img src="/images/mia11.png" height="250px"
+                                                            style="border-radius: 15px;">
+                                                        <% } %>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="cartTitle" id="t<%= item.title %>">
+                                                <%= item.title %>
+                                            </div>
+                                            <div class="cartDescription text-center">
+                                                <%= item.description %>
+                                            </div>
+
+                                        </div>
+                                        <h3 class="ms-auto">
+                                            <div class="cartPrice">
+                                                <%if (req.session.value=="usd" ){%>
+                                                    $<%= eurtousd(item.price).toFixed(2) %>
+                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
+                                                            <%= price.toFixed(2) %>€
+                                                                <% } %>
+                                            </div>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="d-block d-lg-none d-sm-block d-md-block">
+                                    <div class="col">
+                                        <div class="cartImage">
                                             <% if(item.images[0]) {%>
                                                 <img src="/uploads/<%= item.images[0] %>" height="250px"
                                                     style="border-radius: 15px;">
@@ -64,23 +98,25 @@
                                                         style="border-radius: 15px;">
                                                     <% } %>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="cartTitle" id="t<%= item.title %>"><%= item.title %></div>
-                                        <div class="cartDescription text-center">
-                                            <%= item.description %>
-                                        </div>
+                                        <div class="col">
+                                            <div class="cartTitle" id="t<%= item.title %>">
+                                                <%= item.title %>
+                                            </div>
+                                            <div class="cartDescription text-center">
+                                                <%= item.description %>
+                                            </div>
 
-                                    </div>
-                                    <h3 class="ms-auto">
-                                        <div class="cartPrice">
-                                            <%if (req.session.value=="usd" ){%>
-                                                $<%= eurtousd(item.price).toFixed(2) %>
-                                                    <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
-                                                        <%= price.toFixed(2) %>€
-                                                            <% } %>
                                         </div>
-                                    </h3>
+                                        <h3 class="ms-auto">
+                                            <div class="cartPrice">
+                                                <%if (req.session.value=="usd" ){%>
+                                                    $<%= eurtousd(item.price).toFixed(2) %>
+                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
+                                                            <%= price.toFixed(2) %>€
+                                                                <% } %>
+                                            </div>
+                                        </h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
