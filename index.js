@@ -729,7 +729,6 @@ app.post("/checkout", async function (req, res) {
         break;
     }
   }
-  console.log(e)
   if (err) return;
 
   const orders = db.collection("orders")
