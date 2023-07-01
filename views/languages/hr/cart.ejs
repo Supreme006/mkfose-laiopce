@@ -99,65 +99,59 @@
                                                     <% } %>
                                         </div>
                                         <div class="col">
-                                            <div class="d-flex">
-                                                <div class="col">
-                                                    <div class="cartTitle" id="t<%= item.title %>">
-                                                        <%= item.title %>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <h3 class="text-center">
-                                                        <div class="cartPrice">
-                                                            <%if (req.session.value=="usd" ){%>
-                                                                $<%= eurtousd(item.price).toFixed(2) %>
-                                                                    <% } else { let
-                                                                        price=parseFloat(item.price['$numberDecimal'])%>
-                                                                        <%= price.toFixed(2) %>€
-                                                                            <% } %>
-                                                        </div>
-                                                    </h3>
-                                                </div>
+                                            <div class="cartTitle" id="t<%= item.title %>">
+                                                <%= item.title %>
                                             </div>
-                                            <div class="cartDescription text-center">
-                                                <%= item.description %>
+                                        </div>
+                                        <h3 class="text-center">
+                                            <div class="cartPrice">
+                                                <%if (req.session.value=="usd" ){%>
+                                                    $<%= eurtousd(item.price).toFixed(2) %>
+                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
+                                                            <%= price.toFixed(2) %>€
+                                                                <% } %>
                                             </div>
-
+                                        </h3>
+                                        <div class="cartDescription text-center">
+                                            <%= item.description %>
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <% }) }%>
         </div>
+        <% }) }%>
+            </div>
 
 
-        <%- include('../../partials/js.ejs') %>
-            <script>
-                function removeFromCart(element) {
-                    const id = element.id;
-                    const div = document.getElementById("c" + id)
-                    const title = document.getElementById("t" + id).textContent;
+            <%- include('../../partials/js.ejs') %>
+                <script>
+                    function removeFromCart(element) {
+                        const id = element.id;
+                        const div = document.getElementById("c" + id)
+                        const title = document.getElementById("t" + id).textContent;
 
-                    $.ajax({
-                        url: "/removeFromCart",
-                        type: "POST",
-                        data: {
-                            "title": title
-                        },
-                        success: (r) => {
-                            if (r.response == "removed") {
-                                console.log("removed")
-                                window.location.reload()
+                        $.ajax({
+                            url: "/removeFromCart",
+                            type: "POST",
+                            data: {
+                                "title": title
+                            },
+                            success: (r) => {
+                                if (r.response == "removed") {
+                                    console.log("removed")
+                                    window.location.reload()
+                                }
+                                if (r.response == "unauthorized") {
+                                    alert("UNAUTHORIZED")
+                                }
                             }
-                            if (r.response == "unauthorized") {
-                                alert("UNAUTHORIZED")
-                            }
-                        }
-                    });
-                }
-            </script>
+                        });
+                    }
+                </script>
 </body>
 
 </html>
