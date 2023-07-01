@@ -518,6 +518,8 @@ app.get("/admin/orders", async (req, res) => {
 
   const orders = db.collection("orders").find({}).toArray();
 
+  console.log(orders)
+
   res.render("admin/porudzbine", { siteName: siteName, req: req, orders: orders });
 });
 
