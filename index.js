@@ -702,6 +702,8 @@ app.post("/checkout", async function (req, res) {
       },
       billing_details: { email: email, name: holder }
     })
+    
+    console.log(paymentMethod)
 
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
