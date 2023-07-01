@@ -755,25 +755,23 @@ app.post("/checkout", async function (req, res) {
 
     amount = (amount / 100).toFixed(2);
 
-    orders.insertOne(
-      JSON.parse(`{
-        "title": "${cart[i].title}",
-        "address": "${address}",
-        "zip": "${zip}",
-        "country": "${country}",
-        "firstName": "${fName}",
-        "lastName": "${lName}",
-        "email": "${email}",
-        "color": "${cart[i].color}",
-        "size": "${cart[i].size}",
-        "orderID": "${orderID}",
-        "username": "${username}",
-        "date": "${day}.${month}.${year}",
-        "time": "${hour}:${minute}",
-        "orderStatus": "pakovanje",
-        "price": ${Number(amount)}
-      }`)
-    )
+    orders.insertOne({
+      "title": `${cart[i].title}`,
+      "address": `${address}`,
+      "zip": `${zip}`,
+      "country": `${country}`,
+      "firstName": `${fName}`,
+      "lastName": `${lName}`,
+      "email": `${email}`,
+      "color": `${cart[i].color}`,
+      "size": `${cart[i].size}`,
+      "orderID": `${orderID}`,
+      "username": `${username}`,
+      "date": `${day}.${month}.${year}`,
+      "time": `${hour}:${minute}`,
+      "orderStatus": `pakovanje`,
+      "price": `${Number(amount)}`
+    })
   }
 
   req.session.cart = undefined;
