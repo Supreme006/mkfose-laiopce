@@ -516,7 +516,7 @@ app.get("/admin/orders", async (req, res) => {
   if (!req.session.user) return res.redirect("/404");
   if (!req.session.user.isAdmin) return res.redirect("/404");
 
-  const orders = db.collection("orders").find({}).toArray();
+  const orders = await db.collection("orders").find({}).toArray();
 
   console.log(orders)
 
