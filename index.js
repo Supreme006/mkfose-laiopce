@@ -701,8 +701,6 @@ app.post("/checkout", async function (req, res) {
       billing_details: { email: email, name: holder }
     })
 
-    console.log(paymentMethod)
-
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
       amount: amount,
@@ -755,7 +753,7 @@ app.post("/checkout", async function (req, res) {
 
     orders.insertOne(
       JSON.parse(`{
-        "title": "${cart[i].tite}",
+        "title": "${cart[i].title}",
         "address": "${address}",
         "zip": "${zip}",
         "country": "${country}",
