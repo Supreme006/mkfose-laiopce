@@ -50,8 +50,9 @@
                         </h4>
                         <ul class="list-group mb-3">
                             <% if(cart){ %>
-                                <% cart.forEach(product=> { let price = parseFloat(product.price['$numberDecimal']); total=
-                                total + Number(price) ; %>
+                                <% cart.forEach(product=> { let price = parseFloat(product.price['$numberDecimal']);
+                                    total=
+                                    total + Number(price) ; %>
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
                                             <h6 class="my-0">
@@ -89,12 +90,16 @@
                                                         <% if(req.session.value=="usd" ) {%>
                                                             <span>Ukupno (USD)</span>
                                                             <div>
-                                                                $<strong id="total"><%= eurtousd(total.toFixed(2)) %></strong>
+                                                                $<strong id="total">
+                                                                    <%= eurtousd(total.toFixed(2)) %>
+                                                                </strong>
                                                             </div>
                                                             <% } else { %>
                                                                 <span>Ukupno (EUR)</span>
                                                                 <div>
-                                                                    <strong id="total"><%=total.toFixed(2)%></strong>€
+                                                                    <strong id="total">
+                                                                        <%=total.toFixed(2)%>
+                                                                    </strong>€
                                                                 </div>
                                                                 <%}%>
                                                     </li>
@@ -153,7 +158,8 @@
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                                    <input type="email" class="form-control" id="email" placeholder="you@example.com"
+                                        required>
                                     <div class="invalid-feedback">
                                         Unesite validan email kako bi dobili informacije o vasoj porudzbini.
                                     </div>
@@ -246,9 +252,11 @@
                         </form>
 
                         <% if(!cart) {%>
-                            <button class="w-100 btn btn-primary btn-lg disabled" type="btn">Plati kreditnom karticom</button>
+                            <button class="w-100 btn btn-primary btn-lg disabled" type="btn">Plati kreditnom
+                                karticom</button>
                             <% } else {%>
-                                <button class="w-100 btn btn-primary btn-lg" type="btn" onclick="checkOut()">Plati kreditnom karticom</button>
+                                <button class="w-100 btn btn-primary btn-lg" type="btn" onclick="checkOut()">Plati
+                                    kreditnom karticom</button>
                                 <% } %>
 
                     </div>
@@ -290,22 +298,25 @@
                             <!-- Modal Header -->
                             <div class="checkoutModal">
                                 <div class="modal-header d-flex justify-content-center">
-                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x" style="color: green;"></i>
+                                    <i class="fa-regular fa-circle-check fa-beat-fade fa-5x" style="color: green;"></i>
                                 </div>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body text-center checkoutModal">
                                 <div>Vaša uplata je uspešna.</div>
-                                <div>Molimo vas sačuvajte <b>ID PORUDZBINE</b> za slučaj da budete trebali da zamenite paket.</div>
-                                <b><div id="orderID"></div></b>
+                                <div>Molimo vas sačuvajte <b>ID PORUDZBINE</b> za slučaj da budete trebali da zamenite
+                                    paket.</div>
+                                <b>
+                                    <div id="orderID"></div>
+                                </b>
                             </div>
 
                             <!-- Modal footer -->
                             <div class="checkoutModal">
                                 <div class="modal-footer">
 
-                                    <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="window.location.reload()">Zatvori</button>
                                 </div>
                             </div>
 
@@ -421,46 +432,46 @@
                         const orID = document.getElementById("orderID")
 
                         checkID().then(() => {
-                        $.ajax({
-                            url: "/checkout",
-                            type: "POST",
-                            data: {
-                                "expirem": `${expirem}`,
-                                "expirey": `${expirey}`,
-                                "holder": `${holder}`,
-                                "number": `${number}`,
-                                "cvv": `${cvv}`,
-                                "zip": `${zip}`,
-                                "country": `${country}`,
-                                "fName": `${fName}`,
-                                "lName": `${lName}`,
-                                "address": `${address}`,
-                                "email": `${email}`,
-                                "total": `${amount}`,
-                                "orderID": `${Order_id}`
-                            },
-                            success: (r) => {
-                                console.log(r)
-                                if (r.error) {
-                                    emsg.textContent = r.error;
-                                    loading.hide();
-                                    error.show();
-                                }
-                                if (!r.error) {
-                                    if (r.response) {
-                                        orID.textContent = Order_id;
-                                        setTimeout(() => {
-                                            loading.hide();
-                                            successs.show();
-                                        }, 1500)
+                            $.ajax({
+                                url: "/checkout",
+                                type: "POST",
+                                data: {
+                                    "expirem": `${expirem}`,
+                                    "expirey": `${expirey}`,
+                                    "holder": `${holder}`,
+                                    "number": `${number}`,
+                                    "cvv": `${cvv}`,
+                                    "zip": `${zip}`,
+                                    "country": `${country}`,
+                                    "fName": `${fName}`,
+                                    "lName": `${lName}`,
+                                    "address": `${address}`,
+                                    "email": `${email}`,
+                                    "total": `${amount}`,
+                                    "orderID": `${Order_id}`
+                                },
+                                success: (r) => {
+                                    console.log(r)
+                                    if (r.error) {
+                                        emsg.textContent = r.error;
+                                        loading.hide();
+                                        error.show();
                                     }
+                                    if (!r.error) {
+                                        if (r.response) {
+                                            orID.textContent = Order_id;
+                                            setTimeout(() => {
+                                                loading.hide();
+                                                successs.show();
+                                            }, 1500)
+                                        }
+                                    }
+                                },
+                                error: (e) => {
+                                    console.log(e)
                                 }
-                            },
-                            error: (e) => {
-                                console.log(e)
-                            }
-                        });
-                    })
+                            });
+                        })
                     }
                 </script>
 </body>
