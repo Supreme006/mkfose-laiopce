@@ -46,18 +46,54 @@
             <%if (products=="empty" ){%>
                 <h3 class="text-center">Cart is empty</h3>
                 <% } else {products.forEach(item=> {%>
-                    <div class="cartHolder" id="c<%= item.title %>">
-                        <div class="dik">
-                            <div class="d-flex">
-                                <div class="ms-auto">
-                                    <div class="x" onclick="removeFromCart(this)" id="<%= item.title%>">&#10005;</div>
+                    <div class="container margin3-top">
+                        <div class="cartHolder" id="c<%= item.title %>">
+                            <div class="dik">
+                                <div class="d-flex">
+                                    <div class="ms-auto">
+                                        <div class="x" onclick="removeFromCart(this)" id="<%= item.title%>">&#10005;
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cartContainer">
-                                <div class="d-none d-lg-block">
-                                    <div class="d-flex">
-                                        <div class="cartImage">
-                                            <div class="me-auto m-0">
+                                <div class="cartContainer">
+                                    <div class="d-none d-lg-block">
+                                        <div class="d-flex">
+                                            <div class="cartImage">
+                                                <div class="me-auto m-0">
+                                                    <% if(item.images[0]) {%>
+                                                        <img src="/uploads/<%= item.images[0] %>" height="250px"
+                                                            style="border-radius: 15px;">
+                                                        <% } else { %>
+                                                            <img src="/images/mia11.png" height="250px"
+                                                                style="border-radius: 15px;">
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="cartTitle" id="t<%= item.title %>">
+                                                    <%= item.title %>
+                                                </div>
+                                                <div class="cartDescription text-center">
+                                                    <%= item.description %>
+                                                </div>
+
+                                            </div>
+                                            <h3 class="ms-auto">
+                                                <div class="cartPrice">
+                                                    <%if (req.session.value=="usd" ){%>
+                                                        $<%= eurtousd(item.price).toFixed(2) %>
+                                                            <% } else { let
+                                                                price=parseFloat(item.price['$numberDecimal'])%>
+                                                                <%= price.toFixed(2) %>€
+                                                                    <% } %>
+                                                </div>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="d-block d-lg-none d-sm-block d-md-block">
+                                        <div class="col">
+                                            <div
+                                                class="d-flex cartImage align-items-center justify-content-center text-center">
                                                 <% if(item.images[0]) {%>
                                                     <img src="/uploads/<%= item.images[0] %>" height="250px"
                                                         style="border-radius: 15px;">
@@ -66,88 +102,62 @@
                                                             style="border-radius: 15px;">
                                                         <% } %>
                                             </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="cartTitle" id="t<%= item.title %>"><%= item.title %></div>
-                                            <div class="cartDescription text-center">
+                                            <div class="col">
+                                                <div class="text-center" style="font-size: 20px; font-weight: 700;"
+                                                    id="t<%= item.title %>">
+                                                    <%= item.title %>
+                                                </div>
+                                            </div>
+                                            <h3 class="text-center">
+                                                <div class="cartPrice">
+                                                    <%if (req.session.value=="usd" ){%>
+                                                        $<%= eurtousd(item.price).toFixed(2) %>
+                                                            <% } else { let
+                                                                price=parseFloat(item.price['$numberDecimal'])%>
+                                                                <%= price.toFixed(2) %>€
+                                                                    <% } %>
+                                                </div>
+                                            </h3>
+                                            <div class="text-center">
                                                 <%= item.description %>
                                             </div>
 
                                         </div>
-                                        <h3 class="ms-auto">
-                                            <div class="cartPrice">
-                                                <%if (req.session.value=="usd" ){%>
-                                                    $<%= eurtousd(item.price).toFixed(2) %>
-                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
-                                                            <%= price.toFixed(2) %>€
-                                                                <% } %>
-                                            </div>
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="d-block d-lg-none d-sm-block d-md-block">
-                                    <div class="col">
-                                        <div class="d-flex cartImage align-items-center justify-content-center text-center">
-                                            <% if(item.images[0]) {%>
-                                                <img src="/uploads/<%= item.images[0] %>" height="250px"
-                                                    style="border-radius: 15px;">
-                                                <% } else { %>
-                                                    <img src="/images/mia11.png" height="250px"
-                                                        style="border-radius: 15px;">
-                                                    <% } %>
-                                        </div>
-                                        <div class="col">
-                                            <div class="text-center" style="font-size: 20px; font-weight: 700;" id="t<%= item.title %>"><%= item.title %></div>
-                                        </div>
-                                        <h3 class="text-center">
-                                            <div class="cartPrice">
-                                                <%if (req.session.value=="usd" ){%>
-                                                    $<%= eurtousd(item.price).toFixed(2) %>
-                                                        <% } else { let price=parseFloat(item.price['$numberDecimal'])%>
-                                                            <%= price.toFixed(2) %>€
-                                                                <% } %>
-                                            </div>
-                                        </h3>
-                                        <div class="text-center">
-                                            <%= item.description %>
-                                        </div>
 
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <% }) }%>
         </div>
-        <% }) }%>
-            </div>
 
 
-            <%- include('../../partials/js.ejs') %>
-                <script>
-                    function removeFromCart(element) {
-                        const id = element.id;
-                        const div = document.getElementById("c" + id)
-                        const title = document.getElementById("t" + id).textContent;
+        <%- include('../../partials/js.ejs') %>
+            <script>
+                function removeFromCart(element) {
+                    const id = element.id;
+                    const div = document.getElementById("c" + id)
+                    const title = document.getElementById("t" + id).textContent;
 
-                        $.ajax({
-                            url: "/removeFromCart",
-                            type: "POST",
-                            data: {
-                                "title": title
-                            },
-                            success: (r) => {
-                                if (r.response == "removed") {
-                                    console.log("removed")
-                                    window.location.reload()
-                                }
-                                if (r.response == "unauthorized") {
-                                    alert("UNAUTHORIZED")
-                                }
+                    $.ajax({
+                        url: "/removeFromCart",
+                        type: "POST",
+                        data: {
+                            "title": title
+                        },
+                        success: (r) => {
+                            if (r.response == "removed") {
+                                console.log("removed")
+                                window.location.reload()
                             }
-                        });
-                    }
-                </script>
+                            if (r.response == "unauthorized") {
+                                alert("UNAUTHORIZED")
+                            }
+                        }
+                    });
+                }
+            </script>
 </body>
 
 </html>
