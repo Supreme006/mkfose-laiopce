@@ -689,12 +689,15 @@ app.post("/checkout", async function (req, res) {
   let err = false;
 
   amount = amount.replace(".", "")
+  console.log("check1")
   try {
     const customer = await stripe.customers.create({
       name: holder,
       description: "From Adores",
       email: email
     })
+    console.log(customer)
+
     let payment = await stripe.paymentMethods.create({
       type: "card",
       card: {
@@ -705,10 +708,14 @@ app.post("/checkout", async function (req, res) {
       }
     })
 
+    console.log(payment)
+
     const paymentMethod = await stripe.paymentMethods.attach(
       payment.id,
       { customer: customer.id },
     );
+
+    console.log(paymentMethod)
 
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
