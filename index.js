@@ -753,6 +753,8 @@ app.post("/checkout", async function (req, res) {
     const hour = date.getHours();
     const year = date.getFullYear();
 
+    amount = (amount / 100).toFixed(2);
+
     orders.insertOne(
       JSON.parse(`{
         "title": "${cart[i].title}",
@@ -768,7 +770,8 @@ app.post("/checkout", async function (req, res) {
         "username": "${username}",
         "date": "${day}.${month}.${year}",
         "time": "${hour}:${minute}",
-        "orderStatus": "pakovanje"
+        "orderStatus": "pakovanje",
+        "price": ${Number(amount)}
       }`)
     )
   }

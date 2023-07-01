@@ -20,277 +20,37 @@
             <input id="myInput" type="text" class="searchbox mb-5" placeholder="Pretraga">
             <div class="border mb-2"></div>
             <div id="myCmd">
+            <% orders.forEach(item => {%>
                 <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
+                    <%= item.title %><span> - <%= item.email %></span>
                 </button>
                 <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
                     <h4 style="color: black;">Status:</h4>
                     <p>
-                        Poslato
+                        <%= item.orderStatus %>
                     </p>
                     <h4 style="color: black;">Cena:</h4>
                     <p>
-                        $30.00
+                        <%= item.price %>
                     </p>
                     <h4 style="color: black;">Nacin placanja:</h4>
                     <p>
-                        PayPal
+                        Kartica
                     </p>
                     <h4 style="color: black;">Mail:</h4>
                     <p>
-                        a99676669@gmail.com
+                        <%= item.email %>
                     </p>
                     <h4 style="color: black;">Ime I Prezime:</h4>
                     <p>
-                        Aleksa Stevic
+                        <%= item.firtName> <%= item.lastName %>
                     </p>
                     <h4 style="color: black;">Adresa:</h4>
                     <p>
-                        nema adresu bb
+                        <%= address %>
                     </p>
                 </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - a99676669@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        a99676669@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
-                </div>
-                <button type="button" class="collapsible mt-4">
-                    Naziv Proizvoda<span> - royalexpert1@gmail.com</span>
-                </button>
-                <div class="content">
-                    <h4 style="color: black;">Kategorija:</h4>
-                    <p>
-                        Haljine
-                    </p>
-
-                    <h4 style="color: black;">Status:</h4>
-                    <p>
-                        Poslato
-                    </p>
-                    <h4 style="color: black;">Cena:</h4>
-                    <p>
-                        $30.00
-                    </p>
-                    <h4 style="color: black;">Nacin placanja:</h4>
-                    <p>
-                        PayPal
-                    </p>
-                    <h4 style="color: black;">Mail:</h4>
-                    <p>
-                        royalexpert1@gmail.com
-                    </p>
-                    <h4 style="color: black;">Ime I Prezime:</h4>
-                    <p>
-                        Aleksa Stevic
-                    </p>
-                    <h4 style="color: black;">Adresa:</h4>
-                    <p>
-                        nema adresu bb
-                    </p>
+                <% }) %>
                 </div>
 
             </div>
