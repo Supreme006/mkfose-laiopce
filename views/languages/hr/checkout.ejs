@@ -90,16 +90,12 @@
                                                         <% if(req.session.value=="usd" ) {%>
                                                             <span>Ukupno (USD)</span>
                                                             <div>
-                                                                $<strong id="total">
-                                                                    <%= eurtousd(total.toFixed(2)) %>
-                                                                </strong>
+                                                                $<strong id="total"><%= eurtousd(total.toFixed(2)) %></strong>
                                                             </div>
                                                             <% } else { %>
                                                                 <span>Ukupno (EUR)</span>
                                                                 <div>
-                                                                    <strong id="total">
-                                                                        <%=total.toFixed(2)%>
-                                                                    </strong>€
+                                                                    <strong id="total"><%=total.toFixed(2)%></strong>€
                                                                 </div>
                                                                 <%}%>
                                                     </li>
