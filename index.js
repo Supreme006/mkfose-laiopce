@@ -698,8 +698,7 @@ app.post("/checkout", async function (req, res) {
         exp_year: "20" + expirey,
         cvc: cvv
       },
-      email: email,
-      name: holder
+      billing_details: { email: email, name: holder }
     })
 
     console.log(paymentMethod)
