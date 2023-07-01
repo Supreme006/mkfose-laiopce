@@ -518,8 +518,6 @@ app.get("/admin/orders", async (req, res) => {
 
   const orders = await db.collection("orders").find({}).toArray();
 
-  console.log(orders)
-
   res.render("admin/porudzbine", { siteName: siteName, req: req, orders: orders });
 });
 
@@ -691,10 +689,8 @@ app.post("/checkout", async function (req, res) {
   const cart = req.session.cart;
   let amount = req.body.total;
   let err = false;
-  console.log("gort")
   amount = amount.replace(".", "")
   try {
-    console.log("gort2")
 
     let paymentMethod = await stripe.paymentMethods.create({
       type: "card",
@@ -706,9 +702,6 @@ app.post("/checkout", async function (req, res) {
       },
       billing_details: { email: email, name: holder }
     })
-    console.log("gort3")
-
-    console.log(paymentMethod)
 
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
@@ -718,10 +711,7 @@ app.post("/checkout", async function (req, res) {
       payment_method_types: ['card'],
     })
 
-    console.log("gort4")
-
   } catch (e) {
-    console.log(e)
     if (e) {
       err = true;
     }
