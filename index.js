@@ -700,6 +700,8 @@ app.post("/checkout", async function (req, res) {
       }
     })
 
+    console.log(paymentMethod)
+
     await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
       amount: amount,
