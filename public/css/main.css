@@ -6,7 +6,12 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
-
+.successBg{
+    width: 80%;
+    height: 15rem;
+    align-items: center;
+    text-align: center;
+}
 
 .img-center{
     margin-left: auto;
