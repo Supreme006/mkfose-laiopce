@@ -369,6 +369,8 @@
                             success: (r) => {
                                 if (r.code == "invalid") {
                                     alert("invalid")
+                                } else {
+                                    window.location.reload();
                                 }
                             }
                         });
