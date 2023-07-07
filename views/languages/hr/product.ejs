@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product | <%= siteName %></title>
     <%- include('../../partials/css.ejs') %>
         <link rel="stylesheet" href="/css/product.css">
 </head>
@@ -38,7 +38,7 @@
 
                         <div class="col-lg-6 order-3">
                             <div class="product_description">
-                                <span class="product_name" id="title"><%= product.title %></span>
+                                <div class="product_name" id="title"><%= product.title %></div>
                                 <div class="product_shortDescription" id="s_description">
                                     <%= product.shortDescription || "Kratak opis nije pronadjen" %>
                                 </div>
@@ -92,16 +92,16 @@
                                                             </div>
                                                         </div>
                                                         <% } %>
-                                                        <% if(product.colors.gold){%>
-                                                            <div class="color-gap gold" onclick="color(this)">
-                                                                <div class="colorgold1">
-                                                                    <div class="colorCentarWite" id="gold">
-                                                                        <div class="colorgold2">
+                                                            <% if(product.colors.gold){%>
+                                                                <div class="color-gap gold" onclick="color(this)">
+                                                                    <div class="colorgold1">
+                                                                        <div class="colorCentarWite" id="gold">
+                                                                            <div class="colorgold2">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <% } %>
+                                                                <% } %>
                                 </div>
                                 <div class="product_info">
                                     Veličine:
@@ -125,7 +125,8 @@
                                 <div class="checkout text-center">
                                     <div class="wud btn btn-classic" style="width: auto; padding: 8px 15px 8px 15px;"
                                         onclick="addToCart();">
-                                        <img src="/images/bag.png" width="25" height="25" style="margin-right: 8px;">Dodaj u košaricu
+                                        <img src="/images/bag.png" width="25" height="25"
+                                            style="margin-right: 8px;">Dodaj u košaricu
                                     </div>
                                 </div>
                                 <hr>
@@ -157,16 +158,76 @@
                             Ostali proizvodi iz ove kolekcije.
                         </div>
                         <div class="recommendedItemsList row">
-                            <% other.forEach(ot => { %>
-                            <div class="col product-gap tile">
-                                <img src="/uploads/<%= ot.images[0] %>" style="max-height: 378px; border-radius: 15px;">
-                                <div class="productInfo">
-                                    <div class="productName text-break">
-                                        <%= ot.title %>
+                            <% other.forEach(ot=> { %>
+                                <div class="col product-gap tile">
+                                    <a href="/products/<%=ot.title.replaceAll(' ', '_')%>">
+                                        <img src="/uploads/<%= ot.images[0] %>"
+                                            style="max-height: 378px; border-radius: 15px;">
+                                    </a>
+                                    <div class="productInfo">
+                                        <a class="productName text-break c-black" href="/products/<%=ot.title.replaceAll(' ', '_')%>">
+                                            <%= ot.title %>
+                                        </a>
                                     </div>
                                 </div>
+                                <% }) %>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="successs">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                    
+                                <!-- Modal Header -->
+                                <div class="checkoutModal">
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <i class="fa-regular fa-circle-check fa-beat-fade fa-5x" style="color: green;"></i>
+                                    </div>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body text-center checkoutModal">
+                                    <div>Proizvod je dodat u košaricu</div>
+                                    <div>Vaš proizvod je uspešno dodat u košaricu. Želimo vam ugodan dan.</div>
+                                </div>
+                    
+                                <!-- Modal footer -->
+                                <div class="checkoutModal">
+                                    <div class="modal-footer">
+                    
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Zatvori</button>
+                                    </div>
+                                </div>
+                    
                             </div>
-                            <% }) %>
+                        </div>
+                    </div>
+
+                    <div class="modal" id="error">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                    
+                                <!-- Modal Header -->
+                                <div class="checkoutModal">
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <i class="fa-solid fa-circle-exclamation fa-beat- fa-5x" style="color: red;"></i>
+                                    </div>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body text-center checkoutModal">
+                                    <div>Proizvod koji pokusavate da dodate je vec u korpi. Trenutno nije moguce dodati 2 ista proizvoda. Mozete platiti trenutni pa se vratiti i naruciti jos jedan. Bice vam upakovani zajedno.</div>
+                                </div>
+                    
+                                <!-- Modal footer -->
+                                <div class="checkoutModal">
+                                    <div class="modal-footer">
+                    
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Zatvori</button>
+                                    </div>
+                                </div>
+                    
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,6 +252,119 @@
                 }
             }
 
+        </script>
+
+        <script>
+            // const colors = [];
+                // const sizes = [];
+                let colorr;
+                let sizee;
+
+                function removeFromArray(arr, value) {
+                    var index = arr.indexOf(value);
+                    if (index > -1) {
+                        arr.splice(index, 1);
+                    }
+                    return arr;
+                }
+
+                function size(element) {
+                    const selected_size = element.className
+                    const id = document.getElementById(selected_size)
+                    // if(sizes.includes(selected_size)){
+                    //   removeFromArray(sizes, selected_size)
+                    //   id.classList.remove("sizeS2")
+                    // } else {
+                    //   sizes.push(selected_size)
+                    //   id.classList.add("sizeS2")
+                    // }
+                    if (!sizee) {
+                        id.classList.add("sizeS2")
+                        sizee = selected_size;
+                    } else {
+                        const old = document.getElementById(sizee)
+                        old.classList.remove("sizeS2")
+                        id.classList.add("sizeS2");
+                        sizee = selected_size;
+                    }
+                }
+
+                function color(element) {
+                    const selected_color = element.classList[1] || element.classList[0];
+                    const id = document.getElementById(selected_color)
+                    // if(colors.includes(selected_color)){
+                    //   removeFromArray(colors, selected_color)
+                    //   id.classList.remove("colorCentarSelected")
+                    //   id.classList.add("colorCentarWite")
+                    // } else {
+                    //   colors.push(selected_color)
+                    //   id.classList.add("colorCentarSelected")
+                    // }
+                    if (!colorr) {
+                        if (id == 'gray') {
+                            id.classList.remove("colorCentarBlack")
+                        } else {
+                            id.classList.remove("colorCentarWite")
+                        }
+                        id.classList.add("colorCentarSelected")
+                        colorr = selected_color;
+                    } else {
+                        const old = document.getElementById(colorr)
+                        old.classList.remove("colorCentarSelected")
+                        if (id == 'gray') {
+                            old.classList.add("colorCentarBlack")
+                        } else {
+                            old.classList.add("colorCentarWite")
+                        }
+                        if (id == 'gray') {
+                            id.classList.remove("colorCentarBlack")
+                        } else {
+                            id.classList.remove("colorCentarWite")
+                        }
+                        id.classList.add("colorCentarSelected");
+                        colorr = selected_color;
+                    }
+                }
+
+                async function addToCart() {
+                    const title = document.getElementById("title").textContent;
+                    const successs = new bootstrap.Modal("#successs");
+                    const error = new bootstrap.Modal("#error");
+                    // const price = document.getElementById("price").innerText;
+                    // const value = document.getElementById("value").innerText;
+                    // const s_description = document.getElementById("s_description")
+
+                    // const s = [];
+                    // const c = [];
+                    // sizes.forEach(siz => {
+                    //   s.push(`\"${siz}\"`)
+                    // })
+                    // colors.forEach(col => {
+                    //   s.push(`\"${col}\"`)
+                    // })
+                    if (!sizee) return alert("No size");
+                    if (!colorr) return alert("No color");
+                    $.ajax({
+                        url: "/addToCart",
+                        type: "POST",
+                        data: {
+                            title: title,
+                            sizes: sizee,
+                            colors: colorr
+                        },
+                        success: (r) => {
+                            if (r.response == "added") {
+                                successs.show();
+                            }
+                            if(r.response == "failed"){
+                                error.show()
+                            }
+                            if (r.response == "unauthorized") {
+                                alert("UNAUTHORIZED")
+                            }
+                        }
+                    });
+                }
         </script>
 
         <script src="/js/addtocart.js"></script>

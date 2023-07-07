@@ -118,6 +118,9 @@ app.get("/policy/data", async (req, res) => {
 })
 
 app.get("/checkout", async (req, res) => {
+
+
+
   let arr = req.session.cart
   let promo = req.session.code;
 
@@ -164,11 +167,10 @@ app.get("/products/:name", async (req, res) => {
   const name = req.params.name;
   const title = name.replace(/_/g, " ");
   const result = await db.collection("products").find({ "title": title }).toArray();
-  const other = await db.collection("products").find({"collection": result[0].collection}).toArray()
+  let other = await db.collection("products").find({ "collection": result[0].collection }).toArray()
 
-  console.log(result)
 
-  removeFromArray(other, result)
+  other = removeFromArray(other, result)
 
   if (req.session.language == "hr")
     return res.render("languages/hr/product", { siteName: siteName, req: req, product: result[0], eurtousd: eurtousd, other: other });
@@ -192,17 +194,17 @@ app.get("/", async (req, res) => {
   const info = JSON.parse(data)
 
   // const info = await ig.posts()
-  
+
   async function downloadImage(url, filename) {
-    try{
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
-    fs.writeFileSync("public/tempImage/" + filename, response.data, (err) => {
-      if (err) throw err;
-      if(err) console.log("err: " + err)
-    });
-  } catch(err){
-    console.log("error")
-  }
+    try {
+      const response = await axios.get(url, { responseType: 'arraybuffer' });
+      fs.writeFileSync("public/tempImage/" + filename, response.data, (err) => {
+        if (err) throw err;
+        if (err) console.log("err: " + err)
+      });
+    } catch (err) {
+      console.log("error")
+    }
   }
 
   info.forEach(pohoto => {
@@ -514,7 +516,9 @@ app.get("/admin/orders", async (req, res) => {
   if (!req.session.user) return res.redirect("/404");
   if (!req.session.user.isAdmin) return res.redirect("/404");
 
-  res.render("admin/porudzbine", { siteName: siteName, req: req });
+  const orders = await db.collection("orders").find({}).toArray();
+
+  res.render("admin/porudzbine", { siteName: siteName, req: req, orders: orders });
 });
 
 app.get("/admin/orders", async (req, res) => {
@@ -620,7 +624,7 @@ app.get("/admin/edit/:id", async (req, res) => {
 
   const id = req.params.id;
 
-  const product = await db.collection("products").find({title: id})
+  const product = await db.collection("products").find({ title: id })
 
   res.render("admin/edit", { siteName: siteName, req: req, product: product });
 });
@@ -649,10 +653,23 @@ app.get("/admin/uploaded", async (req, res) => {
 
 app.post("/removeFromCart", async (req, res) => {
   const id = req.body.title;
-    let cart = req.session.user.cart;
-    const result = db.collection("products").find({ title: id }).toArray();
-    req.session.user.cart = removeFromArray(cart, result);
-    res.send("removed");
+  let cart = req.session.cart;
+  const result = await db.collection("products").find({ title: id }).toArray();
+  let newArr = []
+
+  for (let i = 0; i < cart.length; i++) {
+
+    if (cart[i].title != result[0].title) {
+      newArr.push(cart[i])
+    }
+
+    if (cart[i].title == result[0].title) { }
+  }
+
+  if (JSON.stringify(newArr) == "[]") newArr = false;
+
+  req.session.cart = newArr;
+  return res.json({ response: "removed" });
 });
 
 app.post("/checkout", async function (req, res) {
@@ -672,9 +689,9 @@ app.post("/checkout", async function (req, res) {
   const cart = req.session.cart;
   let amount = req.body.total;
   let err = false;
-
   amount = amount.replace(".", "")
   try {
+
     let paymentMethod = await stripe.paymentMethods.create({
       type: "card",
       card: {
@@ -682,7 +699,8 @@ app.post("/checkout", async function (req, res) {
         exp_month: expirem,
         exp_year: "20" + expirey,
         cvc: cvv
-      }
+      },
+      billing_details: { email: email, name: holder }
     })
 
     await stripe.paymentIntents.create({
@@ -693,10 +711,9 @@ app.post("/checkout", async function (req, res) {
       payment_method_types: ['card'],
     })
 
-
   } catch (e) {
-    if(e){
-    err = true;
+    if (e) {
+      err = true;
     }
     switch (e.type) {
       case 'StripeCardError':
@@ -704,27 +721,27 @@ app.post("/checkout", async function (req, res) {
         break;
     }
   }
-
-  if(err)return;
+  if (err) return;
 
   const orders = db.collection("orders")
   for (let i = 0; i < cart.length; i++) {
     const old = await db.collection("sold").findOne({ title: cart[i].title });
     qdb.add(`totalSold`, 1)
 
-    if (await old) {
+    if (old) {
       const newVal = {
         "title": `${cart[i].title}`,
         "sold": old.sold + 1
       }
+
       await db.collection("sold").updateOne(old, { $set: newVal })
+
     } else {
       await db.collection("sold").insertOne(
-        JSON.parse(`{
-      "title": "${cart[i].title}",
-      "sold": ${sold},
-      "
-    }`)
+        {
+          "title": `${cart[i].title}`,
+          "sold": 1,
+        }
       )
     }
 
@@ -735,23 +752,25 @@ app.post("/checkout", async function (req, res) {
     const hour = date.getHours();
     const year = date.getFullYear();
 
-    orders.insertOne(
-      JSON.parse(`{
-        "title": "${cart[i].tite}",
-        "address": "${address}",
-        "zip": "${zip}",
-        "country": "${country}",
-        "firstName": "${fName}",
-        "lastName": "${lName}",
-        "email": "${email}",
-        "color": "${cart[i].color}",
-        "size": "${cart[i].size}",
-        "orderID": "${orderID}",
-        "username": "${username}",
-        "date": "${day}.${month}.${year}",
-        "time": "${hour}:${minute}"
-      }`)
-    )
+    amount = (amount / 100).toFixed(2);
+
+    orders.insertOne({
+      "title": `${cart[i].title}`,
+      "address": `${address}`,
+      "zip": `${zip}`,
+      "country": `${country}`,
+      "firstName": `${fName}`,
+      "lastName": `${lName}`,
+      "email": `${email}`,
+      "color": `${cart[i].color}`,
+      "size": `${cart[i].size}`,
+      "orderID": `${orderID}`,
+      "username": `${username}`,
+      "date": `${day}.${month}.${year}`,
+      "time": `${hour}:${minute}`,
+      "orderStatus": `pakovanje`,
+      "price": `${Number(amount)}`
+    })
   }
 
   req.session.cart = undefined;
@@ -779,19 +798,39 @@ app.post("/checkCode", async function (req, res) {
 
 app.post("/addToCart", async function (req, res) {
   const id = req.body.title;
-  console.log(id)
+  const size = req.body.sizes;
+  const color = req.body.colors;
+  let adding;
   const result = await db.collection("products").findOne({ title: id });
-  if(!await result)return console.log("not found");
+
+  if (!result) return;
+
+  let err;
   let cart = [];
+
   if (req.session.cart) cart = req.session.cart;
-  cart.push(result);
-  console.log(cart)
+
+  cart.forEach(item => {
+    if (item.title == result.title) return err = true;
+  })
+
+  if (err) return res.json({ response: "failed" });
+  adding = {
+    "title": result.title,
+    "description": result.description,
+    "images": result.images,
+    "price": result.price,
+    "size": size,
+    "color": color
+  }
+  cart.push(adding);
   req.session.cart = await cart;
-  console.log(req.session.cart)
+
   return res.json({ response: "added" });
 });
 
 app.post("/register", async (req, res) => {
+
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
@@ -801,19 +840,22 @@ app.post("/register", async (req, res) => {
   if (offers == "on") offers = true;
   if (offers == "off") offers = false;
 
-  const user = await usersCollection.findOne({ email });
+  const user = await db.collection("users").findOne({ email: email });
   if (user) return res.send("Already registred email");
 
+
   if (firstName && lastName && email && password && offers) {
-    db.collection("users").insertOne(
-      JSON.parse(`{
+    const data = JSON.parse(`{
             "firstName": "${firstName}",
             "lastName": "${lastName}",
             "email": "${email}",
             "password": "${password}",
             "offers": ${offers},
             "isAdmin": false
-        }`)
+        }`);
+    req.session.user = data;
+    db.collection("users").insertOne(
+      data
     );
 
     return res.redirect("/");
@@ -887,11 +929,11 @@ app.post("/edit", upload.array("filesfld", 10), async (req, res) => {
                 "gold": ${gold}
             },
             "sizes": ${sizes}
-        }`), function(res){
-          console.log(res)
-        }
+        }`), function (res) {
+    console.log(res)
+  }
   );
-  
+
 });
 
 app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
@@ -927,9 +969,8 @@ app.post("/upload", upload.array("filesfld", 10), async (req, res) => {
                 "gold": ${gold}
             },
             "sizes": ${sizes}
-        }`), function(res){
-          console.log(res)
-        }
+        }`), function (res) {
+  }
   );
 
 
